@@ -36,11 +36,9 @@ Button {
     -fx-background-color: white;
 }
 
-<<<<<<< HEAD
 .text-area {
     -fx-background-color: white;
 }
-=======
 
 /*
     buttons
@@ -63,6 +61,7 @@ Button {
 }
 .button-navigation {
     -fx-background-color: none;
+    -fx-border-radius: 10%;
     -fx-text-fill: white;
+    -fx-font-size: 16;
 }
->>>>>>> 2b2f93cc07e0c44dbd803a8783cb5ad83585b342

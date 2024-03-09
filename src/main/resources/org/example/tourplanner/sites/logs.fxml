@@ -12,23 +12,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane>
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-        <Label fx:id="navigation_tour_btn" text="Tours" />
-        <Label fx:id="navigation_settings_btn" text="Import &amp; Export" GridPane.columnIndex="3" />
-        <Label fx:id="navigation_reports_btn" text="Reports" GridPane.columnIndex="2" />
-        <Label fx:id="navigation_logs_btn" text="Logs" GridPane.columnIndex="1" />
-    </GridPane>
-    <HBox prefHeight="670.0" prefWidth="920.0" spacing="10.0">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="920.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.LogsController">
+    <!-- INCLUDE NAVIGATION BAR -->
+    <fx:include source="components/navigation.fxml" />
+    <HBox prefHeight="628.0" prefWidth="920.0" spacing="10.0">
         <VBox prefHeight="648.0" prefWidth="374.0" spacing="10">
             <Label prefHeight="17.0" prefWidth="114.0" text="Suche &amp; Auswahl" />
             <TextField fx:id="searchField" promptText="Log suchen..." />
@@ -36,26 +23,42 @@
             <Button fx:id="searchButton" maxWidth="Infinity" text="Suchen" />
             <Label prefHeight="17.0" prefWidth="53.0" text="Logliste" />
             <ScrollPane prefHeight="299.0" prefWidth="365.0" />
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
         </VBox>
         <VBox prefHeight="573.0" prefWidth="533.0" spacing="10">
             <Label text="Log-Detailansicht &amp; Bearbeitung" />
             <ScrollPane prefHeight="623.0" prefWidth="525.0">
                 <VBox prefHeight="266.0" prefWidth="501.0" spacing="10">
                     <GridPane hgap="10" vgap="10">
-                        <Label text="Username" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                        <TextField fx:id="usernameField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                        <Label text="Datum/Uhrzeit" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <TextField fx:id="dateTimeField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <Label text="Kommentar" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                        <TextField fx:id="commentField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                        <Label text="Schwierigkeit" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                        <TextField fx:id="difficultyField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <Label text="Gesamtstrecke" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                        <TextField fx:id="totalDistanceField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                        <Label text="Gesamtzeit" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                        <TextField fx:id="totalTimeField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                        <Label text="Bewertung" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-                        <TextField fx:id="ratingField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                        <Label text="Username" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="usernameField" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label text="Datum/Uhrzeit" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="dateTimeField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Kommentar" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <TextField fx:id="commentField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Schwierigkeit" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <TextField fx:id="difficultyField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Gesamtstrecke" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <TextField fx:id="totalDistanceField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Gesamtzeit" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <TextField fx:id="totalTimeField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Bewertung" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                        <TextField fx:id="ratingField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
                     </GridPane>
                     <HBox prefHeight="102.0" prefWidth="481.0" spacing="10">
                         <Button fx:id="createButton" maxWidth="Infinity" prefHeight="25.0" prefWidth="88.0" text="Erstellen" />
@@ -67,12 +70,12 @@
                     </padding>
                 </VBox>
             </ScrollPane>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
         </VBox>
         <padding>
             <Insets top="10.0" />
         </padding>
     </HBox>
-    <padding>
-        <Insets left="10.0" right="10.0" />
-    </padding>
 </VBox>
