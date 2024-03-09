@@ -18,3 +18,7 @@ TextField {
 .input-cell {
     -fx-background-color: white;
 }
+
+.text-area {
+    -fx-background-color: white;
+}
