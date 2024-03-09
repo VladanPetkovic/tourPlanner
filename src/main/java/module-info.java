@@ -4,7 +4,6 @@ module org.example.tourplanner {
 
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
-    requires org.kordamp.bootstrapfx.core;
 
     opens org.example.tourplanner to javafx.fxml;
     exports org.example.tourplanner;

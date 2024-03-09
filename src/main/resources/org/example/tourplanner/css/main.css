@@ -1,6 +1,18 @@
+/**
+    css for elements: TextField, Button,...
+*/
 TextField {
 
 }
+Button {
+    -fx-border-radius: 2%;
+    -fx-cursor: HAND;
+    -fx-font-weight: bold;
+}
+
+/**
+    labels
+*/
 .label-white {
     -fx-text-fill: white;
     -fx-alignment: center;
@@ -9,12 +21,42 @@ TextField {
     -fx-text-fill: black;
     -fx-alignment: center;
 }
+
+/**
+    content
+*/
 .navigation {
     -fx-background-color: #0a1045;
+    -fx-font-weight: bold;
 }
 .content {
     -fx-background-color: #0a1045;
 }
 .input-cell {
     -fx-background-color: white;
+}
+
+
+/*
+    buttons
+*/
+.button_danger {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+.button_create {
+    -fx-background-color: #0ed70e;
+    -fx-text-fill: white;
+}
+.button_save_edit {
+    -fx-background-color: #0a1045;
+    -fx-text-fill: white;
+}
+.button_search {
+    -fx-background-color: grey;
+    -fx-text-fill: white;
+}
+.button-navigation {
+    -fx-background-color: none;
+    -fx-text-fill: white;
 }
