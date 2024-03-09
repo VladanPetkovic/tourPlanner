@@ -13,14 +13,6 @@ import java.io.IOException;
 public class NavigationController {
     private final double sceneWidth = 920;
     private final double sceneHeight = 700;
-    @FXML
-    public Button navLogsBtn;
-    @FXML
-    public Button navToursBtn;
-    @FXML
-    public Button navReportsBtn;
-    @FXML
-    public Button navImportExportBtn;
 
     @FXML
     protected void onToursBtnClick(ActionEvent actionEvent) throws IOException {
@@ -33,11 +25,15 @@ public class NavigationController {
     }
 
     @FXML
-    public void onReportsBtnClick(ActionEvent actionEvent) {
-
+    public void onTourReportBtnClick(ActionEvent actionEvent) throws IOException {
+        switchScene("sites/tour_report.fxml");
     }
 
     @FXML
+    public void onSummarizeReportBtnClick(ActionEvent actionEvent) throws IOException {
+        switchScene("sites/summarize_report.fxml");
+    }
+
     public void onImportExportBtnClick(ActionEvent actionEvent) throws IOException {
         switchScene("sites/import_export.fxml");
     }

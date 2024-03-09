@@ -7,11 +7,11 @@
 
 <GridPane prefHeight="70.0" prefWidth="920.0" styleClass="navigation" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.NavigationController">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.20001220703125" minWidth="10.0" prefWidth="164.9999755859375" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.6000244140625" minWidth="10.0" prefWidth="185.19998779296876" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="196.99997558593753" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.5999755859375" minWidth="10.0" prefWidth="187.19997558593752" />
+      <ColumnConstraints maxWidth="192.80007324218752" minWidth="6.4000244140625" prefWidth="184.60002441406243" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -19,7 +19,8 @@
    <children>
       <Button mnemonicParsing="false" onAction="#onLogsBtnClick" prefHeight="50.0" prefWidth="100.0" styleClass="button-navigation" text="Logs" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Button mnemonicParsing="false" onAction="#onToursBtnClick" prefHeight="50.0" prefWidth="100.0" styleClass="button-navigation" text="Tours" GridPane.halignment="CENTER" />
-      <Button mnemonicParsing="false" onAction="#onReportsBtnClick" prefHeight="50.0" prefWidth="100.0" styleClass="button-navigation" text="Reports" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-      <Button mnemonicParsing="false" onAction="#onImportExportBtnClick" prefHeight="50.0" prefWidth="182.0" styleClass="button-navigation" text="Import &amp; Export" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#onSummarizeReportBtnClick" prefHeight="50.0" prefWidth="210.0" styleClass="button-navigation" text="Summarize-Report" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#onImportExportBtnClick" prefHeight="50.0" prefWidth="182.0" styleClass="button-navigation" text="Import &amp; Export" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#onTourReportBtnClick" prefHeight="50.0" prefWidth="144.0" styleClass="button-navigation" text="Tour-Report" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
    </children>
 </GridPane>
