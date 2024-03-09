@@ -1,0 +1,20 @@
+TextField {
+
+}
+.label-white {
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+.label-dark {
+    -fx-text-fill: black;
+    -fx-alignment: center;
+}
+.navigation {
+    -fx-background-color: #0a1045;
+}
+.content {
+    -fx-background-color: #0a1045;
+}
+.input-cell {
+    -fx-background-color: white;
+}
