@@ -18,7 +18,7 @@
       <fx:include source="components/navigation.fxml" />
       <HBox prefHeight="614.0" prefWidth="920.0">
          <children>
-            <VBox prefHeight="663.0" prefWidth="298.0" styleClass="content">
+            <VBox prefHeight="663.0" prefWidth="298.0" styleClass="contentOfPage">
                <children>
                   <GridPane prefHeight="202.0" prefWidth="278.0" styleClass="input-cell">
                     <columnConstraints>
@@ -38,7 +38,7 @@
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="458.0" styleClass="button_create" text="Create new Tour" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                        <Button mnemonicParsing="false" onAction="#onCreateNewTourBtnClick" prefHeight="26.0" prefWidth="458.0" styleClass="button_create" text="Create new Tour" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
                      </children>
                      <VBox.margin>
                         <Insets />

@@ -1,9 +1,6 @@
 /**
     css for elements: TextField, Button,...
 */
-TextField {
-
-}
 Button {
     -fx-border-radius: 2%;
     -fx-cursor: HAND;
@@ -21,6 +18,12 @@ Button {
     -fx-text-fill: black;
     -fx-alignment: center;
 }
+.label-title-dark {
+    -fx-text-fill: black;
+    -fx-alignment: center;
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+}
 
 /**
     content
@@ -29,14 +32,10 @@ Button {
     -fx-background-color: #0a1045;
     -fx-font-weight: bold;
 }
-.content {
+.contentOfPage {
     -fx-background-color: #0a1045;
 }
 .input-cell {
-    -fx-background-color: white;
-}
-
-.text-area {
     -fx-background-color: white;
 }
 
@@ -45,6 +44,10 @@ Button {
 */
 .button_danger {
     -fx-background-color: red;
+    -fx-text-fill: white;
+}
+.button_cancel {
+    -fx-background-color: orange;
     -fx-text-fill: white;
 }
 .button_create {
@@ -64,4 +67,8 @@ Button {
     -fx-border-radius: 10%;
     -fx-text-fill: white;
     -fx-font-size: 16;
+}
+.button-icon {
+    -fx-cursor: HAND;
+    -fx-background-color: none;
 }

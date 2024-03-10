@@ -10,10 +10,9 @@ import org.example.tourplanner.Main;
 
 import java.io.IOException;
 
-public class NavigationController {
-    private final double sceneWidth = 920;
-    private final double sceneHeight = 700;
+import static org.example.tourplanner.frontend.controller.SwitchScene.switchScene;
 
+public class NavigationController {
     @FXML
     protected void onToursBtnClick(ActionEvent actionEvent) throws IOException {
         switchScene("sites/tours.fxml");
@@ -34,15 +33,8 @@ public class NavigationController {
         switchScene("sites/summarize_report.fxml");
     }
 
+    @FXML
     public void onImportExportBtnClick(ActionEvent actionEvent) throws IOException {
         switchScene("sites/import_export.fxml");
-    }
-
-    private void switchScene(String path) throws IOException {
-        Parent newParent = FXMLLoader.load(Main.class.getResource(path));
-
-        // create new scene
-        Scene newScene = new Scene(newParent, this.sceneWidth, this.sceneHeight);
-        Main.stage.setScene(newScene);
     }
 }
