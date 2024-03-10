@@ -1,12 +1,6 @@
 package org.example.tourplanner.frontend.controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import org.example.tourplanner.Main;
 
 import java.io.IOException;
 

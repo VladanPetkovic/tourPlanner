@@ -5,6 +5,9 @@ Button {
     -fx-border-radius: 2%;
     -fx-cursor: HAND;
     -fx-font-weight: bold;
+    /* using the following two lines, because margin does not exist in javafx */
+    -fx-border-insets: 0px 5px 0px 5px;
+    -fx-background-insets: 0px 5px 0px 5px;
 }
 
 /**
@@ -36,7 +39,7 @@ Button {
     -fx-background-color: #0a1045;
 }
 .input-cell {
-    -fx-background-color: white;
+    -fx-background-color: #f4f4f4;
 }
 
 /*

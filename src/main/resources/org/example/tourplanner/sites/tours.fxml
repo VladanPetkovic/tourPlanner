@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="920.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="920.0" styleClass="contentOfPage" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursController">
    <children>
        <!-- INCLUDE NAVIGATION BAR -->
       <fx:include source="components/navigation.fxml" />
@@ -57,8 +59,58 @@
             </VBox>
             <VBox prefHeight="649.0" prefWidth="622.0">
                <children>
-                  <Pane prefHeight="390.0" prefWidth="622.0" />
-                  <Pane prefHeight="270.0" prefWidth="622.0" styleClass="input-cell" />
+                  <Pane prefHeight="390.0" prefWidth="622.0">
+                     <children>
+                        <ImageView fitHeight="614.0" fitWidth="648.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/card.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <GridPane prefHeight="237.0" prefWidth="622.0" styleClass="contentOfPage">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.1999755859375" minWidth="10.0" prefWidth="140.0000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.599983215332" minWidth="10.0" prefWidth="437.5999755859375" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label styleClass="label-white" text="Tour-Name:" GridPane.rowIndex="1" />
+                        <Label styleClass="label-white" text="From:" GridPane.rowIndex="3" />
+                        <Label styleClass="label-white" text="Description:" GridPane.rowIndex="2" />
+                        <Label styleClass="label-white" text="To:" GridPane.rowIndex="4" />
+                        <Label styleClass="label-white" text="Transport-Type:" GridPane.rowIndex="5" />
+                        <Label styleClass="label-white" text="Tour-Distance:" GridPane.rowIndex="6" />
+                        <Label styleClass="label-white" text="Estimated Time:" GridPane.rowIndex="7" />
+                        <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Button mnemonicParsing="false" styleClass="button-icon" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/edit_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </GridPane>
                </children>
             </VBox>
          </children>
