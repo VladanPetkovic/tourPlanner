@@ -10,4 +10,7 @@ public class ToursController {
     public void onCreateNewTourBtnClick(ActionEvent actionEvent) throws IOException {
         switchScene("sites/tours_editCreate.fxml");
     }
+    public void onEditTourBtnClick(ActionEvent actionEvent) throws IOException {
+        switchScene("sites/tours_editCreate.fxml");
+    }
 }

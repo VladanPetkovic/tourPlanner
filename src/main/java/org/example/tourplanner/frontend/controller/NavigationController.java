@@ -19,16 +19,6 @@ public class NavigationController {
     }
 
     @FXML
-    public void onTourReportBtnClick(ActionEvent actionEvent) throws IOException {
-        switchScene("sites/tour_report.fxml");
-    }
-
-    @FXML
-    public void onSummarizeReportBtnClick(ActionEvent actionEvent) throws IOException {
-        switchScene("sites/summarize_report.fxml");
-    }
-
-    @FXML
     public void onImportExportBtnClick(ActionEvent actionEvent) throws IOException {
         switchScene("sites/import_export.fxml");
     }

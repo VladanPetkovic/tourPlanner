@@ -18,7 +18,7 @@
    <children>
        <!-- INCLUDE NAVIGATION BAR -->
       <fx:include source="components/navigation.fxml" />
-      <HBox prefHeight="614.0" prefWidth="920.0">
+      <HBox prefHeight="629.0" prefWidth="920.0">
          <children>
             <VBox prefHeight="663.0" prefWidth="298.0" styleClass="contentOfPage">
                <children>
@@ -57,30 +57,30 @@
                   </ScrollPane>
                </children>
             </VBox>
-            <VBox prefHeight="649.0" prefWidth="622.0">
+            <VBox prefHeight="623.0" prefWidth="622.0">
                <children>
                   <Pane prefHeight="390.0" prefWidth="622.0">
                      <children>
-                        <ImageView fitHeight="614.0" fitWidth="648.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="614.0" fitWidth="614.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/card.png" />
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <GridPane prefHeight="237.0" prefWidth="622.0" styleClass="contentOfPage">
+                  <GridPane prefHeight="249.0" prefWidth="622.0" styleClass="contentOfPage">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.1999755859375" minWidth="10.0" prefWidth="140.0000244140625" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.599983215332" minWidth="10.0" prefWidth="437.5999755859375" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="41.333343505859375" minHeight="10.0" prefHeight="36.66668701171875" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="31.666646321614586" minHeight="10.0" prefHeight="30.333333333333336" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="37.33331298828125" minHeight="10.0" prefHeight="24.33333333333333" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="36.333320617675795" minHeight="10.0" prefHeight="28.666687011718764" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="35.666687011718764" minHeight="10.0" prefHeight="28.33330535888672" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="26.999979654947907" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="34.33331298828125" minHeight="10.0" prefHeight="28.333292643229157" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.3333740234375" minHeight="10.0" prefHeight="23.66668701171875" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label styleClass="label-white" text="Tour-Name:" GridPane.rowIndex="1" />
@@ -97,11 +97,29 @@
                         <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Button mnemonicParsing="false" styleClass="button-icon" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                        <Button mnemonicParsing="false" onAction="#onEditTourBtnClick" styleClass="button-icon" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                            <graphic>
-                              <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icons/edit_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="36.0" styleClass="button-icon" GridPane.halignment="RIGHT">
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/report_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="36.0" styleClass="button-icon" GridPane.halignment="LEFT">
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/sumReport_white.png" />
                                  </image>
                               </ImageView>
                            </graphic>
