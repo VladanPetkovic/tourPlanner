@@ -14,7 +14,7 @@ class Tour {
     +Setter();
 }
 
-class TourLogs {
+class Logs {
     -String dateTime;
     -String comment;
     -int difficulty;

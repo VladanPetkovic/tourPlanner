@@ -4,6 +4,7 @@ module org.example.tourplanner {
 
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
+    requires lombok;
 
     opens org.example.tourplanner to javafx.fxml;
     exports org.example.tourplanner;
