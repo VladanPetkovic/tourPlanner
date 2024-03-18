@@ -17,9 +17,19 @@ Button {
     -fx-text-fill: white;
     -fx-alignment: center;
 }
+.label-white-bold {
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}
 .label-dark {
     -fx-text-fill: black;
     -fx-alignment: center;
+}
+.label-dark-bold {
+    -fx-text-fill: black;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
 }
 .label-title-dark {
     -fx-text-fill: black;

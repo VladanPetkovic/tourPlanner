@@ -14,11 +14,6 @@ public class NavigationController {
     }
 
     @FXML
-    public void onLogsBtnClick(ActionEvent actionEvent) throws IOException {
-        switchScene("sites/logs.fxml");
-    }
-
-    @FXML
     public void onImportExportBtnClick(ActionEvent actionEvent) throws IOException {
         switchScene("sites/import_export.fxml");
     }

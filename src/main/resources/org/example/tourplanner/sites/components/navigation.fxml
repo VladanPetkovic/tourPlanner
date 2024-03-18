@@ -7,15 +7,14 @@
 
 <GridPane prefHeight="70.0" prefWidth="920.0" styleClass="navigation" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.NavigationController">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.66665140787757" minWidth="10.0" prefWidth="302.66665140787757" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="453.3334045410156" minWidth="10.0" prefWidth="301.3333333333333" />
-      <ColumnConstraints maxWidth="328.6666463216145" minWidth="6.4000244140625" prefWidth="315.33333333333326" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.6666666666667" minWidth="10.0" prefWidth="423.33335367838544" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="453.3334045410156" minWidth="10.0" prefWidth="69.33335367838538" />
+      <ColumnConstraints maxWidth="457.99995930989587" minWidth="6.4000244140625" prefWidth="426.6666463216146" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" onAction="#onLogsBtnClick" prefHeight="50.0" prefWidth="100.0" styleClass="button-navigation" text="Logs" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Button mnemonicParsing="false" onAction="#onToursBtnClick" prefHeight="50.0" prefWidth="100.0" styleClass="button-navigation" text="Tours" GridPane.halignment="CENTER" />
       <Button mnemonicParsing="false" onAction="#onImportExportBtnClick" prefHeight="50.0" prefWidth="237.0" styleClass="button-navigation" text="Import &amp; Export" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
    </children>
