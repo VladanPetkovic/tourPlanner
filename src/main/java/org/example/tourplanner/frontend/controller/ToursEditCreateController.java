@@ -62,7 +62,7 @@ public class ToursEditCreateController implements Initializable {
         }
     }
 
-    public void setDistanceSpinner(double initialValue) {
+    private void setDistanceSpinner(double initialValue) {
         // min, max, and default values inserted
         SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10000.0);
         valueFactory.setValue(initialValue);
@@ -76,7 +76,7 @@ public class ToursEditCreateController implements Initializable {
         });
     }
 
-    public void setEstimatedTimeSpinner(int initialValue) {
+    private void setEstimatedTimeSpinner(int initialValue) {
         // min, max, and default values inserted
         SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100000);
         valueFactory.setValue(initialValue);

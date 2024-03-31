@@ -59,7 +59,7 @@
                         <Slider blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.rowIndex="3" />
                         <Label prefHeight="29.0" prefWidth="282.0" styleClass="label-dark" text="Select the difficulty:" GridPane.rowIndex="2" />
                         <Label prefHeight="29.0" prefWidth="282.0" styleClass="label-dark" text="Select the rating:" GridPane.rowIndex="4" />
-                        <Slider blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.rowIndex="5" />
+                        <Slider blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="3.0" GridPane.rowIndex="5" />
                         <Button mnemonicParsing="false" onAction="#onReturnBtnClick" styleClass="button-icon">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -78,7 +78,7 @@
                      </padding>
                   </GridPane>
                   <Label prefHeight="46.0" prefWidth="298.0" styleClass="label-white" text="Log-List" />
-                  <ListView prefHeight="305.0" prefWidth="298.0" />
+                  <ListView fx:id="logListView" prefHeight="305.0" prefWidth="298.0" />
                </children>
             </VBox>
             <VBox prefHeight="840.0" prefWidth="604.0" spacing="10" styleClass="input-cell" GridPane.columnIndex="1" GridPane.halignment="CENTER">
@@ -87,44 +87,47 @@
                </padding>
                <children>
                   <Label prefHeight="39.0" prefWidth="583.0" styleClass="label-dark-bold" text="Log-Detailansicht &amp; Bearbeitung" />
-                  <GridPane hgap="10" prefHeight="335.0" prefWidth="582.0" vgap="10">
+                  <GridPane hgap="10" prefHeight="398.0" prefWidth="583.0" vgap="10">
                      <columnConstraints>
                         <ColumnConstraints maxWidth="288.66670735677087" minWidth="68.66664632161459" prefWidth="140.66668701171875" />
                         <ColumnConstraints maxWidth="326.0" minWidth="5.599848937988327" prefWidth="283.6666463216146" />
                         <ColumnConstraints maxWidth="326.0" minWidth="10.0" prefWidth="138.3333129882812" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints />
-                        <RowConstraints />
+                        <RowConstraints maxHeight="25.6" minHeight="4.000020599365236" prefHeight="25.6" />
+                        <RowConstraints maxHeight="21.599979400634766" minHeight="0.0" prefHeight="0.0" />
+                        <RowConstraints maxHeight="25.6" minHeight="25.6" prefHeight="25.6" />
                         <RowConstraints />
                         <RowConstraints />
                         <RowConstraints />
                         <RowConstraints />
                         <RowConstraints />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
                      </rowConstraints>
                      <children>
                         <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <TextField fx:id="usernameField" prefWidth="200.0" promptText="user1234" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                        <Label text="Date/Time:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <TextField fx:id="dateTimeField" prefWidth="200" promptText="2024/3/10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Comment:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <TextField fx:id="commentField" prefWidth="200" promptText="no comments" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Difficulty:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                        <Label text="Total distance (in m):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                        <Label text="Total time (in min):" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                        <Label text="Rating:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                        <Slider blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Spinner prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Spinner prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Slider blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Button fx:id="createButton" maxWidth="Infinity" prefHeight="25.0" prefWidth="88.0" styleClass="button_create" text="Create" GridPane.rowIndex="7" />
-                        <Button fx:id="updateButton" maxWidth="Infinity" prefHeight="25.0" prefWidth="91.0" styleClass="button_save_edit" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Button fx:id="deleteButton" maxWidth="Infinity" prefHeight="26.0" prefWidth="185.0" styleClass="button_danger" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                        <TextField fx:id="usernameTextField" prefWidth="200.0" promptText="user1234" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label text="Date/Time:" GridPane.rowIndex="2" />
+                        <Label text="Comment:" GridPane.rowIndex="3" />
+                        <TextField fx:id="commentTextField" prefWidth="200" promptText="no comments" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Difficulty:" GridPane.rowIndex="4" />
+                        <Label text="Total distance (in m):" GridPane.rowIndex="5" />
+                        <Label text="Total time (in min):" GridPane.rowIndex="6" />
+                        <Label text="Rating:" GridPane.rowIndex="7" />
+                        <Slider fx:id="difficultySlider" blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Spinner fx:id="totalDistanceSpinner" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Spinner fx:id="totalTimeSpinner" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Slider fx:id="ratingSlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Button maxWidth="Infinity" onAction="#onCreateBtnClick" prefHeight="25.0" prefWidth="88.0" styleClass="button_create" text="Create" GridPane.rowIndex="9" />
+                        <Button maxWidth="Infinity" onAction="#onSaveBtnClick" prefHeight="25.0" prefWidth="91.0" styleClass="button_save_edit" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Button maxWidth="Infinity" onAction="#onDeleteBtnClick" prefHeight="26.0" prefWidth="185.0" styleClass="button_danger" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="9">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
+                        <Label fx:id="errorLabel" styleClass="label-error" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                        <TextField fx:id="dateTextField" prefWidth="200.0" promptText="2024-02-12" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

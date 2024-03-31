@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.util.StringConverter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.viewModel.TourViewModel;
@@ -94,8 +93,10 @@ public class ToursController implements Initializable {
         switchScene("sites/tours_editCreate.fxml");
     }
     public void onEditTourBtnClick(ActionEvent actionEvent) throws IOException {
-        this.viewModel.setHasSelectedTour(true);
-        switchScene("sites/tours_editCreate.fxml");
+        if (this.viewModel.getSelectedTour() != null) {
+            this.viewModel.setHasSelectedTour(true);
+            switchScene("sites/tours_editCreate.fxml");
+        }
     }
 
     public void onTourReportBtnClick(ActionEvent actionEvent) {
@@ -107,10 +108,12 @@ public class ToursController implements Initializable {
     }
 
     public void onLogBtnClick(ActionEvent actionEvent) throws IOException {
-        // go to the logs page
-        switchScene("sites/logs.fxml");
+        if (this.viewModel.getSelectedTour() != null) {
+            // pass the tour-Name
 
-        // pass the tour-Name
+            // go to the logs page
+            switchScene("sites/logs.fxml");
+        }
     }
 
     public void onSearchBtnClick(ActionEvent actionEvent) {

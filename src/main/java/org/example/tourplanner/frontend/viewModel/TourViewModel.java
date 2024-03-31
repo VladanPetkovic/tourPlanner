@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
+import org.example.tourplanner.frontend.model.TransportType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,11 @@ public class TourViewModel {
     private final DoubleProperty currentTourDistance = new SimpleDoubleProperty();
     private final IntegerProperty currentEstimatedTime = new SimpleIntegerProperty(); // in seconds
     private final StringProperty currentRouteInformation = new SimpleStringProperty("");
-    private final ObservableList<Tour> tourData = FXCollections.observableArrayList();
+    // some sample data
+    private final ObservableList<Tour> tourData = FXCollections.observableArrayList(
+                    new Tour("Tour 1", "Description 1", "From 1", "To 1", TransportType.VACATION.name(), 100.0, 120, "Route 1"),
+                    new Tour("Tour 2", "Description 2", "From 2", "To 2", TransportType.HIKE.name(), 150.0, 180, "Route 2")
+    );
     private Tour selectedTour;
     private boolean hasSelectedTour = false;
 
