@@ -25,6 +25,8 @@ public class TourViewModel {
     private final IntegerProperty currentEstimatedTime = new SimpleIntegerProperty(); // in seconds
     private final StringProperty currentRouteInformation = new SimpleStringProperty("");
     private final ObservableList<Tour> tourData = FXCollections.observableArrayList();
+    private Tour selectedTour;
+    private boolean hasSelectedTour = false;
 
     public void addListener(FocusChangedListener listener) {
         this.focusChangedListenerList.add(listener);
@@ -60,15 +62,17 @@ public class TourViewModel {
         // check empty properties
         if (Objects.equals(this.currentTourDescription.get(), "") || Objects.equals(this.currentFrom.get(), "") ||
                 Objects.equals(this.currentTo.get(), "") || Objects.equals(this.currentTransportType.get(), "") ||
-                this.currentTourDistance.get() == 0 || this.currentEstimatedTime.get() == 0 ||
                 Objects.equals(this.currentRouteInformation.get(), "")) {
             return "Fill out all required fields!";
         }
 
+        if (this.currentTourDistance.get() == 0) {
+            return "Tour distance must be greater than 0!";
+        }
 
-
-
-
+        if (this.currentEstimatedTime.get() == 0) {
+            return "The estimated time must be greated than 0!";
+        }
 
         return "True";
     }

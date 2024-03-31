@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.StringConverter;
+import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.viewModel.TourViewModel;
 
@@ -32,10 +33,16 @@ public class ToursController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        viewModel.addListener(new FocusChangedListener() {
+            @Override
+            public void requestFocusChange(String name) {
+                tourListView.requestFocus();
+            }
+        });
+
         tourListView.setItems(viewModel.getTourData());
         displayTourNames();
         displayTourInformation();
-
     }
 
     /**
@@ -61,6 +68,7 @@ public class ToursController implements Initializable {
     private void displayTourInformation() {
         tourListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                this.viewModel.setSelectedTour(newValue);
                 tourNameLabel.setText(newValue.getName());
                 descriptionLabel.setText(newValue.getDescription());
                 fromLabel.setText(newValue.getFrom());
@@ -82,9 +90,11 @@ public class ToursController implements Initializable {
 
     public void onCreateNewTourBtnClick(ActionEvent actionEvent) throws IOException {
         this.viewModel.resetCurrentInput();
+        this.viewModel.setHasSelectedTour(false);
         switchScene("sites/tours_editCreate.fxml");
     }
     public void onEditTourBtnClick(ActionEvent actionEvent) throws IOException {
+        this.viewModel.setHasSelectedTour(true);
         switchScene("sites/tours_editCreate.fxml");
     }
 

@@ -37,6 +37,11 @@ Button {
     -fx-font-size: 25;
     -fx-font-weight: bold;
 }
+.label-error {
+    -fx-text-fill: red;
+    -fx-allignment: center;
+    -fx-font-weight: bold;
+}
 
 /**
     content

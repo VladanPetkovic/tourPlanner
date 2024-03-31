@@ -34,8 +34,9 @@
          <RowConstraints maxHeight="348.0000190734863" minHeight="10.0" prefHeight="34.999963378906216" vgrow="SOMETIMES" />
        <RowConstraints maxHeight="265.39996948242185" minHeight="10.0" prefHeight="41.39996337890625" vgrow="SOMETIMES" />
          <RowConstraints maxHeight="383.1999816894531" minHeight="10.0" prefHeight="48.599999999999966" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="303.5999694824219" minHeight="10.0" prefHeight="89.39999389648438" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="435.59999084472656" minHeight="10.0" prefHeight="75.60000000000002" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="303.5999694824219" minHeight="10.0" prefHeight="77.40001831054695" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="303.5999694824219" minHeight="10.0" prefHeight="46.199981689453125" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="435.59999084472656" minHeight="10.0" prefHeight="66.79999999999995" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
          <Label alignment="CENTER" prefHeight="57.0" prefWidth="920.0" styleClass="label-title-dark" text="Create/Edit Tour" GridPane.columnIndex="2" />
@@ -47,8 +48,8 @@
          <Label text="Tour distance:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          <Label text="Estimated Time:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
          <Label text="Route Information:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-         <Button mnemonicParsing="false" onAction="#onSaveUpdateBtnClick" styleClass="button_save_edit" text="Save/Update" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-         <Button mnemonicParsing="false" onAction="#onDeleteBtnClick" styleClass="button_danger" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+         <Button mnemonicParsing="false" onAction="#onSaveUpdateBtnClick" styleClass="button_save_edit" text="Save/Update" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+         <Button mnemonicParsing="false" onAction="#onDeleteBtnClick" styleClass="button_danger" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
          <TextField fx:id="nameTextField" promptText="Hiking Tour Vienna" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          <TextField fx:id="fromTextField" promptText="Sterngasse 4" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          <TextField fx:id="toTextField" promptText="Höchstädtplatz 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />
@@ -66,6 +67,7 @@
                </ImageView>
             </graphic>
          </Button>
+         <Label fx:id="errorLabel" styleClass="label-error" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
       </children>
    </GridPane>
 

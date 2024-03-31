@@ -39,6 +39,18 @@ public class Tour {
         setRouteInformation(routeInformation);
     }
 
+    // Copy constructor
+    public Tour(Tour other) {
+        this.name = other.name;
+        this.description = other.description;
+        this.from = other.from;
+        this.to = other.to;
+        this.transportType = other.transportType;
+        this.distance = other.distance;
+        this.estimatedTime = other.estimatedTime;
+        this.routeInformation = other.routeInformation;
+    }
+
     private void initTransportType(String transportTypeValue) {
         switch (transportTypeValue) {
             case "Bike": setTransportType(TransportType.BIKE);

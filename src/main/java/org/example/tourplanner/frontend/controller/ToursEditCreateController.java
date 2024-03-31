@@ -25,6 +25,7 @@ public class ToursEditCreateController implements Initializable {
     public Spinner<Integer> estimatedTimeSpinner;
     public TextField routeInformationTextField;
     public TextArea descriptionTextArea;
+    public Label errorLabel;
 
     public ToursEditCreateController(TourViewModel tourViewModel) {
         this.viewModel = tourViewModel;
@@ -36,6 +37,13 @@ public class ToursEditCreateController implements Initializable {
             @Override
             public void requestFocusChange(String name) {
                 nameTextField.requestFocus();
+                fromTextField.requestFocus();
+                toTextField.requestFocus();
+                transportTypeChoiceBox.requestFocus();
+                distanceSpinner.requestFocus();
+                estimatedTimeSpinner.requestFocus();
+                routeInformationTextField.requestFocus();
+                descriptionTextArea.requestFocus();
             }
         });
         transportTypeChoiceBox.getItems().addAll(transportTypeItems);
@@ -44,15 +52,20 @@ public class ToursEditCreateController implements Initializable {
         fromTextField.textProperty().bindBidirectional(viewModel.getCurrentFrom());
         toTextField.textProperty().bindBidirectional(viewModel.getCurrentTo());
         transportTypeChoiceBox.valueProperty().bindBidirectional(viewModel.getCurrentTransportType());
-        setDistanceSpinner();
-        setEstimatedTimeSpinner();
+        setDistanceSpinner(5);
+        setEstimatedTimeSpinner(15);
         routeInformationTextField.textProperty().bindBidirectional(viewModel.getCurrentRouteInformation());
         descriptionTextArea.textProperty().bindBidirectional(viewModel.getCurrentTourDescription());
+
+        if (this.viewModel.getSelectedTour() != null && this.viewModel.isHasSelectedTour()) {
+            initializeFieldsWithValue();
+        }
     }
 
-    public void setDistanceSpinner() {
+    public void setDistanceSpinner(double initialValue) {
         // min, max, and default values inserted
-        SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10000.0, 10.0);
+        SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10000.0);
+        valueFactory.setValue(initialValue);
         distanceSpinner.setValueFactory(valueFactory);
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentTourDistance().asObject());
 
@@ -63,9 +76,10 @@ public class ToursEditCreateController implements Initializable {
         });
     }
 
-    public void setEstimatedTimeSpinner() {
+    public void setEstimatedTimeSpinner(int initialValue) {
         // min, max, and default values inserted
-        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100000, 30);
+        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100000);
+        valueFactory.setValue(initialValue);
         estimatedTimeSpinner.setValueFactory(valueFactory);
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentEstimatedTime().asObject());
 
@@ -78,24 +92,45 @@ public class ToursEditCreateController implements Initializable {
     }
 
     public void onGoBackBtnClick(ActionEvent actionEvent) throws IOException {
+        errorLabel.setText("");
         switchScene("sites/tours.fxml");
     }
 
     public void onSaveUpdateBtnClick(ActionEvent actionEvent) throws IOException {
-        if (this.viewModel.checkInput().equals("True")) {
+        if (this.viewModel.checkInput().equals("True") && !this.viewModel.isHasSelectedTour()) {
             viewModel.saveDataToList();
+            errorLabel.setText("");
+            switchScene("sites/tours.fxml");
+        } else if (this.viewModel.checkInput().equals("True")) {
+            errorLabel.setText("");
             switchScene("sites/tours.fxml");
         } else {
-
+            errorLabel.setText(this.viewModel.checkInput());
         }
-
     }
 
-    public void onDeleteBtnClick(ActionEvent actionEvent) {
-
+    public void onDeleteBtnClick(ActionEvent actionEvent) throws IOException {
+        errorLabel.setText("");
+        this.viewModel.getTourData().remove(this.viewModel.getSelectedTour());
+        switchScene("sites/tours.fxml");
     }
 
+    // TODO: not working properly
     private static boolean isValidDouble(String text) {
         return text.matches("^\\d+(,)?(\\d*)?$");
+    }
+
+    /**
+     * This function initializes values, when editing or deleting a tour.
+     */
+    private void initializeFieldsWithValue() {
+        nameTextField.setText(this.viewModel.getSelectedTour().getName());
+        fromTextField.setText(this.viewModel.getSelectedTour().getFrom());
+        toTextField.setText(this.viewModel.getSelectedTour().getTo());
+        transportTypeChoiceBox.setValue(this.viewModel.getSelectedTour().getTransportType().name());
+        setDistanceSpinner(this.viewModel.getSelectedTour().getDistance());
+        setEstimatedTimeSpinner(this.viewModel.getSelectedTour().getEstimatedTime());
+        routeInformationTextField.setText(this.viewModel.getSelectedTour().getRouteInformation());
+        descriptionTextArea.setText(this.viewModel.getSelectedTour().getDescription());
     }
 }
