@@ -10,6 +10,7 @@ import org.example.tourplanner.frontend.model.Tour;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -40,7 +41,7 @@ public class TourViewModel {
                 this.currentRouteInformation.get()));
     }
 
-    private void resetCurrentInput() {
+    public void resetCurrentInput() {
         currentTourName.set("");
         currentTourDescription.set("");
         currentFrom.set("");
@@ -49,5 +50,26 @@ public class TourViewModel {
         currentTourDistance.set(0);
         currentEstimatedTime.set(0);
         currentRouteInformation.set("");
+    }
+
+    /**
+     * This function checks, if everything is filled out.
+     * @return "True", when everything is correct and when something is false, it returns the error message.
+     */
+    public String checkInput() {
+        // check empty properties
+        if (Objects.equals(this.currentTourDescription.get(), "") || Objects.equals(this.currentFrom.get(), "") ||
+                Objects.equals(this.currentTo.get(), "") || Objects.equals(this.currentTransportType.get(), "") ||
+                this.currentTourDistance.get() == 0 || this.currentEstimatedTime.get() == 0 ||
+                Objects.equals(this.currentRouteInformation.get(), "")) {
+            return "Fill out all required fields!";
+        }
+
+
+
+
+
+
+        return "True";
     }
 }

@@ -55,6 +55,12 @@ public class ToursEditCreateController implements Initializable {
         SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10000.0, 10.0);
         distanceSpinner.setValueFactory(valueFactory);
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentTourDistance().asObject());
+
+        this.distanceSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {
+            if (!isValidDouble(event.getCharacter())) { // Check if the input character is a valid double value
+                event.consume(); // Consume the event to prevent non-numeric input
+            }
+        });
     }
 
     public void setEstimatedTimeSpinner() {
@@ -62,6 +68,13 @@ public class ToursEditCreateController implements Initializable {
         SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100000, 30);
         estimatedTimeSpinner.setValueFactory(valueFactory);
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentEstimatedTime().asObject());
+
+        // Add an event filter to the text field to allow only numeric input
+        this.estimatedTimeSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("\\d")) { // Only allow digits
+                event.consume(); // Consume the event to prevent non-numeric input
+            }
+        });
     }
 
     public void onGoBackBtnClick(ActionEvent actionEvent) throws IOException {
@@ -69,11 +82,20 @@ public class ToursEditCreateController implements Initializable {
     }
 
     public void onSaveUpdateBtnClick(ActionEvent actionEvent) throws IOException {
-        viewModel.saveDataToList();
-        switchScene("sites/tours.fxml");
+        if (this.viewModel.checkInput().equals("True")) {
+            viewModel.saveDataToList();
+            switchScene("sites/tours.fxml");
+        } else {
+
+        }
+
     }
 
     public void onDeleteBtnClick(ActionEvent actionEvent) {
 
+    }
+
+    private static boolean isValidDouble(String text) {
+        return text.matches("^\\d+(,)?(\\d*)?$");
     }
 }
