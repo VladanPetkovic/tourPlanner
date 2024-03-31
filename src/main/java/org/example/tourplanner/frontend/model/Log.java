@@ -1,21 +1,25 @@
 package org.example.tourplanner.frontend.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor     // has already the constructor
 public class Log {
-    private final StringProperty dateTime;
-    private final StringProperty comment;
-    private final IntegerProperty difficulty; // only in ranges from 1 to 10
-    private final DoubleProperty totalDistance;
-    private final DoubleProperty totalTime;
-    private final IntegerProperty rating; // only in ranges from 1 to 5
+    private String dateTime;
+    private String comment;
+    private Integer difficulty; // only in ranges from 1 to 10
+    private Double totalDistance;
+    private Double totalTime;
+    private Integer rating; // only in ranges from 1 to 5
 
+    public Log(String dateTime, String comment, Integer difficulty,
+               Double totalDistance, Double totalTime, Integer rating) {
+        setDateTime(dateTime);
+        setComment(comment);
+        setDifficulty(difficulty);
+        setTotalDistance(totalDistance);
+        setTotalTime(totalTime);
+        setRating(rating);
+    }
 }
