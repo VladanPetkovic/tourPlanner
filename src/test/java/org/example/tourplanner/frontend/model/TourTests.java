@@ -1,12 +1,23 @@
-/*
-package org.example.tourplanner.backend.app.model;
+package org.example.tourplanner.frontend.model;
 
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TourTests {
+    Tour tour = new Tour(
+            "Vienna city exploration",
+            "A beautiful city tour",
+            "Stephansplatz",
+            "Reumannplatz",
+            "1", // 1: TransportType.HIKE
+            10.0, // Distance in km
+            7200, // Estimated time in seconds
+            "Explore the city with a walk through the city"
+    );
+
+
     @BeforeAll
     void beforeAll() {
         System.out.println("Starting with Tour-tests");
@@ -28,90 +39,57 @@ public class TourTests {
     }
 
     @Test
-    void exampleTest() {
-        assertTrue(true);
-    }
-
-    // TODO: implement tests for the creation of the variables
-    // check for input validation
-
-    // eg: tourname is combined: "from" + "to"
-    // --> test, if the string is correctly made
-
-}
-*/
-
-
-package org.example.tourplanner.frontend.model;
-
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
-public class TourTests {
-
-    @Test
-    public void testViennaTourInitialization() {
-        Tour tour = new Tour(
-                "Vienna city exploration",
-                "A beautiful city tour",
-                "Stephansplatz",
-                "Reumannplatz",
-                "1", // 1: TransportType.HIKE
-                10.0, // Distance in km
-                7200, // Estimated time in seconds
-                "Explore the city with a walk through the city"
-        );
-
-        assertEquals("Vienna city exploration", tour.getTourName().get());
-        assertEquals("A beautiful city tour", tour.getTourDescription().get());
-        assertEquals("Stephansplatz", tour.getFrom().get());
-        assertEquals("Reumannplatz", tour.getTo().get());
+    public void Tour_testInitialization() {
+        assertEquals("A beautiful city tour", tour.getDescription());
+        assertEquals("Stephansplatz", tour.getFrom());
+        assertEquals("Reumannplatz", tour.getTo());
+        // TODO: hier ist ein Fehler
         assertEquals(TransportType.HIKE, tour.getTransportType());
-        assertEquals(10, tour.getTourDistance().get(), 0.001);
-        assertEquals(7200, tour.getEstimatedTime().get());
-        assertEquals("Explore the city with a walk through the city", tour.getRouteInformation().get());
+        assertEquals(10, tour.getDistance(), 0.001);
+        assertEquals(7200, tour.getEstimatedTime());
+        assertEquals("Explore the city with a walk through the city", tour.getRouteInformation());
     }
 
     @Test
-    public void testTransportTypeConversion() {
-        Tour bikeTour = new Tour(
-                new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), new SimpleIntegerProperty(0), null, null, new SimpleStringProperty("")
-        );
-        assertEquals(TransportType.BIKE, bikeTour.getTransportType());
+    public void setCombinedTourName_testCombination() {
+        // arrange
+        String from = "ottakring";
+        String to = "hernals";
+        String expected_combination = "ottakring-hernals";
 
-        Tour hikeTour = new Tour(
-                new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), new SimpleIntegerProperty(1), null, null, new SimpleStringProperty("")
-        );
-        assertEquals(TransportType.HIKE, hikeTour.getTransportType());
+        // act
+        tour.setCombinedTourName(from, to);
+
+        // assert
+        assertEquals(expected_combination, tour.getName());
     }
 
     @Test
-    public void testPropertySetting() {
-        Tour tour = new Tour(
-                new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), new SimpleIntegerProperty(0), null, null, new SimpleStringProperty("")
-        );
+    public void setCombinedTourName_testLowercase() {
+        // arrange
+        String from = "Ottakring";
+        String to = "Hernals";
+        String expected_combination = "ottakring-hernals";
 
-        tour.setTourName(new SimpleStringProperty("New Name"));
-        assertEquals("New Name", tour.getTourName().get());
+        // act
+        tour.setCombinedTourName(from, to);
 
-        tour.setTourDistance(new SimpleDoubleProperty(200.0));
-        assertEquals(200.0, tour.getTourDistance().get(), 0.001);
+        // assert
+        assertEquals(expected_combination, tour.getName());
     }
 
     @Test
-    public void testDefaultTransportType() {
-        Tour defaultTour = new Tour(
-                new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), new SimpleIntegerProperty(-1), null, null, new SimpleStringProperty("")
-        );
-        assertEquals(TransportType.VACATION, defaultTour.getTransportType());
+    public void setCombinedTourName_testMissingSpaces() {
+        // arrange
+        String from = "Ottakring und eine andere Stadt";
+        String to = "Hernals und Döbling";
+        String expected_combination = "ottakring-und-eine-andere-stadt-hernals-und-döbling";
+
+        // act
+        tour.setCombinedTourName(from, to);
+
+        // assert
+        assertEquals(expected_combination, tour.getName());
     }
 }
 

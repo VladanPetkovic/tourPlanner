@@ -67,7 +67,7 @@ public class Tour {
      * This function sets the tour-name. It combines From and To to one word.
      * For example: From: Favoriten; To: Ottakring ==> Name: favoriten-ottakring
      */
-    private void setCombinedTourName(String from, String to) {
+    public void setCombinedTourName(String from, String to) {
         String combinedName = "";
 
         if (!Objects.equals(from, "") && !Objects.equals(to, "")) {
