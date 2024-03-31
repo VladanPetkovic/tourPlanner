@@ -42,12 +42,11 @@ public class TourTests {
 */
 
 
-package org.example.tourplanner.backend.app.model;
+package org.example.tourplanner.frontend.model;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import org.example.tourplanner.backend.app.TransportType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -57,14 +56,14 @@ public class TourTests {
     @Test
     public void testViennaTourInitialization() {
         Tour tour = new Tour(
-                new SimpleStringProperty("Vienna city exploration"),
-                new SimpleStringProperty("A beautiful city tour"),
-                new SimpleStringProperty("Stephansplatz"),
-                new SimpleStringProperty("Reumannplatz"),
-                1, // 1: TransportType.HIKE
-                new SimpleDoubleProperty(10), // Distance in km
-                new SimpleIntegerProperty(7200), // Estimated time in seconds
-                new SimpleStringProperty("Explore the city with a walk through the city")
+                "Vienna city exploration",
+                "A beautiful city tour",
+                "Stephansplatz",
+                "Reumannplatz",
+                "1", // 1: TransportType.HIKE
+                10.0, // Distance in km
+                7200, // Estimated time in seconds
+                "Explore the city with a walk through the city"
         );
 
         assertEquals("Vienna city exploration", tour.getTourName().get());
@@ -81,13 +80,13 @@ public class TourTests {
     public void testTransportTypeConversion() {
         Tour bikeTour = new Tour(
                 new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), 0, null, null, new SimpleStringProperty("")
+                new SimpleStringProperty(""), new SimpleIntegerProperty(0), null, null, new SimpleStringProperty("")
         );
         assertEquals(TransportType.BIKE, bikeTour.getTransportType());
 
         Tour hikeTour = new Tour(
                 new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), 1, null, null, new SimpleStringProperty("")
+                new SimpleStringProperty(""), new SimpleIntegerProperty(1), null, null, new SimpleStringProperty("")
         );
         assertEquals(TransportType.HIKE, hikeTour.getTransportType());
     }
@@ -96,7 +95,7 @@ public class TourTests {
     public void testPropertySetting() {
         Tour tour = new Tour(
                 new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), 0, null, null, new SimpleStringProperty("")
+                new SimpleStringProperty(""), new SimpleIntegerProperty(0), null, null, new SimpleStringProperty("")
         );
 
         tour.setTourName(new SimpleStringProperty("New Name"));
@@ -107,12 +106,12 @@ public class TourTests {
     }
 
     @Test
-    public void testInvalidTransportType() {
-        Tour invalidTour = new Tour(
+    public void testDefaultTransportType() {
+        Tour defaultTour = new Tour(
                 new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty(""),
-                new SimpleStringProperty(""), -1, null, null, new SimpleStringProperty("")
+                new SimpleStringProperty(""), new SimpleIntegerProperty(-1), null, null, new SimpleStringProperty("")
         );
-        assertEquals(TransportType.VACATION, invalidTour.getTransportType());
+        assertEquals(TransportType.VACATION, defaultTour.getTransportType());
     }
 }
 

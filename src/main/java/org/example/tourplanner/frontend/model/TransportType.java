@@ -1,4 +1,4 @@
-package org.example.tourplanner.backend.app;
+package org.example.tourplanner.frontend.model;
 
 public enum TransportType {
     BIKE,

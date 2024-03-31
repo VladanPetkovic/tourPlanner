@@ -10,4 +10,6 @@ module org.example.tourplanner {
     exports org.example.tourplanner;
     exports org.example.tourplanner.frontend.controller;
     opens org.example.tourplanner.frontend.controller to javafx.fxml;
+    exports org.example.tourplanner.frontend;
+    opens org.example.tourplanner.frontend to javafx.fxml;
 }

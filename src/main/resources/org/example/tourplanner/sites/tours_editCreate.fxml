@@ -47,16 +47,16 @@
          <Label text="Tour distance:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          <Label text="Estimated Time:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
          <Label text="Route Information:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-         <Button mnemonicParsing="false" styleClass="button_save_edit" text="Save/Update" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-         <Button mnemonicParsing="false" styleClass="button_danger" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
-         <TextField promptText="Hiking Tour Vienna" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-         <TextField promptText="Sterngasse 4" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-         <TextField promptText="Höchstädtplatz 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-         <ChoiceBox prefHeight="26.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-         <Spinner editable="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-         <Spinner editable="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-         <TextField promptText="Enter further information..." GridPane.columnIndex="2" GridPane.rowIndex="9" />
-         <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Enter the description of the tour..." GridPane.columnIndex="2" GridPane.rowIndex="3" />
+         <Button mnemonicParsing="false" onAction="#onSaveUpdateBtnClick" styleClass="button_save_edit" text="Save/Update" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+         <Button mnemonicParsing="false" onAction="#onDeleteBtnClick" styleClass="button_danger" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+         <TextField fx:id="nameTextField" promptText="Hiking Tour Vienna" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         <TextField fx:id="fromTextField" promptText="Sterngasse 4" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+         <TextField fx:id="toTextField" promptText="Höchstädtplatz 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+         <ChoiceBox fx:id="transportTypeChoiceBox" prefHeight="26.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+         <Spinner fx:id="distanceSpinner" editable="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         <Spinner fx:id="estimatedTimeSpinner" editable="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         <TextField fx:id="routeInformationTextField" promptText="Enter further information..." GridPane.columnIndex="2" GridPane.rowIndex="9" />
+         <TextArea fx:id="descriptionTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Enter the description of the tour..." GridPane.columnIndex="2" GridPane.rowIndex="3" />
          <Button mnemonicParsing="false" onAction="#onGoBackBtnClick" styleClass="button-icon" GridPane.columnIndex="1">
             <graphic>
                <ImageView fitHeight="60.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">

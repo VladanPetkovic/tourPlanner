@@ -1,4 +1,4 @@
-package org.example.tourplanner.backend.app.model;
+package org.example.tourplanner.frontend.model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
