@@ -22,38 +22,35 @@
          <children>
             <VBox prefHeight="663.0" prefWidth="298.0" styleClass="contentOfPage">
                <children>
-                  <GridPane prefHeight="376.0" prefWidth="298.0" styleClass="input-cell">
+                  <GridPane prefHeight="202.0" prefWidth="278.0" styleClass="input-cell">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="167.999994913737" minHeight="2.000008368492132" prefHeight="106.33332824707031" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="189.79999163150788" minHeight="1.0" prefHeight="56.66665649414064" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="244.80002746582028" minHeight="0.0" prefHeight="81.33334350585938" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="213.00001373291016" minHeight="0.0" prefHeight="79.33335876464844" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="91.60001220703126" minHeight="2.000008368492132" prefHeight="66.99998016357422" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="189.79999163150788" minHeight="10.0" prefHeight="33.59998779296875" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="244.80002746582028" minHeight="10.0" prefHeight="56.80000000000001" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="213.00001373291016" minHeight="10.0" prefHeight="47.19999999999999" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="29.0" prefWidth="282.0" styleClass="label-dark" text="Search for Tour:" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets />
-                           </GridPane.margin></Label>
-                        <TextField alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="278.0" promptText="Type Tour-Name" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets left="12.0" right="12.0" />
-                           </GridPane.margin></TextField>
-                        <Button mnemonicParsing="false" onAction="#onSearchBtnClick" prefHeight="27.0" prefWidth="280.0" styleClass="button_search" text="Search" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label prefHeight="29.0" prefWidth="282.0" styleClass="label-dark" text="Search for Tour:" GridPane.rowIndex="1" />
+                        <TextField alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="230.0" promptText="Type Tour-Name" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#onSearchBtnClick" prefHeight="27.0" prefWidth="425.0" styleClass="button_search" text="Search" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onCreateNewTourBtnClick" prefHeight="26.0" prefWidth="278.0" styleClass="button_create" text="Create Tour" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#onCreateNewTourBtnClick" prefHeight="26.0" prefWidth="458.0" styleClass="button_create" text="Create new Tour" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </GridPane>
-                  <Label minWidth="70.0" prefHeight="133.0" prefWidth="298.0" styleClass="label-white" text="Tour-List:" />
-                  <ListView fx:id="tourListView" prefHeight="324.0" prefWidth="298.0" />
+                  <Label prefHeight="46.0" prefWidth="298.0" styleClass="label-white" text="Tour-List:" />
+                  <ListView fx:id="tourListView" prefHeight="371.0" prefWidth="298.0" />
                </children>
             </VBox>
             <VBox prefHeight="623.0" prefWidth="622.0">
@@ -66,62 +63,72 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <GridPane prefHeight="403.0" prefWidth="622.0" styleClass="contentOfPage">
+                  <GridPane prefHeight="249.0" prefWidth="622.0" styleClass="contentOfPage">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.1999755859375" minWidth="10.0" prefWidth="140.0000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.599983215332" minWidth="10.0" prefWidth="437.5999755859375" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="41.333343505859375" minHeight="10.0" prefHeight="36.66668701171875" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="55.66668701171876" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="163.3333536783854" minHeight="0.0" prefHeight="53.33331298828125" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="125.33333333333334" minHeight="10.0" prefHeight="62.00002034505209" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="105.33335367838544" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="31.666646321614586" minHeight="10.0" prefHeight="30.333333333333336" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="37.33331298828125" minHeight="10.0" prefHeight="24.33333333333333" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="36.333320617675795" minHeight="10.0" prefHeight="28.666687011718764" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="35.666687011718764" minHeight="10.0" prefHeight="28.33330535888672" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="26.999979654947907" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="34.33331298828125" minHeight="10.0" prefHeight="28.333292643229157" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.3333740234375" minHeight="10.0" prefHeight="23.66668701171875" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="17.0" prefWidth="93.0" styleClass="label-white" text="Tour-Name:" GridPane.rowIndex="1" />
-                        <Label prefHeight="17.0" prefWidth="106.0" styleClass="label-white" text="From:" GridPane.rowIndex="3" />
-                        <Label prefHeight="17.0" prefWidth="110.0" styleClass="label-white" text="Description:" GridPane.rowIndex="2" />
-                        <Label prefHeight="17.0" prefWidth="104.0" styleClass="label-white" text="To:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <Label prefHeight="17.0" prefWidth="128.0" styleClass="label-white" text="Transport-Type:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <Label prefHeight="17.0" prefWidth="106.0" styleClass="label-white" text="Tour-Distance:" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                        <Label prefHeight="17.0" prefWidth="125.0" styleClass="label-white" text="Estimated Time:" GridPane.rowIndex="4" />
-                        <Label fx:id="tourNameLabel" styleClass="label-white" text="..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label fx:id="descriptionLabel" styleClass="label-white" text="..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Label fx:id="fromLabel" styleClass="label-white" text="..." GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <Label fx:id="toLabel" styleClass="label-white" text="..." GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <Label fx:id="transportTypeLabel" styleClass="label-white" text="..." GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                        <Label fx:id="tourDistanceLabel" styleClass="label-white" text="..." GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                        <Label fx:id="estimatedTimeLabel" styleClass="label-white" text="..." GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" onAction="#onEditTourBtnClick" styleClass="button-icon" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                        <Button mnemonicParsing="false" onAction="#onTourReportBtnClick" prefHeight="38.0" prefWidth="36.0" styleClass="button-icon" GridPane.halignment="RIGHT" />
-                        <Button mnemonicParsing="false" onAction="#onSummarizeReportBtnClick" prefHeight="38.0" prefWidth="36.0" styleClass="button-icon" GridPane.halignment="LEFT" />
-                        <Button mnemonicParsing="false" onAction="#onLogBtnClick" styleClass="button-icon" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                        <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
-                           <image>
-                              <Image url="@../icons/edit_white.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="41.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
-                           <image>
-                              <Image url="@../icons/log_white.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                           <image>
-                              <Image url="@../icons/report_white.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/sumReport_white.png" />
-                           </image>
-                        </ImageView>
+                        <Label styleClass="label-white" text="Tour-Name:" GridPane.rowIndex="1" />
+                        <Label styleClass="label-white" text="From:" GridPane.rowIndex="3" />
+                        <Label styleClass="label-white" text="Description:" GridPane.rowIndex="2" />
+                        <Label styleClass="label-white" text="To:" GridPane.rowIndex="4" />
+                        <Label styleClass="label-white" text="Transport-Type:" GridPane.rowIndex="5" />
+                        <Label styleClass="label-white" text="Tour-Distance:" GridPane.rowIndex="6" />
+                        <Label styleClass="label-white" text="Estimated Time:" GridPane.rowIndex="7" />
+                        <Label fx:id="tourNameLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="descriptionLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="fromLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="toLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="transportTypeLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="tourDistanceLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="estimatedTimeLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Button mnemonicParsing="false" onAction="#onEditTourBtnClick" styleClass="button-icon" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/edit_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onTourReportBtnClick" prefHeight="38.0" prefWidth="36.0" styleClass="button-icon" GridPane.halignment="RIGHT">
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/report_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onSummarizeReportBtnClick" prefHeight="38.0" prefWidth="36.0" styleClass="button-icon" GridPane.halignment="LEFT">
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/sumReport_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onLogBtnClick" styleClass="button-icon" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/log_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
