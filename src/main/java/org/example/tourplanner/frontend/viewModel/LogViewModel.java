@@ -83,6 +83,14 @@ public class LogViewModel {
             return "Input DateTime as: YYYY-MM-DD";
         }
 
+        if (Log.checkDate(currentDateTime.get())) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate parsedDate = LocalDate.parse(currentDateTime.get(), formatter);
+            if (parsedDate.isAfter(LocalDate.now())) {
+                return "Date cannot be in the future!";
+            }
+        }
+
         return "True";
     }
 }

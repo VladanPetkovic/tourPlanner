@@ -52,14 +52,7 @@ public class Log {
             // Try parsing the input string using the first pattern
             LocalDate parsedDate = LocalDate.parse(dateTime, formatter);
 
-            if (parsedDate.isAfter(LocalDate.now())) {
-                // Date is in the future
-                return false;
-            } else {
-                // Return true if parsing succeeds
-                // AND: Date is not in the future
-                return true;
-            }
+            return true;
         } catch (DateTimeParseException e) {
             return false;
         }

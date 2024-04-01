@@ -1,6 +1,6 @@
 # Tour Planner
 
-Author: Vladan Petkovic & Luca Carpentieri
+Author: Vladan Petkovic & Luca Carpentieri & Magnus Goeppel
 
 Sommer semester 2024
 
