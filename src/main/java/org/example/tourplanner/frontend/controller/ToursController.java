@@ -90,6 +90,7 @@ public class ToursController implements Initializable {
     public void onCreateNewTourBtnClick(ActionEvent actionEvent) throws IOException {
         this.viewModel.resetCurrentInput();
         this.viewModel.setHasSelectedTour(false);
+        this.viewModel.setSelectedTour(null);
         switchScene("sites/tours_editCreate.fxml");
     }
     public void onEditTourBtnClick(ActionEvent actionEvent) throws IOException {

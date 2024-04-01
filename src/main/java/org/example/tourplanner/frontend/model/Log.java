@@ -29,6 +29,17 @@ public class Log {
         setRating(rating);
     }
 
+    public Log(Log other) {
+        this.username = other.username;
+        this.dateTime = other.dateTime;
+        this.comment = other.comment;
+        this.difficulty = other.difficulty;
+        this.totalDistance = other.totalDistance;
+        this.totalTime = other.totalTime;
+        this.rating = other.rating;
+    }
+
+
     /**
      * This function checks the submitted string for correct date-input. Only yyyy-MM-dd accepted.
      * @param dateTime The String, that is being checked.

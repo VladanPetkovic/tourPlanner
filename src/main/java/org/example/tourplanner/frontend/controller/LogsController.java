@@ -144,7 +144,7 @@ public class LogsController implements Initializable {
         Log selectedLog = this.logListView.getSelectionModel().getSelectedItem();
         if (this.viewModel.checkInput().equals("True") && selectedLog != null) {
             errorLabel.setText("");
-            // TODO: add loosing focus of the list-element
+            viewModel.updateDataInList(selectedLog);
         } else {
             errorLabel.setText(this.viewModel.checkInput());
         }

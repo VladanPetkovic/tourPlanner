@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Log;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,39 +35,51 @@ public class LogViewModel {
 
     public void saveDataToList() {
         logData.add(new Log(
-                this.currentUsername.get(),
-                this.currentDateTime.get(),
-                this.currentComment.get(),
-                this.currentDifficulty.get(),
-                this.currentTotalDistance.get(),
-                this.currentTotalTime.get(),
-                this.currentRating.get()));
+                currentUsername.get(),
+                currentDateTime.get(),
+                currentComment.get(),
+                currentDifficulty.get(),
+                currentTotalDistance.get(),
+                currentTotalTime.get(),
+                currentRating.get()));
+    }
+
+    public void updateDataInList(Log selectedLog) {
+        selectedLog.setUsername(currentUsername.get());
+        if (Log.checkDate(currentDateTime.get())) {
+            selectedLog.setDateTime(LocalDate.parse(currentDateTime.get(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        }
+        selectedLog.setComment(currentComment.get());
+        selectedLog.setDifficulty(currentDifficulty.get());
+        selectedLog.setTotalDistance(currentTotalDistance.get());
+        selectedLog.setTotalTime(currentTotalTime.get());
+        selectedLog.setRating(currentRating.get());
     }
 
     public void resetCurrentInput() {
-        this.currentDateTime.set("");
-        this.currentComment.set("");
-        this.currentDifficulty.set(5);
-        this.currentTotalDistance.set(0);
-        this.currentTotalTime.set(0);
-        this.currentRating.set(2);
+        currentDateTime.set("");
+        currentComment.set("");
+        currentDifficulty.set(5);
+        currentTotalDistance.set(0);
+        currentTotalTime.set(0);
+        currentRating.set(2);
     }
 
     public String checkInput() {
         // check empty properties
-        if (Objects.equals(this.currentDateTime.get(), "")) {
+        if (Objects.equals(currentDateTime.get(), "")) {
             return "Current date is required!";
         }
 
-        if (this.currentTotalDistance.get() == 0) {
+        if (currentTotalDistance.get() == 0) {
             return "The total distance must be greater than 0!";
         }
 
-        if (this.currentTotalTime.get() == 0) {
+        if (currentTotalTime.get() == 0) {
             return "The total time must be greated than 0!";
         }
 
-        if (!Log.checkDate(this.currentDateTime.get())) {
+        if (!Log.checkDate(currentDateTime.get())) {
             return "Input DateTime as: YYYY-MM-DD";
         }
 
