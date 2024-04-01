@@ -51,7 +51,7 @@ public class Tour {
         this.routeInformation = other.routeInformation;
     }
 
-    private void initTransportType(String transportTypeValue) {
+    public void initTransportType(String transportTypeValue) {
         switch (transportTypeValue) {
             case "Bike": setTransportType(TransportType.BIKE);
                 break;

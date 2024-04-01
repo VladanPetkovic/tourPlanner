@@ -52,12 +52,12 @@ public class ToursEditCreateController implements Initializable {
         fromTextField.textProperty().bindBidirectional(viewModel.getCurrentFrom());
         toTextField.textProperty().bindBidirectional(viewModel.getCurrentTo());
         transportTypeChoiceBox.valueProperty().bindBidirectional(viewModel.getCurrentTransportType());
-        setDistanceSpinner(5);
+        setDistanceSpinner(5.0);
         setEstimatedTimeSpinner(15);
         routeInformationTextField.textProperty().bindBidirectional(viewModel.getCurrentRouteInformation());
         descriptionTextArea.textProperty().bindBidirectional(viewModel.getCurrentTourDescription());
 
-        if (this.viewModel.getSelectedTour() != null && this.viewModel.isHasSelectedTour()) {
+        if (viewModel.getSelectedTour() != null && viewModel.isHasSelectedTour()) {
             initializeFieldsWithValue();
         }
     }
@@ -69,7 +69,7 @@ public class ToursEditCreateController implements Initializable {
         distanceSpinner.setValueFactory(valueFactory);
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentTourDistance().asObject());
 
-        this.distanceSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {
+        distanceSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {
             if (!isValidDouble(event.getCharacter())) { // Check if the input character is a valid double value
                 event.consume(); // Consume the event to prevent non-numeric input
             }
@@ -84,7 +84,7 @@ public class ToursEditCreateController implements Initializable {
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentEstimatedTime().asObject());
 
         // Add an event filter to the text field to allow only numeric input
-        this.estimatedTimeSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {
+        estimatedTimeSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {
             if (!event.getCharacter().matches("\\d")) { // Only allow digits
                 event.consume(); // Consume the event to prevent non-numeric input
             }
@@ -93,25 +93,33 @@ public class ToursEditCreateController implements Initializable {
 
     public void onGoBackBtnClick(ActionEvent actionEvent) throws IOException {
         errorLabel.setText("");
+        viewModel.setHasSelectedTour(false);
         switchScene("sites/tours.fxml");
     }
 
     public void onSaveUpdateBtnClick(ActionEvent actionEvent) throws IOException {
-        if (this.viewModel.checkInput().equals("True") && !this.viewModel.isHasSelectedTour()) {
+        if (viewModel.checkInput().equals("True") && !viewModel.isHasSelectedTour()) {
+            // creating new instance
             viewModel.saveDataToList();
+            viewModel.setHasSelectedTour(false);
             errorLabel.setText("");
             switchScene("sites/tours.fxml");
-        } else if (this.viewModel.checkInput().equals("True")) {
+        } else if (viewModel.checkInput().equals("True")) {
+            // saving
+            viewModel.updateDataInList();
             errorLabel.setText("");
+            viewModel.setHasSelectedTour(false);
             switchScene("sites/tours.fxml");
         } else {
-            errorLabel.setText(this.viewModel.checkInput());
+            // some inputs have not been filled out
+            errorLabel.setText(viewModel.checkInput());
         }
     }
 
     public void onDeleteBtnClick(ActionEvent actionEvent) throws IOException {
         errorLabel.setText("");
-        this.viewModel.getTourData().remove(this.viewModel.getSelectedTour());
+        viewModel.setHasSelectedTour(false);
+        viewModel.getTourData().remove(viewModel.getSelectedTour());
         switchScene("sites/tours.fxml");
     }
 
@@ -124,13 +132,13 @@ public class ToursEditCreateController implements Initializable {
      * This function initializes values, when editing or deleting a tour.
      */
     private void initializeFieldsWithValue() {
-        nameTextField.setText(this.viewModel.getSelectedTour().getName());
-        fromTextField.setText(this.viewModel.getSelectedTour().getFrom());
-        toTextField.setText(this.viewModel.getSelectedTour().getTo());
-        transportTypeChoiceBox.setValue(this.viewModel.getSelectedTour().getTransportType().name());
-        setDistanceSpinner(this.viewModel.getSelectedTour().getDistance());
-        setEstimatedTimeSpinner(this.viewModel.getSelectedTour().getEstimatedTime());
-        routeInformationTextField.setText(this.viewModel.getSelectedTour().getRouteInformation());
-        descriptionTextArea.setText(this.viewModel.getSelectedTour().getDescription());
+        nameTextField.setText(viewModel.getSelectedTour().getName());
+        fromTextField.setText(viewModel.getSelectedTour().getFrom());
+        toTextField.setText(viewModel.getSelectedTour().getTo());
+        transportTypeChoiceBox.setValue(viewModel.getSelectedTour().getTransportType().name());
+        distanceSpinner.getValueFactory().setValue(viewModel.getSelectedTour().getDistance());
+        estimatedTimeSpinner.getValueFactory().setValue(viewModel.getSelectedTour().getEstimatedTime());
+        routeInformationTextField.setText(viewModel.getSelectedTour().getRouteInformation());
+        descriptionTextArea.setText(viewModel.getSelectedTour().getDescription());
     }
 }

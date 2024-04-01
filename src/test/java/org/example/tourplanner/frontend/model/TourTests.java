@@ -11,7 +11,7 @@ public class TourTests {
             "A beautiful city tour",
             "Stephansplatz",
             "Reumannplatz",
-            "1", // 1: TransportType.HIKE
+            "Hike",
             10.0, // Distance in km
             7200, // Estimated time in seconds
             "Explore the city with a walk through the city"
@@ -43,7 +43,6 @@ public class TourTests {
         assertEquals("A beautiful city tour", tour.getDescription());
         assertEquals("Stephansplatz", tour.getFrom());
         assertEquals("Reumannplatz", tour.getTo());
-        // TODO: hier ist ein Fehler
         assertEquals(TransportType.HIKE, tour.getTransportType());
         assertEquals(10, tour.getDistance(), 0.001);
         assertEquals(7200, tour.getEstimatedTime());

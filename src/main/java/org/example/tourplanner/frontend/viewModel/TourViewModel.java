@@ -27,8 +27,8 @@ public class TourViewModel {
     private final StringProperty currentRouteInformation = new SimpleStringProperty("");
     // some sample data
     private final ObservableList<Tour> tourData = FXCollections.observableArrayList(
-                    new Tour("Tour 1", "Description 1", "From 1", "To 1", TransportType.VACATION.name(), 100.0, 120, "Route 1"),
-                    new Tour("Tour 2", "Description 2", "From 2", "To 2", TransportType.HIKE.name(), 150.0, 180, "Route 2")
+                    new Tour("Tour 1", "Description 1", "From 1", "To 1", "Vacation", 100.0, 120, "Route 1"),
+                    new Tour("Tour 2", "Description 2", "From 2", "To 2", "Running", 150.0, 180, "Route 2")
     );
     private Tour selectedTour;
     private boolean hasSelectedTour = false;
@@ -46,6 +46,21 @@ public class TourViewModel {
                 this.currentTourDistance.get(),
                 this.currentEstimatedTime.get(),
                 this.currentRouteInformation.get()));
+    }
+
+    public void updateDataInList() {
+        if (Objects.equals(this.currentTourName.get(), "")) {
+            selectedTour.setCombinedTourName(this.currentFrom.get(), this.currentTo.get());
+        } else {
+            selectedTour.setName(this.currentTourName.get());
+        }
+        selectedTour.setDescription(this.currentTourDescription.get());
+        selectedTour.setFrom(this.currentFrom.get());
+        selectedTour.setTo(this.currentTo.get());
+        selectedTour.initTransportType(this.currentTransportType.get());
+        selectedTour.setDistance(this.currentTourDistance.get());
+        selectedTour.setEstimatedTime(this.currentEstimatedTime.get());
+        selectedTour.setRouteInformation(this.currentRouteInformation.get());
     }
 
     public void resetCurrentInput() {
@@ -76,7 +91,7 @@ public class TourViewModel {
         }
 
         if (this.currentEstimatedTime.get() == 0) {
-            return "The estimated time must be greated than 0!";
+            return "The estimated time must be greater than 0!";
         }
 
         return "True";
