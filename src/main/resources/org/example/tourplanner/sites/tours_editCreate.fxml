@@ -13,10 +13,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursEditCreateController">
+<VBox maxHeight="-Infinity" spacing="20" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursEditCreateController">
     <!-- INCLUDE NAVIGATION BAR -->
     <fx:include source="components/navigation.fxml" />
-   <GridPane prefHeight="627.0" prefWidth="920.0">
+   <GridPane hgap="20" prefHeight="627.0" prefWidth="920.0" vgap="20">
      <columnConstraints>
          <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="42.20001220703125" />
        <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.79998779296875" minWidth="10.0" prefWidth="212.19999999999996" />
@@ -48,8 +48,8 @@
          <Label text="Tour distance:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          <Label text="Estimated Time:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
          <Label text="Route Information:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-         <Button mnemonicParsing="false" onAction="#onSaveUpdateBtnClick" styleClass="button_save_edit" text="Save/Update" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-         <Button mnemonicParsing="false" onAction="#onDeleteBtnClick" styleClass="button_danger" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
+         <Button mnemonicParsing="false" onAction="#onSaveUpdateBtnClick" styleClass="button_save_edit" text="Save/Update" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+         <Button mnemonicParsing="false" onAction="#onDeleteBtnClick" styleClass="button_danger" text="Delete" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
          <TextField fx:id="nameTextField" promptText="Hiking Tour Vienna" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          <TextField fx:id="fromTextField" promptText="Sterngasse 4" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          <TextField fx:id="toTextField" promptText="Höchstädtplatz 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />
