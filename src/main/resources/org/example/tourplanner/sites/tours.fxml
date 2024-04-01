@@ -22,7 +22,7 @@
          <children>
             <VBox prefHeight="663.0" prefWidth="298.0" styleClass="contentOfPage">
                <children>
-                  <GridPane prefHeight="202.0" prefWidth="278.0" styleClass="input-cell">
+                  <GridPane prefHeight="202.0" prefWidth="500" styleClass="input-cell">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -65,8 +65,10 @@
                      </children></Pane>
                   <GridPane prefHeight="249.0" prefWidth="622.0" styleClass="contentOfPage">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.1999755859375" minWidth="10.0" prefWidth="140.0000244140625" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.599983215332" minWidth="10.0" prefWidth="437.5999755859375" />
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="41.333343505859375" minHeight="10.0" prefHeight="36.66668701171875" vgrow="SOMETIMES" />
