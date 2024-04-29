@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class SwitchScene {
     public static void switchScene(String path) throws IOException {
-        double sceneWidth = 920;
-        double sceneHeight = 700;
+        double sceneWidth = Main.stage.getWidth();
+        double sceneHeight = Main.stage.getHeight();
 
         Parent newParent = FXMLDependencyInjection.load(path);
 
