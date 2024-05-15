@@ -9,8 +9,13 @@ module org.example.tourplanner {
     requires spring.boot;
     requires spring.boot.autoconfigure;
     requires spring.context;
+    requires spring.beans;
+    requires spring.core;
+    requires spring.data.jpa;
+    requires jakarta.persistence;
 
     opens org.example.tourplanner to javafx.fxml;
+    opens org.example.tourplanner.backend;
     exports org.example.tourplanner;
     exports org.example.tourplanner.frontend.controller;
     opens org.example.tourplanner.frontend.controller to javafx.fxml;

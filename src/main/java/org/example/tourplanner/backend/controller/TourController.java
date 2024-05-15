@@ -2,35 +2,52 @@ package org.example.tourplanner.backend.controller;
 
 
 import org.example.tourplanner.backend.model.Tour;
+import org.example.tourplanner.backend.repository.TourRepository;
+import org.example.tourplanner.backend.service.TourService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/tours")
 public class TourController {
+    private final TourService tourService;
 
-    private final List<Tour> tours = Arrays.asList(
-            new Tour(1L, "Tour 1", "Description 1"),
-            new Tour(2L, "Tour 2", "Description 2")
-    );
+    @Autowired
+    public TourController(TourService tourService) {
+        this.tourService = tourService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Tour> saveTour(@RequestBody Tour tour) {
+        Tour newTour = tourService.saveTour(tour);
+        return ResponseEntity.ok(newTour);
+    }
 
     @GetMapping
-    public ResponseEntity<List<Tour>> getAllTours() {
-        return ResponseEntity.ok(tours);
+    public List<Tour> getAllTours() {
+        return tourService.getAllTours();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Tour> getTourById(@PathVariable Long id) {
-        return tours.stream()
-                .filter(tour -> tour.getId().equals(id))
-                .findFirst()
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Optional<Tour> tour = tourService.getTourById(id);
+        return tour.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Tour> updateTour(@PathVariable Long id, @RequestBody Tour tour) {
+        Tour updatedTour = tourService.updateTour(id, tour);
+        return ResponseEntity.ok(updatedTour);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTour(@PathVariable Long id) {
+        tourService.deleteTour(id);
+        return ResponseEntity.ok("Tour deleted successfully!");
     }
 }
