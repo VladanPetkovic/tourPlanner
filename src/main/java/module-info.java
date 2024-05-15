@@ -5,6 +5,10 @@ module org.example.tourplanner {
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
     requires lombok;
+    requires spring.web;
+    requires spring.boot;
+    requires spring.boot.autoconfigure;
+    requires spring.context;
 
     opens org.example.tourplanner to javafx.fxml;
     exports org.example.tourplanner;
@@ -12,4 +16,8 @@ module org.example.tourplanner {
     opens org.example.tourplanner.frontend.controller to javafx.fxml;
     exports org.example.tourplanner.frontend;
     opens org.example.tourplanner.frontend to javafx.fxml;
+    exports org.example.tourplanner.backend;
+    exports org.example.tourplanner.backend.controller;
+    exports org.example.tourplanner.backend.model;
+
 }
