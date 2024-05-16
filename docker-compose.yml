@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # User DB
   db:
     image: postgres
     container_name: tour_db
