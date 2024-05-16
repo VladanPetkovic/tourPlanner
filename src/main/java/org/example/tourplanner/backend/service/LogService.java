@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class LogService {
-
     private final LogRepository logRepository;
 
     @Autowired
@@ -18,17 +17,16 @@ public class LogService {
         this.logRepository = logRepository;
     }
 
-    public List<Log> findAllLogs() {
+    public Log saveLog(Log log) {
+        return logRepository.save(log);
+    }
+
+    public List<Log> getAllLogs() {
         return logRepository.findAll();
     }
 
-    public Log findLogById(Long id) {
-        Optional<Log> log = logRepository.findById(id);
-        return log.orElse(null);
-    }
-
-    public Log saveLog(Log log) {
-        return logRepository.save(log);
+    public Optional<Log> getLogById(Long id) {
+        return logRepository.findById(id);
     }
 
     public Log updateLog(Long id, Log logDetails) {
@@ -44,16 +42,11 @@ public class LogService {
             log.setRating(logDetails.getRating());
             return logRepository.save(log);
         } else {
-            return null;
+            throw new RuntimeException("Log not found");
         }
     }
 
-    public boolean deleteLog(Long id) {
-        if (logRepository.existsById(id)) {
-            logRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    public void deleteLog(Long id) {
+        logRepository.deleteById(id);
     }
 }

@@ -1,9 +1,6 @@
 package org.example.tourplanner.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,18 +9,25 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
+@Table(name = "log")
 public class Log {
-
-    // Getters and setters
     @Id
+    @Column(name = "log_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "username", nullable = false)
     private String username;
+    @Column(name = "date_time", nullable = false)
     private LocalDate dateTime;
+    @Column(name = "comment", nullable = false)
     private String comment;
+    @Column(name = "difficulty", nullable = false)
     private Integer difficulty; // only in ranges from 1 to 10
+    @Column(name = "total_distance", nullable = false)
     private Double totalDistance;
+    @Column(name = "total_time", nullable = false)
     private Integer totalTime;
+    @Column(name = "rating", nullable = false)
     private Integer rating; // only in ranges from 1 to 5
 
     // Constructors

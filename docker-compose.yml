@@ -1,32 +1,41 @@
 version: '3.8'
 
 services:
-  app:
-    image: 'tour_api'
-    build:
-      context: .
-    ports:
-      - "8080:8080"
-    container_name: tour_api_1
-    depends_on:
-      - db
+  postgres:
+    build: db/.
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=compose-postgres
-      - SPRING_DATASOURCE_PASSWORD=compose-postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
-  db:
-    image: postgres
-    container_name: tour_db
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
+    # volumes:
+    #  - ./docker-data/postgres/:/data/postgres
     ports:
       - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
     environment:
-      POSTGRES_DB: user_db
-      POSTGRES_USER: user1
-      POSTGRES_PASSWORD: pass1
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      #  - ./docker-data/pgadmin/:/var/lib/pgadmin
+      - ./db/pgadmin-servers.json:/pgadmin4/servers.json
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
 
 volumes:
-    postgres_data:
+  postgres:
+  pgadmin:

@@ -3,7 +3,6 @@ package org.example.tourplanner.backend.service;
 import org.example.tourplanner.backend.model.Tour;
 import org.example.tourplanner.backend.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,8 +50,8 @@ public class TourService {
             // Update tour properties
             tour.setName(updatedTour.getName());
             tour.setDescription(updatedTour.getDescription());
-            tour.setFrom(updatedTour.getFrom());
-            tour.setTo(updatedTour.getTo());
+            tour.setFromPlace(updatedTour.getFromPlace());
+            tour.setToPlace(updatedTour.getToPlace());
             tour.setTransport_type(updatedTour.getTransport_type());
             tour.setDistance(updatedTour.getDistance());
             tour.setEstimated_time(updatedTour.getEstimated_time());

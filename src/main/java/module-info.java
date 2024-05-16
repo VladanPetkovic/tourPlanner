@@ -13,9 +13,11 @@ module org.example.tourplanner {
     requires spring.core;
     requires spring.data.jpa;
     requires jakarta.persistence;
+    requires org.hibernate.orm.core;
 
     opens org.example.tourplanner to javafx.fxml;
     opens org.example.tourplanner.backend;
+    opens org.example.tourplanner.backend.model;
     exports org.example.tourplanner;
     exports org.example.tourplanner.frontend.controller;
     opens org.example.tourplanner.frontend.controller to javafx.fxml;
@@ -24,5 +26,4 @@ module org.example.tourplanner {
     exports org.example.tourplanner.backend;
     exports org.example.tourplanner.backend.controller;
     exports org.example.tourplanner.backend.model;
-
 }

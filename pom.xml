@@ -89,11 +89,6 @@
             <version>42.7.1</version>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.1</version>
-        </dependency>
-        <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
             <version>3.1.0</version>
@@ -111,17 +106,6 @@
                     <source>21</source>
                     <target>21</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.18.20.0</version>
-                <executions>
-                    <execution>
-                        <id>install-lombok</id>
-                        <phase>generate-sources</phase>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>

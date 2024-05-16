@@ -7,11 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/logs")
+@RequestMapping("/logs")
 public class LogController {
-
     private final LogService logService;
 
     @Autowired
@@ -19,42 +19,32 @@ public class LogController {
         this.logService = logService;
     }
 
+    @PostMapping
+    public ResponseEntity<Log> saveLog(@RequestBody Log log) {
+        Log newLog = logService.saveLog(log);
+        return ResponseEntity.ok(newLog);
+    }
+
     @GetMapping
     public List<Log> getAllLogs() {
-        return logService.findAllLogs();
+        return logService.getAllLogs();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Log> getLogById(@PathVariable Long id) {
-        Log log = logService.findLogById(id);
-        if (log != null) {
-            return ResponseEntity.ok(log);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping
-    public Log createLog(@RequestBody Log log) {
-        return logService.saveLog(log);
+        Optional<Log> log = logService.getLogById(id);
+        return log.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Log> updateLog(@PathVariable Long id, @RequestBody Log logDetails) {
         Log updatedLog = logService.updateLog(id, logDetails);
-        if (updatedLog != null) {
-            return ResponseEntity.ok(updatedLog);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(updatedLog);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLog(@PathVariable Long id) {
-        if (logService.deleteLog(id)) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> deleteLog(@PathVariable Long id) {
+        logService.deleteLog(id);
+        return ResponseEntity.ok("Log deleted successfully!");
     }
 }

@@ -1,14 +1,11 @@
 package org.example.tourplanner.backend.controller;
 
-
 import org.example.tourplanner.backend.model.Tour;
-import org.example.tourplanner.backend.repository.TourRepository;
 import org.example.tourplanner.backend.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

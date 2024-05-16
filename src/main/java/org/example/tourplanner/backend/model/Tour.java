@@ -17,10 +17,10 @@ public class Tour {
     private String name;
     @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "from", nullable = false)
-    private String from;
-    @Column(name = "to", nullable = false)
-    private String to;
+    @Column(name = "from_place", nullable = false)
+    private String fromPlace;
+    @Column(name = "to_place", nullable = false)
+    private String toPlace;
     @Column(name = "transport_type", nullable = false)
     private int transport_type;
     @Column(name = "distance", nullable = false)
@@ -37,8 +37,8 @@ public class Tour {
         setTour_id(id);
         setName(name);
         setDescription(description);
-        setFrom(from);
-        setTo(to);
+        setFromPlace(from);
+        setToPlace(to);
         setTransport_type(transport_type);
         setDistance(distance);
         setEstimated_time(estimated_time);
