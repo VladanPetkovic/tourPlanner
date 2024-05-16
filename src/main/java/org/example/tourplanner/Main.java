@@ -9,13 +9,15 @@ import org.example.tourplanner.frontend.controller.FXMLDependencyInjection;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class Main extends Application
+{
     public static Stage stage;
     public static ControllerFactory controllerFactory = new ControllerFactory();
 
     @Override
-    public void start(Stage stage) throws IOException {
-        this.stage = stage;
+    public void start(Stage stage) throws IOException
+    {
+        Main.stage = stage;
         Parent root = FXMLDependencyInjection.load("sites/tours.fxml");
         Scene scene = new Scene(root, 920, 700);
         stage.setScene(scene);
