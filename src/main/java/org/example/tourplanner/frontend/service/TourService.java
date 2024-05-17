@@ -1,49 +1,49 @@
 package org.example.tourplanner.frontend.service;
 
-import org.example.tourplanner.frontend.model.Log;
-import org.springframework.stereotype.Service;
+import org.example.tourplanner.frontend.model.Tour;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class LogService {
-    private static final String BASE_URL = "http://localhost:8080/logs";
+public class TourService {
+    private static final String BASE_URL = "http://localhost:8080/tours";
 
     private final WebClient webClient;
 
-    public LogService() {
+    public TourService() {
         this.webClient = WebClient.builder().baseUrl(BASE_URL).build();
     }
 
-    public Mono<Log> createLog(Log log) {
+    public Mono<Tour> createTour(Tour tour) {
         return webClient.post()
-                .bodyValue(log)
+                .bodyValue(tour)
                 .retrieve()
-                .bodyToMono(Log.class);
+                .bodyToMono(Tour.class);
     }
 
-    public Mono<Log[]> getLogs() {
+    public Mono<Tour[]> getTours() {
         return webClient.get()
                 .retrieve()
-                .bodyToMono(Log[].class);
+                .bodyToMono(Tour[].class);
     }
 
-    public Mono<Log> getLog(long id) {
+    public Mono<Tour> getTour(long id) {
         return webClient.get()
                 .uri("/" + id)
                 .retrieve()
-                .bodyToMono(Log.class);
+                .bodyToMono(Tour.class);
     }
 
-    public Mono<Void> updateLog(Log log) {
+    public Mono<Void> updateTour(Tour tour) {
         return webClient.put()
-                .uri("/" + log.getId())
-                .bodyValue(log)
+                .uri("/" + tour.getId())
+                .bodyValue(tour)
                 .retrieve()
                 .bodyToMono(Void.class);
     }
 
-    public Mono<Void> deleteLog(long id) {
+    public Mono<Void> deleteTour(long id) {
         return webClient.delete()
                 .uri("/" + id)
                 .retrieve()

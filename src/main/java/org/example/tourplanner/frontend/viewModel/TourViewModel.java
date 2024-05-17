@@ -7,9 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
-import org.example.tourplanner.frontend.model.TransportType;
+import org.example.tourplanner.frontend.service.TourService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,6 +33,16 @@ public class TourViewModel {
     );
     private Tour selectedTour;
     private boolean hasSelectedTour = false;
+    private TourService tourService;
+
+    public TourViewModel() {
+        // get all tours --> TODO: change to be better
+        tourService = new TourService();
+        Tour[] receivedTours = tourService.getTours().block();
+        if (receivedTours != null) {
+            Collections.addAll(tourData, receivedTours);
+        }
+    }
 
     public void addListener(FocusChangedListener listener) {
         this.focusChangedListenerList.add(listener);
@@ -55,12 +66,12 @@ public class TourViewModel {
             selectedTour.setName(this.currentTourName.get());
         }
         selectedTour.setDescription(this.currentTourDescription.get());
-        selectedTour.setFrom(this.currentFrom.get());
-        selectedTour.setTo(this.currentTo.get());
+        selectedTour.setFromPlace(this.currentFrom.get());
+        selectedTour.setToPlace(this.currentTo.get());
         selectedTour.initTransportType(this.currentTransportType.get());
         selectedTour.setDistance(this.currentTourDistance.get());
-        selectedTour.setEstimatedTime(this.currentEstimatedTime.get());
-        selectedTour.setRouteInformation(this.currentRouteInformation.get());
+        selectedTour.setEstimated_time(this.currentEstimatedTime.get());
+        selectedTour.setRoute_information(this.currentRouteInformation.get());
     }
 
     public void resetCurrentInput() {

@@ -8,13 +8,13 @@ import java.io.IOException;
 
 public class SwitchScene {
     public static void switchScene(String path) throws IOException {
-        double sceneWidth = Main.stage.getWidth();
-        double sceneHeight = Main.stage.getHeight();
-
         Parent newParent = FXMLDependencyInjection.load(path);
 
         // create new scene
-        Scene newScene = new Scene(newParent, sceneWidth, sceneHeight);
+        Main.stage.setHeight(Main.stage.getHeight());
+        Main.stage.setWidth(Main.stage.getWidth());
+        Scene newScene = new Scene(newParent);
         Main.stage.setScene(newScene);
+        Main.stage.show();
     }
 }

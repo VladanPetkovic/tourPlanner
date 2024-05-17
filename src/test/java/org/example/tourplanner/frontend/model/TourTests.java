@@ -41,12 +41,12 @@ public class TourTests {
     @Test
     public void Tour_testInitialization() {
         assertEquals("A beautiful city tour", tour.getDescription());
-        assertEquals("Stephansplatz", tour.getFrom());
-        assertEquals("Reumannplatz", tour.getTo());
-        assertEquals(TransportType.HIKE, tour.getTransportType());
+        assertEquals("Stephansplatz", tour.getFromPlace());
+        assertEquals("Reumannplatz", tour.getToPlace());
+        assertEquals(TransportType.HIKE, tour.getTransport_type());
         assertEquals(10, tour.getDistance(), 0.001);
-        assertEquals(7200, tour.getEstimatedTime());
-        assertEquals("Explore the city with a walk through the city", tour.getRouteInformation());
+        assertEquals(7200, tour.getEstimated_time());
+        assertEquals("Explore the city with a walk through the city", tour.getRoute_information());
     }
 
     @Test

@@ -34,8 +34,9 @@ public class Log {
     public Log() {
     }
 
-    public Log(String username, LocalDate dateTime, String comment, Integer difficulty,
+    public Log(Long id, String username, LocalDate dateTime, String comment, Integer difficulty,
                Double totalDistance, Integer totalTime, Integer rating) {
+        this.id = id;
         this.username = username;
         this.dateTime = dateTime;
         this.comment = comment;
@@ -44,5 +45,4 @@ public class Log {
         this.totalTime = totalTime;
         this.rating = rating;
     }
-
 }

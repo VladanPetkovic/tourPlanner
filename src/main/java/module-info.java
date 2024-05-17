@@ -4,7 +4,7 @@ module org.example.tourplanner {
 
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
-    requires lombok;
+    requires static lombok;
     requires spring.web;
     requires spring.boot;
     requires spring.boot.autoconfigure;
@@ -14,6 +14,8 @@ module org.example.tourplanner {
     requires spring.data.jpa;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
+    requires spring.webflux;
+    requires reactor.core;
 
     opens org.example.tourplanner to javafx.fxml;
     opens org.example.tourplanner.backend;
@@ -22,6 +24,8 @@ module org.example.tourplanner {
     opens org.example.tourplanner.frontend to javafx.fxml;
     exports org.example.tourplanner;
     exports org.example.tourplanner.frontend.controller;
+    exports org.example.tourplanner.frontend.service;
+    exports org.example.tourplanner.frontend.model;
     exports org.example.tourplanner.frontend;
     exports org.example.tourplanner.backend;
     exports org.example.tourplanner.backend.controller;

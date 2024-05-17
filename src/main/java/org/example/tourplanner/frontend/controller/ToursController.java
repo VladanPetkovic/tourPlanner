@@ -70,11 +70,11 @@ public class ToursController implements Initializable {
                 this.viewModel.setSelectedTour(newValue);
                 tourNameLabel.setText(newValue.getName());
                 descriptionLabel.setText(newValue.getDescription());
-                fromLabel.setText(newValue.getFrom());
-                toLabel.setText(newValue.getTo());
-                transportTypeLabel.setText(newValue.getTransportType().name());
+                fromLabel.setText(newValue.getFromPlace());
+                toLabel.setText(newValue.getToPlace());
+                transportTypeLabel.setText(newValue.getTransport_type().name());
                 tourDistanceLabel.setText(String.valueOf(newValue.getDistance()));
-                estimatedTimeLabel.setText(String.valueOf(newValue.getEstimatedTime()));
+                estimatedTimeLabel.setText(String.valueOf(newValue.getEstimated_time()));
             } else {
                 tourNameLabel.setText("...");
                 descriptionLabel.setText("...");

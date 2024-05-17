@@ -44,5 +44,4 @@ public class Tour {
         setEstimated_time(estimated_time);
         setRoute_information(route_information);
     }
-
 }

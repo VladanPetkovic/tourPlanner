@@ -1,7 +1,5 @@
 package org.example.tourplanner.frontend.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -133,12 +131,12 @@ public class ToursEditCreateController implements Initializable {
      */
     private void initializeFieldsWithValue() {
         nameTextField.setText(viewModel.getSelectedTour().getName());
-        fromTextField.setText(viewModel.getSelectedTour().getFrom());
-        toTextField.setText(viewModel.getSelectedTour().getTo());
-        transportTypeChoiceBox.setValue(viewModel.getSelectedTour().getTransportType().name());
+        fromTextField.setText(viewModel.getSelectedTour().getFromPlace());
+        toTextField.setText(viewModel.getSelectedTour().getToPlace());
+        transportTypeChoiceBox.setValue(viewModel.getSelectedTour().getTransport_type().name());
         distanceSpinner.getValueFactory().setValue(viewModel.getSelectedTour().getDistance());
-        estimatedTimeSpinner.getValueFactory().setValue(viewModel.getSelectedTour().getEstimatedTime());
-        routeInformationTextField.setText(viewModel.getSelectedTour().getRouteInformation());
+        estimatedTimeSpinner.getValueFactory().setValue(viewModel.getSelectedTour().getEstimated_time());
+        routeInformationTextField.setText(viewModel.getSelectedTour().getRoute_information());
         descriptionTextArea.setText(viewModel.getSelectedTour().getDescription());
     }
 }

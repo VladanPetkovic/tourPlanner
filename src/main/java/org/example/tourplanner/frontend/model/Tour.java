@@ -8,58 +8,62 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Tour {
+    private Long id;
     private String name;
     private String description;
-    private String from;
-    private String to;
-    private TransportType transportType; // needs to be converted from int
+    private String fromPlace;
+    private String toPlace;
+    private TransportType transport_type; // needs to be converted from int
     private Double distance;
-    private Integer estimatedTime; // in seconds
-    private String routeInformation;
+    private Integer estimated_time; // in seconds
+    private String route_information;
 
-    public Tour(String name,
+    public Tour(
+                String name,
                 String description,
-                String from,
-                String to,
-                String transportType,
+                String fromPlace,
+                String toPlace,
+                String transport_type,
                 Double distance,
-                Integer estimatedTime,
-                String routeInformation) {
+                Integer estimated_time,
+                String route_information) {
         if (Objects.equals(name, "")) {
-            setCombinedTourName(from, to);
+            setCombinedTourName(fromPlace, toPlace);
         } else {
             setName(name);
         }
+        setId(id);
         setDescription(description);
-        setFrom(from);
-        setTo(to);
-        initTransportType(transportType);
+        setFromPlace(fromPlace);
+        setToPlace(toPlace);
+        initTransportType(transport_type);
         setDistance(distance);
-        setEstimatedTime(estimatedTime);
-        setRouteInformation(routeInformation);
+        setEstimated_time(estimated_time);
+        setRoute_information(route_information);
     }
 
     // Copy constructor
     public Tour(Tour other) {
+        this.id = other.id;
         this.name = other.name;
         this.description = other.description;
-        this.from = other.from;
-        this.to = other.to;
-        this.transportType = other.transportType;
+        this.fromPlace = other.fromPlace;
+        this.toPlace = other.toPlace;
+        this.transport_type = other.transport_type;
         this.distance = other.distance;
-        this.estimatedTime = other.estimatedTime;
-        this.routeInformation = other.routeInformation;
+        this.estimated_time = other.estimated_time;
+        this.route_information = other.route_information;
     }
 
     public void initTransportType(String transportTypeValue) {
         switch (transportTypeValue) {
-            case "Bike": setTransportType(TransportType.BIKE);
+            case "Bike": setTransport_type(TransportType.BIKE);
                 break;
-            case "Hike": setTransportType(TransportType.HIKE);
+            case "Hike": setTransport_type(TransportType.HIKE);
                 break;
-            case "Running": setTransportType(TransportType.RUNNING);
+            case "Running": setTransport_type(TransportType.RUNNING);
                 break;
-            default: setTransportType(TransportType.VACATION);
+            default: setTransport_type(TransportType.VACATION);
         }
     }
 

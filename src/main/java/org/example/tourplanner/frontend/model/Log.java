@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 @Getter
 @Setter
 public class Log {
+    private Long id;
     private String username;
     private LocalDate dateTime;
     private String comment;
@@ -30,6 +31,7 @@ public class Log {
     }
 
     public Log(Log other) {
+        this.id = other.id;
         this.username = other.username;
         this.dateTime = other.dateTime;
         this.comment = other.comment;
