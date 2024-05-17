@@ -18,12 +18,13 @@ module org.example.tourplanner {
     opens org.example.tourplanner to javafx.fxml;
     opens org.example.tourplanner.backend;
     opens org.example.tourplanner.backend.model;
+    opens org.example.tourplanner.frontend.controller to javafx.fxml;
+    opens org.example.tourplanner.frontend to javafx.fxml;
     exports org.example.tourplanner;
     exports org.example.tourplanner.frontend.controller;
-    opens org.example.tourplanner.frontend.controller to javafx.fxml;
     exports org.example.tourplanner.frontend;
-    opens org.example.tourplanner.frontend to javafx.fxml;
     exports org.example.tourplanner.backend;
     exports org.example.tourplanner.backend.controller;
     exports org.example.tourplanner.backend.model;
+    exports org.example.tourplanner.backend.service;
 }

@@ -23,8 +23,8 @@
 <!-- LOMBOK -->
         <dependency>
             <groupId>org.projectlombok</groupId>
-            <artifactId>lombok-maven-plugin</artifactId>
-            <version>1.18.20.0</version>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
             <scope>provided</scope>
         </dependency>
 <!-- JAVAFX -->
@@ -98,6 +98,11 @@
 
     <build>
         <plugins>
+            <!-- Spring Boot Maven Plugin for packaging and running Spring Boot applications -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -126,11 +131,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- Spring Boot Maven Plugin for packaging and running Spring Boot applications -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
