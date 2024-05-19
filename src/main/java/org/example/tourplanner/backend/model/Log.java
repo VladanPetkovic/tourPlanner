@@ -3,6 +3,7 @@ package org.example.tourplanner.backend.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.time.LocalDate;
 
@@ -15,6 +16,10 @@ public class Log {
     @Column(name = "log_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long log_id;
+    @ManyToOne
+    @JoinColumn(name = "fk_tour_id", nullable = false, updatable = false)
+    @JsonBackReference
+    private Tour tour;
     @Column(name = "username", nullable = false)
     private String username;
     @Column(name = "date_time", nullable = false)

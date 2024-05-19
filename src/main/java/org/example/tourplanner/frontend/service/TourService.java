@@ -37,7 +37,7 @@ public class TourService {
 
     public Mono<Tour> updateTour(Tour tour) {
         return webClient.put()
-                .uri("/" + tour.getTour_id())
+                .uri("/" + tour.getTourid())
                 .bodyValue(tour)
                 .retrieve()
                 .bodyToMono(Tour.class);

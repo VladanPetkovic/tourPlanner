@@ -3,6 +3,9 @@ package org.example.tourplanner.backend.model;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -12,7 +15,7 @@ public class Tour {
     @Id
     @Column(name = "tour_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long tour_id;
+    private Long tourid;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "description", nullable = false)
@@ -30,11 +33,15 @@ public class Tour {
     @Column(name = "route_information")
     private String route_information;
 
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
+    private final List<Log> logs = new ArrayList<>();
+
     public Tour() {}
 
     public Tour(Long id, String name, String description, String from, String to, int transport_type,
                 double distance, int estimated_time, String route_information) {
-        setTour_id(id);
+        setTourid(id);
         setName(name);
         setDescription(description);
         setFromPlace(from);

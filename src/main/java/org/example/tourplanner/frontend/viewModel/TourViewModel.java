@@ -76,7 +76,7 @@ public class TourViewModel {
     }
 
     public void deleteTour() {
-        tourService.deleteTour(this.selectedTour.getTour_id()).block();
+        tourService.deleteTour(this.selectedTour.getTourid()).block();
         tourData.remove(this.selectedTour);
     }
 
@@ -86,8 +86,8 @@ public class TourViewModel {
         currentFrom.set("");
         currentTo.set("");
         currentTransportType.set("");
-        currentTourDistance.set(0);
-        currentEstimatedTime.set(0);
+        currentTourDistance.set(1500);
+        currentEstimatedTime.set(15);
         currentRouteInformation.set("");
     }
 

@@ -116,8 +116,8 @@
                         <Label text="Total time (in min):" GridPane.rowIndex="6" />
                         <Label text="Rating:" GridPane.rowIndex="7" />
                         <Slider fx:id="difficultySlider" blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Spinner fx:id="totalDistanceSpinner" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Spinner fx:id="totalTimeSpinner" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Spinner fx:id="totalDistanceSpinner" editable="true" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Spinner fx:id="totalTimeSpinner" editable="true" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Slider fx:id="ratingSlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Button maxWidth="Infinity" onAction="#onCreateBtnClick" prefHeight="25.0" prefWidth="141.0" styleClass="button_create" text="Create" GridPane.rowIndex="9" />
                         <Button maxWidth="Infinity" onAction="#onSaveBtnClick" prefHeight="25.0" prefWidth="91.0" styleClass="button_save_edit" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="9" />

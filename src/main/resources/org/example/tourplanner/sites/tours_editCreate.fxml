@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" spacing="20" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursEditCreateController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" spacing="20" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursEditCreateController">
     <!-- INCLUDE NAVIGATION BAR -->
     <fx:include source="components/navigation.fxml" />
    <GridPane hgap="20" prefHeight="627.0" prefWidth="920.0" vgap="20">
@@ -49,7 +49,7 @@
          <Label text="Estimated Time:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
          <Label text="Route Information:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          <Button mnemonicParsing="false" onAction="#onSaveUpdateBtnClick" styleClass="button_save_edit" text="Save/Update" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-         <Button mnemonicParsing="false" onAction="#onDeleteBtnClick" styleClass="button_danger" text="Delete" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+         <Button mnemonicParsing="false" onAction="#onDeleteBtnClick" styleClass="button_danger" text="Delete" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
          <TextField fx:id="nameTextField" promptText="Hiking Tour Vienna" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          <TextField fx:id="fromTextField" promptText="Sterngasse 4" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          <TextField fx:id="toTextField" promptText="Höchstädtplatz 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />

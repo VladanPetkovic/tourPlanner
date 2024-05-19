@@ -18,9 +18,10 @@ public class Log {
     private Double totalDistance;
     private Integer totalTime;
     private Integer rating; // only in ranges from 1 to 5
+    private Tour tour;
 
     public Log(String username, String dateTime, String comment, Integer difficulty,
-               Double totalDistance, Integer totalTime, Integer rating) {
+               Double totalDistance, Integer totalTime, Integer rating, Tour tour) {
         setUsername(username);
         setDateTime(LocalDate.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         setComment(comment);
@@ -28,6 +29,7 @@ public class Log {
         setTotalDistance(totalDistance);
         setTotalTime(totalTime);
         setRating(rating);
+        setTour(tour);
     }
 
     public Log(Log other) {

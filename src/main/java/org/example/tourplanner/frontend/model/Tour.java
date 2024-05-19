@@ -8,7 +8,7 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Tour {
-    private Long tour_id;
+    private Long tourid;
     private String name;
     private String description;
     private String fromPlace;
@@ -43,7 +43,7 @@ public class Tour {
 
     // Copy constructor
     public Tour(Tour other) {
-        this.tour_id = other.tour_id;
+        this.tourid = other.tourid;
         this.name = other.name;
         this.description = other.description;
         this.fromPlace = other.fromPlace;

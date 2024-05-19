@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Log;
+import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.service.LogService;
 
 import java.time.LocalDate;
@@ -33,7 +34,13 @@ public class LogViewModel {
 
     public LogViewModel() {
         logService = new LogService();
-        Log[] receivedLogs = logService.getLogs().block();
+    }
+
+    public void initializeData(Tour selectedTour) {
+        if (selectedTour == null) {
+            return;
+        }
+        Log[] receivedLogs = logService.getLogsByTourId(selectedTour.getTourid()).block();
         if (receivedLogs != null) {
             Collections.addAll(logData, receivedLogs);
         }
@@ -45,7 +52,7 @@ public class LogViewModel {
     }
 
 
-    public void saveDataToList() {
+    public void saveDataToList(Tour selectedTour) {
         Log newLog = new Log(
                 currentUsername.get(),
                 currentDateTime.get(),
@@ -53,7 +60,8 @@ public class LogViewModel {
                 currentDifficulty.get(),
                 currentTotalDistance.get(),
                 currentTotalTime.get(),
-                currentRating.get());
+                currentRating.get(),
+                selectedTour);
 
         Log createdLog = logService.createLog(newLog).block();
         logData.add(createdLog);
@@ -78,14 +86,15 @@ public class LogViewModel {
         logData.remove(selectedLog);
     }
 
-    public void resetCurrentInput() {
-        currentDateTime.set("");
-        currentComment.set("");
-        currentDifficulty.set(5);
-        currentTotalDistance.set(0);
-        currentTotalTime.set(0);
-        currentRating.set(2);
-    }
+    // not needed currently
+//    public void resetCurrentInput() {
+//        currentDateTime.set("");
+//        currentComment.set("");
+//        currentDifficulty.set(5);
+//        currentTotalDistance.set(0);
+//        currentTotalTime.set(0);
+//        currentRating.set(2);
+//    }
 
     public String checkInput() {
         // check empty properties

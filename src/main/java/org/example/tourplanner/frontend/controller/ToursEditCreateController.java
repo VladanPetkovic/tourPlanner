@@ -50,8 +50,8 @@ public class ToursEditCreateController implements Initializable {
         fromTextField.textProperty().bindBidirectional(viewModel.getCurrentFrom());
         toTextField.textProperty().bindBidirectional(viewModel.getCurrentTo());
         transportTypeChoiceBox.valueProperty().bindBidirectional(viewModel.getCurrentTransportType());
-        setDistanceSpinner(5.0);
-        setEstimatedTimeSpinner(15);
+        setDistanceSpinner();
+        setEstimatedTimeSpinner();
         routeInformationTextField.textProperty().bindBidirectional(viewModel.getCurrentRouteInformation());
         descriptionTextArea.textProperty().bindBidirectional(viewModel.getCurrentTourDescription());
 
@@ -60,24 +60,31 @@ public class ToursEditCreateController implements Initializable {
         }
     }
 
-    private void setDistanceSpinner(double initialValue) {
+    private void setDistanceSpinner() {
         // min, max, and default values inserted
-        SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10000.0);
-        valueFactory.setValue(initialValue);
+        SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10000.0, 1, 0.5);
         distanceSpinner.setValueFactory(valueFactory);
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentTourDistance().asObject());
 
-        distanceSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {
-            if (!isValidDouble(event.getCharacter())) { // Check if the input character is a valid double value
-                event.consume(); // Consume the event to prevent non-numeric input
+        // Get the TextField portion of the Spinner
+        TextField textField = distanceSpinner.getEditor();
+
+        // Create a TextFormatter to allow only double input
+        TextFormatter<Double> formatter = new TextFormatter<>(change -> {
+            if (change.getControlNewText().matches("-?\\d*(\\,\\d*)?")) {
+                return change;
+            } else {
+                return null;
             }
         });
+
+        // Set the TextFormatter to the TextField
+        textField.setTextFormatter(formatter);
     }
 
-    private void setEstimatedTimeSpinner(int initialValue) {
+    private void setEstimatedTimeSpinner() {
         // min, max, and default values inserted
         SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100000);
-        valueFactory.setValue(initialValue);
         estimatedTimeSpinner.setValueFactory(valueFactory);
         valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentEstimatedTime().asObject());
 
@@ -100,6 +107,7 @@ public class ToursEditCreateController implements Initializable {
         if (!viewModel.checkInput().equals("True")) {
             // some inputs have not been filled out
             errorLabel.setText(viewModel.checkInput());
+            return;
         }
 
         if (!viewModel.isHasSelectedTour()) {
@@ -125,11 +133,6 @@ public class ToursEditCreateController implements Initializable {
         viewModel.setHasSelectedTour(false);
         viewModel.setSelectedTour(null);
         switchScene("sites/tours.fxml");
-    }
-
-    // TODO: not working properly
-    private static boolean isValidDouble(String text) {
-        return text.matches("^\\d+(,)?(\\d*)?$");
     }
 
     /**

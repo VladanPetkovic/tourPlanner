@@ -22,7 +22,7 @@ public class ControllerFactory {
         if (controllerClass == ImportExportController.class) {
             return new ImportExportController(importExportViewModel);
         } else if (controllerClass == LogsController.class) {
-            return new LogsController(logViewModel);
+            return new LogsController(logViewModel, tourViewModel);
         } else if (controllerClass == NavigationController.class) {
             return new NavigationController();
         } else if (controllerClass == ToursController.class) {

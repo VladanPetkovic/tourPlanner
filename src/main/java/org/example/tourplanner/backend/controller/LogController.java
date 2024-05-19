@@ -3,6 +3,7 @@ package org.example.tourplanner.backend.controller;
 import org.example.tourplanner.backend.model.Log;
 import org.example.tourplanner.backend.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,31 +21,58 @@ public class LogController {
     }
 
     @PostMapping
-    public ResponseEntity<Log> saveLog(@RequestBody Log log) {
-        Log newLog = logService.saveLog(log);
-        return ResponseEntity.ok(newLog);
+    public ResponseEntity<Log> saveLog(@RequestParam Long tourId, @RequestBody Log log) {
+        try {
+            Log newLog = logService.saveLog(tourId, log);
+            return new ResponseEntity<>(newLog, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping
-    public List<Log> getAllLogs() {
-        return logService.getAllLogs();
+    public ResponseEntity<List<Log>> getAllLogs() {
+        try {
+            List<Log> logs = logService.getAllLogs();
+            return new ResponseEntity<>(logs, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/logsByTour")
+    public ResponseEntity<List<Log>> getLogsByTourId(@RequestParam Long tour_id) {
+        try {
+            List<Log> logs = logService.getAllByTourId(tour_id);
+            return new ResponseEntity<>(logs, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Log> getLogById(@PathVariable Long id) {
         Optional<Log> log = logService.getLogById(id);
-        return log.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return log.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Log> updateLog(@PathVariable Long id, @RequestBody Log logDetails) {
-        Log updatedLog = logService.updateLog(id, logDetails);
-        return ResponseEntity.ok(updatedLog);
+        try {
+            Log updatedLog = logService.updateLog(id, logDetails);
+            return new ResponseEntity<>(updatedLog, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteLog(@PathVariable Long id) {
-        logService.deleteLog(id);
-        return ResponseEntity.ok("Log deleted successfully!");
+    public ResponseEntity<HttpStatus> deleteLog(@PathVariable Long id) {
+        try {
+            logService.deleteLog(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -110,8 +110,6 @@ public class ToursController implements Initializable {
 
     public void onLogBtnClick(ActionEvent actionEvent) throws IOException {
         if (this.viewModel.getSelectedTour() != null) {
-            // pass the tour-Name
-
             // go to the logs page
             switchScene("sites/logs.fxml");
         }

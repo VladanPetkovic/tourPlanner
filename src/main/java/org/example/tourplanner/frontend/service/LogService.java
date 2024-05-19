@@ -17,6 +17,7 @@ public class LogService {
 
     public Mono<Log> createLog(Log log) {
         return webClient.post()
+                .uri(uriBuilder -> uriBuilder.queryParam("tourId", log.getTour().getTourid()).build())
                 .bodyValue(log)
                 .retrieve()
                 .bodyToMono(Log.class);
@@ -24,6 +25,13 @@ public class LogService {
 
     public Mono<Log[]> getLogs() {
         return webClient.get()
+                .retrieve()
+                .bodyToMono(Log[].class);
+    }
+
+    public Mono<Log[]> getLogsByTourId(Long tourId) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/logsByTour").queryParam("tour_id", tourId).build())
                 .retrieve()
                 .bodyToMono(Log[].class);
     }

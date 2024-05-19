@@ -16,6 +16,7 @@ module org.example.tourplanner {
     requires org.hibernate.orm.core;
     requires spring.webflux;
     requires reactor.core;
+    requires com.fasterxml.jackson.annotation;
 
     opens org.example.tourplanner to javafx.fxml;
     opens org.example.tourplanner.backend;
