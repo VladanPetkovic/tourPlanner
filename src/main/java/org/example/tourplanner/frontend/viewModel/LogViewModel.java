@@ -7,10 +7,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Log;
+import org.example.tourplanner.frontend.service.LogService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +28,16 @@ public class LogViewModel {
     private final IntegerProperty currentTotalTime = new SimpleIntegerProperty();
     private final IntegerProperty currentRating = new SimpleIntegerProperty();
     private final ObservableList<Log> logData = FXCollections.observableArrayList();
+    private Log selectedLog;
+    private LogService logService;
+
+    public LogViewModel() {
+        logService = new LogService();
+        Log[] receivedLogs = logService.getLogs().block();
+        if (receivedLogs != null) {
+            Collections.addAll(logData, receivedLogs);
+        }
+    }
 
 
     public void addListener(FocusChangedListener listener) {
@@ -34,17 +46,20 @@ public class LogViewModel {
 
 
     public void saveDataToList() {
-        logData.add(new Log(
+        Log newLog = new Log(
                 currentUsername.get(),
                 currentDateTime.get(),
                 currentComment.get(),
                 currentDifficulty.get(),
                 currentTotalDistance.get(),
                 currentTotalTime.get(),
-                currentRating.get()));
+                currentRating.get());
+
+        Log createdLog = logService.createLog(newLog).block();
+        logData.add(createdLog);
     }
 
-    public void updateDataInList(Log selectedLog) {
+    public void updateDataInList() {
         selectedLog.setUsername(currentUsername.get());
         if (Log.checkDate(currentDateTime.get())) {
             selectedLog.setDateTime(LocalDate.parse(currentDateTime.get(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -54,6 +69,13 @@ public class LogViewModel {
         selectedLog.setTotalDistance(currentTotalDistance.get());
         selectedLog.setTotalTime(currentTotalTime.get());
         selectedLog.setRating(currentRating.get());
+
+        logService.updateLog(selectedLog).block();
+    }
+
+    public void deleteLog() {
+        logService.deleteLog(selectedLog.getLog_id()).block();
+        logData.remove(selectedLog);
     }
 
     public void resetCurrentInput() {

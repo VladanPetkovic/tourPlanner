@@ -43,7 +43,7 @@ public class TourTests {
         assertEquals("A beautiful city tour", tour.getDescription());
         assertEquals("Stephansplatz", tour.getFromPlace());
         assertEquals("Reumannplatz", tour.getToPlace());
-        assertEquals(TransportType.HIKE, tour.getTransport_type());
+        assertEquals(TransportType.HIKE.ordinal(), tour.getTransport_type());
         assertEquals(10, tour.getDistance(), 0.001);
         assertEquals(7200, tour.getEstimated_time());
         assertEquals("Explore the city with a walk through the city", tour.getRoute_information());

@@ -35,12 +35,12 @@ public class LogService {
                 .bodyToMono(Log.class);
     }
 
-    public Mono<Void> updateLog(Log log) {
+    public Mono<Log> updateLog(Log log) {
         return webClient.put()
-                .uri("/" + log.getId())
+                .uri("/" + log.getLog_id())
                 .bodyValue(log)
                 .retrieve()
-                .bodyToMono(Void.class);
+                .bodyToMono(Log.class);
     }
 
     public Mono<Void> deleteLog(long id) {

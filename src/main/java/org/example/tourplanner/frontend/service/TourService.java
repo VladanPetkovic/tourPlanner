@@ -35,12 +35,12 @@ public class TourService {
                 .bodyToMono(Tour.class);
     }
 
-    public Mono<Void> updateTour(Tour tour) {
+    public Mono<Tour> updateTour(Tour tour) {
         return webClient.put()
-                .uri("/" + tour.getId())
+                .uri("/" + tour.getTour_id())
                 .bodyValue(tour)
                 .retrieve()
-                .bodyToMono(Void.class);
+                .bodyToMono(Tour.class);
     }
 
     public Mono<Void> deleteTour(long id) {

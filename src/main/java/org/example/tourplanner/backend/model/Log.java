@@ -9,12 +9,12 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-@Table(name = "log")
+@Table(name = "logs")
 public class Log {
     @Id
     @Column(name = "log_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long log_id;
     @Column(name = "username", nullable = false)
     private String username;
     @Column(name = "date_time", nullable = false)
@@ -34,9 +34,9 @@ public class Log {
     public Log() {
     }
 
-    public Log(Long id, String username, LocalDate dateTime, String comment, Integer difficulty,
+    public Log(Long log_id, String username, LocalDate dateTime, String comment, Integer difficulty,
                Double totalDistance, Integer totalTime, Integer rating) {
-        this.id = id;
+        this.log_id = log_id;
         this.username = username;
         this.dateTime = dateTime;
         this.comment = comment;

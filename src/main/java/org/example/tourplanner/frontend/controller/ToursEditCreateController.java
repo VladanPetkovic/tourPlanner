@@ -92,32 +92,38 @@ public class ToursEditCreateController implements Initializable {
     public void onGoBackBtnClick(ActionEvent actionEvent) throws IOException {
         errorLabel.setText("");
         viewModel.setHasSelectedTour(false);
+        viewModel.setSelectedTour(null);
         switchScene("sites/tours.fxml");
     }
 
     public void onSaveUpdateBtnClick(ActionEvent actionEvent) throws IOException {
-        if (viewModel.checkInput().equals("True") && !viewModel.isHasSelectedTour()) {
+        if (!viewModel.checkInput().equals("True")) {
+            // some inputs have not been filled out
+            errorLabel.setText(viewModel.checkInput());
+        }
+
+        if (!viewModel.isHasSelectedTour()) {
             // creating new instance
             viewModel.saveDataToList();
             viewModel.setHasSelectedTour(false);
+            viewModel.setSelectedTour(null);
             errorLabel.setText("");
             switchScene("sites/tours.fxml");
-        } else if (viewModel.checkInput().equals("True")) {
-            // saving
+        } else {
+            // updating
             viewModel.updateDataInList();
             errorLabel.setText("");
             viewModel.setHasSelectedTour(false);
+            viewModel.setSelectedTour(null);
             switchScene("sites/tours.fxml");
-        } else {
-            // some inputs have not been filled out
-            errorLabel.setText(viewModel.checkInput());
         }
     }
 
     public void onDeleteBtnClick(ActionEvent actionEvent) throws IOException {
         errorLabel.setText("");
+        viewModel.deleteTour();
         viewModel.setHasSelectedTour(false);
-        viewModel.getTourData().remove(viewModel.getSelectedTour());
+        viewModel.setSelectedTour(null);
         switchScene("sites/tours.fxml");
     }
 
@@ -133,7 +139,7 @@ public class ToursEditCreateController implements Initializable {
         nameTextField.setText(viewModel.getSelectedTour().getName());
         fromTextField.setText(viewModel.getSelectedTour().getFromPlace());
         toTextField.setText(viewModel.getSelectedTour().getToPlace());
-        transportTypeChoiceBox.setValue(viewModel.getSelectedTour().getTransport_type().name());
+        transportTypeChoiceBox.setValue(viewModel.getSelectedTour().getTransportType().name());
         distanceSpinner.getValueFactory().setValue(viewModel.getSelectedTour().getDistance());
         estimatedTimeSpinner.getValueFactory().setValue(viewModel.getSelectedTour().getEstimated_time());
         routeInformationTextField.setText(viewModel.getSelectedTour().getRoute_information());

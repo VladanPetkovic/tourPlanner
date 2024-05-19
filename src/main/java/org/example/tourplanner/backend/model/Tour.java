@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "tour")
+@Table(name = "tours")
 public class Tour {
     @Id
     @Column(name = "tour_id")

@@ -17,7 +17,7 @@ import java.util.Objects;
 @Getter
 @Setter
 public class TourViewModel {
-    private List<FocusChangedListener> focusChangedListenerList = new ArrayList<FocusChangedListener>();
+    private List<FocusChangedListener> focusChangedListenerList = new ArrayList<>();
     private final StringProperty currentTourName = new SimpleStringProperty("");
     private final StringProperty currentTourDescription = new SimpleStringProperty("");
     private final StringProperty currentFrom = new SimpleStringProperty("");
@@ -26,17 +26,13 @@ public class TourViewModel {
     private final DoubleProperty currentTourDistance = new SimpleDoubleProperty();
     private final IntegerProperty currentEstimatedTime = new SimpleIntegerProperty(); // in seconds
     private final StringProperty currentRouteInformation = new SimpleStringProperty("");
-    // some sample data
-    private final ObservableList<Tour> tourData = FXCollections.observableArrayList(
-                    new Tour("Tour 1", "Description 1", "From 1", "To 1", "Vacation", 100.0, 120, "Route 1"),
-                    new Tour("Tour 2", "Description 2", "From 2", "To 2", "Running", 150.0, 180, "Route 2")
-    );
+    private final ObservableList<Tour> tourData = FXCollections.observableArrayList();
     private Tour selectedTour;
     private boolean hasSelectedTour = false;
     private TourService tourService;
 
     public TourViewModel() {
-        // get all tours --> TODO: change to be better
+        // TODO: maybe change the response-handling to be better (what happens when server is inactive?)
         tourService = new TourService();
         Tour[] receivedTours = tourService.getTours().block();
         if (receivedTours != null) {
@@ -49,14 +45,17 @@ public class TourViewModel {
     }
 
     public void saveDataToList() {
-        tourData.add(new Tour(this.currentTourName.get(),
+        Tour newTour = new Tour(this.currentTourName.get(),
                 this.currentTourDescription.get(),
                 this.currentFrom.get(),
                 this.currentTo.get(),
                 this.currentTransportType.get(),
                 this.currentTourDistance.get(),
                 this.currentEstimatedTime.get(),
-                this.currentRouteInformation.get()));
+                this.currentRouteInformation.get());
+
+        Tour createdTour = tourService.createTour(newTour).block();
+        tourData.add(createdTour);
     }
 
     public void updateDataInList() {
@@ -72,6 +71,13 @@ public class TourViewModel {
         selectedTour.setDistance(this.currentTourDistance.get());
         selectedTour.setEstimated_time(this.currentEstimatedTime.get());
         selectedTour.setRoute_information(this.currentRouteInformation.get());
+
+        tourService.updateTour(selectedTour).block();
+    }
+
+    public void deleteTour() {
+        tourService.deleteTour(this.selectedTour.getTour_id()).block();
+        tourData.remove(this.selectedTour);
     }
 
     public void resetCurrentInput() {

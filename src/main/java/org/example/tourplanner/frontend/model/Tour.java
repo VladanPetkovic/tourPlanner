@@ -8,31 +8,30 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Tour {
-    private Long id;
+    private Long tour_id;
     private String name;
     private String description;
     private String fromPlace;
     private String toPlace;
-    private TransportType transport_type; // needs to be converted from int
+    private int transport_type;
     private Double distance;
     private Integer estimated_time; // in seconds
     private String route_information;
 
     public Tour(
-                String name,
-                String description,
-                String fromPlace,
-                String toPlace,
-                String transport_type,
-                Double distance,
-                Integer estimated_time,
-                String route_information) {
+            String name,
+            String description,
+            String fromPlace,
+            String toPlace,
+            String transport_type,
+            Double distance,
+            Integer estimated_time,
+            String route_information) {
         if (Objects.equals(name, "")) {
             setCombinedTourName(fromPlace, toPlace);
         } else {
             setName(name);
         }
-        setId(id);
         setDescription(description);
         setFromPlace(fromPlace);
         setToPlace(toPlace);
@@ -44,7 +43,7 @@ public class Tour {
 
     // Copy constructor
     public Tour(Tour other) {
-        this.id = other.id;
+        this.tour_id = other.tour_id;
         this.name = other.name;
         this.description = other.description;
         this.fromPlace = other.fromPlace;
@@ -57,14 +56,23 @@ public class Tour {
 
     public void initTransportType(String transportTypeValue) {
         switch (transportTypeValue) {
-            case "Bike": setTransport_type(TransportType.BIKE);
+            case "Bike": setTransport_type(TransportType.BIKE.ordinal());
                 break;
-            case "Hike": setTransport_type(TransportType.HIKE);
+            case "Hike": setTransport_type(TransportType.HIKE.ordinal());
                 break;
-            case "Running": setTransport_type(TransportType.RUNNING);
+            case "Running": setTransport_type(TransportType.RUNNING.ordinal());
                 break;
-            default: setTransport_type(TransportType.VACATION);
+            default: setTransport_type(TransportType.VACATION.ordinal());
         }
+    }
+
+    public TransportType getTransportType() {
+        return switch (this.transport_type) {
+            case 0 -> TransportType.BIKE;
+            case 1 -> TransportType.HIKE;
+            case 2 -> TransportType.RUNNING;
+            default -> TransportType.VACATION;
+        };
     }
 
     /**

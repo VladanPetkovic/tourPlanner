@@ -78,6 +78,7 @@ public class LogsController implements Initializable {
     private void displayLogInformation() {
         logListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                this.viewModel.setSelectedLog(newValue);
                 usernameTextField.setText(newValue.getUsername());
                 commentTextField.setText(newValue.getComment());
                 difficultySlider.setValue(newValue.getDifficulty());
@@ -131,29 +132,28 @@ public class LogsController implements Initializable {
     }
 
     public void onCreateBtnClick(ActionEvent actionEvent) {
-        if (this.viewModel.checkInput().equals("True")) {
+        if (viewModel.checkInput().equals("True")) {
             errorLabel.setText("");
             viewModel.saveDataToList();
+            viewModel.setSelectedLog(null);
             // TODO: add loosing focus of the list-element
         } else {
-            errorLabel.setText(this.viewModel.checkInput());
+            errorLabel.setText(viewModel.checkInput());
         }
     }
 
     public void onSaveBtnClick(ActionEvent actionEvent) {
-        Log selectedLog = this.logListView.getSelectionModel().getSelectedItem();
-        if (this.viewModel.checkInput().equals("True") && selectedLog != null) {
+        if (viewModel.checkInput().equals("True") && viewModel.getSelectedLog() != null) {
             errorLabel.setText("");
-            viewModel.updateDataInList(selectedLog);
+            viewModel.updateDataInList();
         } else {
-            errorLabel.setText(this.viewModel.checkInput());
+            errorLabel.setText(viewModel.checkInput());
         }
     }
 
     public void onDeleteBtnClick(ActionEvent actionEvent) {
         errorLabel.setText("");
-        Log selectedLog = this.logListView.getSelectionModel().getSelectedItem();
-        this.viewModel.getLogData().remove(selectedLog);
+        viewModel.deleteLog();
     }
 
     // TODO: not working properly
