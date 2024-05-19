@@ -37,6 +37,7 @@ public class LogViewModel {
     }
 
     public void initializeData(Tour selectedTour) {
+        logData.clear();
         if (selectedTour == null) {
             return;
         }
