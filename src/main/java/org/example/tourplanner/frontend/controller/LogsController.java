@@ -50,8 +50,8 @@ public class LogsController implements Initializable {
 
         // Binding
         ratingSlider.valueProperty().bindBidirectional(viewModel.getCurrentRating());
-        setTimeSpinner(viewModel.getCurrentTotalTime());
-        setDistanceSpinner(viewModel.getCurrentTotalDistance());
+        setTimeSpinner();
+        setDistanceSpinner();
         dateTextField.textProperty().bindBidirectional(viewModel.getCurrentDateTime());
         difficultySlider.valueProperty().bindBidirectional(viewModel.getCurrentDifficulty());
         commentTextField.textProperty().bindBidirectional(viewModel.getCurrentComment());
@@ -100,11 +100,11 @@ public class LogsController implements Initializable {
         });
     }
 
-    private void setDistanceSpinner(DoubleProperty doubleProperty) {
+    private void setDistanceSpinner() {
         // min, max, and default values inserted
         SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10000.0, 1, 0.5);
+        valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentTotalDistance().asObject());
         totalDistanceSpinner.setValueFactory(valueFactory);
-        valueFactory.valueProperty().bindBidirectional(doubleProperty.asObject());
 
         // Get the TextField portion of the Spinner
         TextField textField = totalDistanceSpinner.getEditor();
@@ -122,11 +122,11 @@ public class LogsController implements Initializable {
         textField.setTextFormatter(formatter);
     }
 
-    private void setTimeSpinner(IntegerProperty integerProperty) {
+    private void setTimeSpinner() {
         // min, max, and default values inserted
         SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100000);
+        valueFactory.valueProperty().bindBidirectional(viewModel.getCurrentTotalTime().asObject());
         totalTimeSpinner.setValueFactory(valueFactory);
-        valueFactory.valueProperty().bindBidirectional(integerProperty.asObject());
 
         // Add an event filter to the text field to allow only numeric input
         this.totalTimeSpinner.getEditor().addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, event -> {

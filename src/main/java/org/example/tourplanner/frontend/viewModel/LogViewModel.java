@@ -41,6 +41,8 @@ public class LogViewModel {
         if (selectedTour == null) {
             return;
         }
+        // set initial input
+        setInitialInput(selectedTour);
         Log[] receivedLogs = logService.getLogsByTourId(selectedTour.getTourid()).block();
         if (receivedLogs != null) {
             Collections.addAll(logData, receivedLogs);
@@ -87,15 +89,14 @@ public class LogViewModel {
         logData.remove(selectedLog);
     }
 
-    // not needed currently
-//    public void resetCurrentInput() {
-//        currentDateTime.set("");
-//        currentComment.set("");
-//        currentDifficulty.set(5);
-//        currentTotalDistance.set(0);
-//        currentTotalTime.set(0);
-//        currentRating.set(2);
-//    }
+    public void setInitialInput(Tour selectedTour) {
+        currentDateTime.set("");
+        currentComment.set("");
+        currentDifficulty.set(5);
+        currentTotalDistance.set(selectedTour.getDistance());
+        currentTotalTime.set(selectedTour.getEstimated_time());
+        currentRating.set(2);
+    }
 
     public String checkInput() {
         // check empty properties
