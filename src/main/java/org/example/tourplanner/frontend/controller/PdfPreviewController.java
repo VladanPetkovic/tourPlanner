@@ -3,7 +3,6 @@ package org.example.tourplanner.frontend.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
@@ -23,7 +22,6 @@ import static org.example.tourplanner.frontend.controller.SwitchScene.switchScen
 
 public class PdfPreviewController implements Initializable {
     public Label selectedFolderLabel;
-    public TextField filenameTextField;
     public Label FolderNotSelectedLabel;
     public VBox vbox_previewPane;
     private final PdfPreviewViewModel viewModel;
@@ -105,10 +103,23 @@ public class PdfPreviewController implements Initializable {
         }
     }
 
-    public void onExportBtnClick(ActionEvent actionEvent) {
+    public void onExportBtnClick(ActionEvent actionEvent) throws IOException {
+        if (!checkInput()) {
+            return;
+        }
+
+        this.viewModel.exportReport(selectedFolderLabel.getText());
+        this.tourViewModel.setSelectedTour(null);
+        switchScene("sites/tours.fxml");
     }
 
     private boolean checkInput() {
+        if (selectedFolderLabel.getText().equals("\"\"")) {
+            FolderNotSelectedLabel.setVisible(true);
+            return false;
+        }
+
+        FolderNotSelectedLabel.setVisible(false);
         return true;
     }
 }

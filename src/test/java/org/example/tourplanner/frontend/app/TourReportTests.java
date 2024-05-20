@@ -33,7 +33,7 @@ public class TourReportTests {
     void export_checkEmptyTestVisually() {
         System.out.println("Check: creation of empty test");
         // arrange
-        report.setOptions("C:\\Users\\vlada\\Downloads", "");
+        report.setOptions("C:\\Users\\vlada\\Downloads");
 
         // act
         report.export(null);

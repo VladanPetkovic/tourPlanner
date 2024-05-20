@@ -91,13 +91,9 @@ public abstract class Report {
 
         document.close();
     }
-    public void setOptions(String destinationFolder, String fileName) {
+    public void setOptions(String destinationFolder) {
         this.destinationFolder = destinationFolder;
-        if (Objects.equals(fileName, "")) {
-            this.fileName = createFileName();
-        } else {
-            this.fileName = fileName;
-        }
+        this.fileName = createFileName();
     }
 
     /**

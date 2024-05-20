@@ -1,11 +1,8 @@
 package org.example.tourplanner.frontend.viewModel;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import lombok.Getter;
 import lombok.Setter;
-import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.app.Report;
 import org.example.tourplanner.frontend.app.SummarizeReport;
 import org.example.tourplanner.frontend.app.TourReport;
@@ -18,8 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 public class PdfPreviewViewModel {
-    private List<FocusChangedListener> focusChangedListenerList = new ArrayList<FocusChangedListener>();
-    private final StringProperty currentFilename = new SimpleStringProperty("");
     private TourService tourService;
     private Report report;
     private List<Tour> tours = new ArrayList<>();
@@ -46,5 +41,10 @@ public class PdfPreviewViewModel {
 
     public ArrayList<Image> getPreviewImages() {
         return report.getPreviewImages(tours);
+    }
+
+    public void exportReport(String directory) {
+        report.setOptions(directory);
+        report.export(tours);
     }
 }
