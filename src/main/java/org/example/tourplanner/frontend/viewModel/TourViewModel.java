@@ -30,6 +30,7 @@ public class TourViewModel {
     private Tour selectedTour;
     private boolean hasSelectedTour = false;
     private TourService tourService;
+    private boolean reportType;     // false = tourReport; true = summarizeReport
 
     public TourViewModel() {
         // TODO: maybe change the response-handling to be better (what happens when server is inactive?)

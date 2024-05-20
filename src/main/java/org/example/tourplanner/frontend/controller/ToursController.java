@@ -100,12 +100,16 @@ public class ToursController implements Initializable {
         }
     }
 
-    public void onTourReportBtnClick(ActionEvent actionEvent) {
-        // bridge to export to pdf
+    public void onTourReportBtnClick(ActionEvent actionEvent) throws IOException {
+        if (this.viewModel.getSelectedTour() != null) {
+            this.viewModel.setReportType(false);
+            switchScene("sites/pdf_preview.fxml");
+        }
     }
 
-    public void onSummarizeReportBtnClick(ActionEvent actionEvent) {
-        // bridge to export to pdf
+    public void onSummarizeReportBtnClick(ActionEvent actionEvent) throws IOException {
+        this.viewModel.setReportType(true);
+        switchScene("sites/pdf_preview.fxml");
     }
 
     public void onLogBtnClick(ActionEvent actionEvent) throws IOException {

@@ -17,6 +17,13 @@ module org.example.tourplanner {
     requires spring.webflux;
     requires reactor.core;
     requires com.fasterxml.jackson.annotation;
+    requires layout;
+    requires kernel;
+    requires org.apache.pdfbox;
+    requires java.desktop;
+    requires io;
+    requires itextpdf;
+    requires javafx.swing;
 
     opens org.example.tourplanner to javafx.fxml;
     opens org.example.tourplanner.backend;

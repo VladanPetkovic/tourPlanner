@@ -64,6 +64,14 @@ Button {
     -fx-background-color: red;
     -fx-text-fill: white;
 }
+.button_danger:hover {
+    -fx-background-color: darkred;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+.button_danger:pressed {
+    -fx-background-color: red;
+}
 .button_cancel {
     -fx-background-color: orange;
     -fx-text-fill: white;
@@ -80,6 +88,14 @@ Button {
     -fx-background-color: grey;
     -fx-text-fill: white;
 }
+.button_search:hover {
+    -fx-background-color: #525252;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+.button_search:pressed {
+    -fx-background-color: grey;
+}
 .button-navigation {
     -fx-background-color: none;
     -fx-border-radius: 10%;
@@ -95,6 +111,6 @@ Button {
     -fx-scale-y: 1.05;
 }
 .button-icon:pressed {
-    -fx-rotate: 45;
+    -fx-rotate: -45;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
 }

@@ -2,17 +2,20 @@ package org.example.tourplanner.frontend.controller;
 
 import org.example.tourplanner.frontend.viewModel.ImportExportViewModel;
 import org.example.tourplanner.frontend.viewModel.LogViewModel;
+import org.example.tourplanner.frontend.viewModel.PdfPreviewViewModel;
 import org.example.tourplanner.frontend.viewModel.TourViewModel;
 
 public class ControllerFactory {
     private final ImportExportViewModel importExportViewModel;
     private final LogViewModel logViewModel;
     private final TourViewModel tourViewModel;
+    private final PdfPreviewViewModel pdfPreviewViewModel;
 
     public ControllerFactory() {
         importExportViewModel = new ImportExportViewModel();
         logViewModel = new LogViewModel();
         tourViewModel = new TourViewModel();
+        pdfPreviewViewModel = new PdfPreviewViewModel();
     }
 
     /*
@@ -29,6 +32,8 @@ public class ControllerFactory {
             return new ToursController(tourViewModel);
         } else if (controllerClass == ToursEditCreateController.class) {
             return new ToursEditCreateController(tourViewModel);
+        } else if (controllerClass == PdfPreviewController.class) {
+            return new PdfPreviewController(pdfPreviewViewModel, tourViewModel);
         }
 
         throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
