@@ -15,6 +15,8 @@ public class ImportExportController {
     public Label selectedFileLabel;
     public Label folderNotSelectedLabel;
     public Label fileNotSelectedLabel;
+    public Label successImportLabel;
+    public Label successExportLabel;
 
     public ImportExportController(ImportExportViewModel importExportViewModel) {
         this.viewModel = importExportViewModel;
@@ -22,18 +24,28 @@ public class ImportExportController {
 
     public void onImportBtnClick(ActionEvent actionEvent) {
         if (!checkInput(selectedFileLabel, fileNotSelectedLabel)) {
+            successImportLabel.setVisible(false);
             return;
         }
 
-
+        boolean hasImported = this.viewModel.importTours(selectedFileLabel.getText());
+        if (hasImported) {
+            successImportLabel.setVisible(true);
+            selectedFileLabel.setText("\"\"");
+        }
     }
 
     public void onExportBtnClick(ActionEvent actionEvent) {
         if (!checkInput(selectedFolderLabel, folderNotSelectedLabel)) {
+            successExportLabel.setVisible(false);
             return;
         }
 
-
+        boolean hasExported = this.viewModel.exportTours(selectedFolderLabel.getText());
+        if (hasExported) {
+            successExportLabel.setVisible(true);
+            selectedFolderLabel.setText("\"\"");
+        }
     }
 
     public void onSelectFileBtnClick(ActionEvent actionEvent) {

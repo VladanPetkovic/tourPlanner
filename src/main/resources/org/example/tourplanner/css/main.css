@@ -22,6 +22,11 @@ Button {
     -fx-alignment: center;
     -fx-font-weight: bold;
 }
+.label-green-bold {
+    -fx-text-fill: green;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}
 .label-dark {
     -fx-text-fill: black;
     -fx-alignment: center;

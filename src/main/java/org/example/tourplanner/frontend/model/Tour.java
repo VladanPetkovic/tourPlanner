@@ -67,7 +67,11 @@ public class Tour {
     }
 
     public TransportType getTransportType() {
-        return switch (this.transport_type) {
+        return getTransportType(this.transport_type);
+    }
+
+    public static TransportType getTransportType(int transport_type) {
+        return switch (transport_type) {
             case 0 -> TransportType.BIKE;
             case 1 -> TransportType.HIKE;
             case 2 -> TransportType.RUNNING;

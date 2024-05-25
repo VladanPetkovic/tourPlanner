@@ -30,6 +30,16 @@ public class TourController {
         }
     }
 
+    @PostMapping("/batch")
+    public ResponseEntity<List<Tour>> createTours(@RequestBody List<Tour> tours) {
+        try {
+            List<Tour> newTours = tourService.saveTours(tours);
+            return new ResponseEntity<>(newTours, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping
     public ResponseEntity<List<Tour>> getAllTours() {
         try {

@@ -5,6 +5,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Service
 public class TourService {
     private static final String BASE_URL = "http://localhost:8080/tours";
@@ -20,6 +22,14 @@ public class TourService {
                 .bodyValue(tour)
                 .retrieve()
                 .bodyToMono(Tour.class);
+    }
+
+    public Mono<Tour[]> createTours(List<Tour> tours) {
+        return webClient.post()
+                .uri("/batch")
+                .bodyValue(tours)
+                .retrieve()
+                .bodyToMono(Tour[].class);
     }
 
     public Mono<Tour[]> getTours() {

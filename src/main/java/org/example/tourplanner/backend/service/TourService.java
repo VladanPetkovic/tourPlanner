@@ -26,6 +26,10 @@ public class TourService {
         return tourRepository.save(tour);
     }
 
+    public List<Tour> saveTours(List<Tour> tours) {
+        return tourRepository.saveAll(tours);
+    }
+
     /**
      * Get all tours.
      * @return the list of entities.
