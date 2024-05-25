@@ -63,6 +63,7 @@ Button {
 .button_danger {
     -fx-background-color: red;
     -fx-text-fill: white;
+    -fx-pref-width: 200px;
 }
 .button_danger:hover {
     -fx-background-color: darkred;
@@ -75,18 +76,46 @@ Button {
 .button_cancel {
     -fx-background-color: orange;
     -fx-text-fill: white;
+    -fx-pref-width: 200px;
+}
+.button_cancel:hover {
+    -fx-background-color: #a26a01;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+.button_cancel:pressed {
+    -fx-background-color: orange;
 }
 .button_create {
     -fx-background-color: #0ed70e;
     -fx-text-fill: white;
+    -fx-pref-width: 200px;
+}
+.button_create:hover {
+    -fx-background-color: #005e00;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+.button_create:pressed {
+    -fx-background-color: #0ed70e;
 }
 .button_save_edit {
     -fx-background-color: #0a1045;
     -fx-text-fill: white;
+    -fx-pref-width: 200px;
+}
+.button_save_edit:hover {
+    -fx-background-color: #04071c;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+.button_save_edit:pressed {
+    -fx-background-color: #0a1045;
 }
 .button_search {
     -fx-background-color: grey;
     -fx-text-fill: white;
+    -fx-pref-width: 200px;
 }
 .button_search:hover {
     -fx-background-color: #525252;
