@@ -25,6 +25,8 @@ public class ToursController implements Initializable {
     public Label transportTypeLabel;
     public Label tourDistanceLabel;
     public Label estimatedTimeLabel;
+    public Label popularityLabel;
+    public Label childFriendLinessLabel;
 
     public ToursController(TourViewModel tourViewModel) {
         this.viewModel = tourViewModel;

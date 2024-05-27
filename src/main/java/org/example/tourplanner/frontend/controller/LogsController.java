@@ -28,6 +28,7 @@ public class LogsController implements Initializable {
     public Label errorLabel;
     private final LogViewModel viewModel;
     private final TourViewModel tourViewModel;
+    public Label selectedTourLabel;
 
     public LogsController(LogViewModel logViewModel, TourViewModel tourViewModel) {
         this.viewModel = logViewModel;
@@ -47,6 +48,9 @@ public class LogsController implements Initializable {
             commentTextField.requestFocus();
             usernameTextField.requestFocus();
         });
+
+        // setting the name of selected tour
+        selectedTourLabel.setText("Selected Tour: " + tourViewModel.getSelectedTour().getName());
 
         // Binding
         ratingSlider.valueProperty().bindBidirectional(viewModel.getCurrentRating());

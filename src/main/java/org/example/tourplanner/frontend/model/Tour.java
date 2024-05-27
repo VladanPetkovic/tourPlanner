@@ -17,6 +17,8 @@ public class Tour {
     private Double distance;
     private Integer estimated_time; // in seconds
     private String route_information;
+    private Popularity popularity;
+    private ChildFriendliness childFriendliness;
 
     public Tour(
             String name,
@@ -76,13 +78,53 @@ public class Tour {
         };
     }
 
-    public static int getTransportTypeInteger(int transport_type) {
-        return switch (transport_type) {
-            case 0 -> TransportType.BIKE.ordinal();
-            case 1 -> TransportType.HIKE.ordinal();
-            case 2 -> TransportType.RUNNING.ordinal();
-            default -> TransportType.VACATION.ordinal();
-        };
+    // TODO: good for unit-tests
+    public void setPopularity(int numberOfLogs) {
+        switch (numberOfLogs) {
+            case 0:
+                this.popularity = Popularity.UNKNOWN; break;
+            case 1:
+            case 2:
+                this.popularity = Popularity.UNPOPULAR; break;
+            case 3:
+            case 4:
+                this.popularity = Popularity.AVERAGE; break;
+            case 5:
+            case 6:
+            case 7:
+                this.popularity = Popularity.POPULAR; break;
+            default:
+                this.popularity = Popularity.VERY_POPULAR;
+        }
+    }
+
+    // TODO: good for unit-tests
+    public void setChildFriendliness(double avgDifficulty, double avgTotalTime, double avgDistance) {
+        double childFriendLiness = 2;
+        
+        // average difficulty
+        if (avgDifficulty < 3) {
+            childFriendLiness++;
+        } else if (avgDifficulty > 7) {
+            childFriendLiness--;
+        }
+        
+        // avgTotalTime
+        if (avgTotalTime < this.estimated_time * 0.9) {
+            childFriendLiness++;
+        } else if (avgTotalTime > this.estimated_time * 1.1) {
+            childFriendLiness--;
+        }
+
+        // avgDistance
+        if (avgDistance < this.distance * 0.9) {
+            childFriendLiness++;
+        } else if (avgDistance > this.distance * 1.1) {
+            childFriendLiness--;
+        }
+
+        // set childFriendLiness
+        setChildFriendliness(ChildFriendliness.fromDouble(childFriendLiness));
     }
 
     /**

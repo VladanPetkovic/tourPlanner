@@ -14,10 +14,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="400.0" prefHeight="720.0" prefWidth="920.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.LogsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="400.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.LogsController">
    <children>
       <fx:include source="components/navigation.fxml" />
-      <GridPane prefHeight="658.0" prefWidth="920.0">
+      <GridPane prefHeight="738.0" prefWidth="1000.0">
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" maxWidth="400.0" minWidth="10.0" />
             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
@@ -28,19 +28,20 @@
          <children>
             <VBox prefHeight="658.0" prefWidth="315.0" styleClass="contentOfPage">
                <children>
-                  <GridPane prefHeight="190.0" prefWidth="315.0" styleClass="input-cell">
+                  <GridPane prefHeight="213.0" prefWidth="335.0" styleClass="input-cell">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints maxHeight="91.60001220703126" minHeight="2.000008368492132" prefHeight="56.399983978271486" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="212.9999855041504" minHeight="10.0" prefHeight="62.60001602172852" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="239.2000305175781" minHeight="10.0" prefHeight="45.00000610351563" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="91.60001220703126" minHeight="2.000008368492132" prefHeight="54.199993896484365" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="91.60001220703126" minHeight="10.0" prefHeight="50.39998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="212.9999855041504" minHeight="10.0" prefHeight="51.20001220703125" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="239.2000305175781" minHeight="10.0" prefHeight="38.99999389648437" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label prefHeight="29.0" prefWidth="282.0" styleClass="label-dark-bold" text="Search for a Log:" />
-                        <TextField alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="230.0" promptText="Search by Comment..." GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="425.0" styleClass="button_search" text="Search" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Label prefHeight="30.0" prefWidth="342.0" styleClass="label-dark-bold" text="Search for a Log:" />
+                        <TextField alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="230.0" promptText="Search by Comment..." GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="425.0" styleClass="button_search" text="Search" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
@@ -54,6 +55,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Label fx:id="selectedTourLabel" prefHeight="18.0" prefWidth="336.0" text="Selected Tour: " GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -62,57 +64,56 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </GridPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="298.0" styleClass="label-white" text="Log-List" textAlignment="CENTER" />
-                  <ListView fx:id="logListView" prefHeight="401.0" prefWidth="315.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="367.0" styleClass="label-white" text="Log-List" textAlignment="CENTER" />
+                  <ListView fx:id="logListView" prefHeight="466.0" prefWidth="335.0" />
                </children>
             </VBox>
-            <VBox prefHeight="840.0" prefWidth="604.0" spacing="10" styleClass="input-cell" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <VBox prefHeight="778.0" prefWidth="644.0" spacing="10" styleClass="input-cell" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
                <children>
                   <Label prefHeight="39.0" prefWidth="583.0" styleClass="label-dark-bold" text="Log-Detailansicht &amp; Bearbeitung" />
-                  <GridPane hgap="10" prefHeight="356.0" prefWidth="584.0" vgap="10">
+                  <GridPane hgap="10" prefHeight="673.0" prefWidth="643.0" vgap="10" VBox.vgrow="ALWAYS">
                      <columnConstraints>
-                        <ColumnConstraints maxWidth="288.66670735677087" minWidth="68.66664632161459" prefWidth="140.66668701171875" />
-                        <ColumnConstraints maxWidth="326.0" minWidth="5.599848937988327" prefWidth="283.6666463216146" />
-                        <ColumnConstraints maxWidth="326.0" minWidth="10.0" prefWidth="138.3333129882812" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="288.66670735677087" minWidth="68.66664632161459" prefWidth="138.79993896484376" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="392.40004425048824" minWidth="5.599848937988327" prefWidth="337.20003051757806" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="326.0" minWidth="10.0" prefWidth="143.5999694824219" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints maxHeight="25.6" minHeight="4.000020599365236" prefHeight="25.6" />
-                        <RowConstraints maxHeight="21.599979400634766" minHeight="0.0" prefHeight="0.0" />
-                        <RowConstraints maxHeight="25.6" minHeight="25.6" prefHeight="25.6" />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                        <RowConstraints maxHeight="59.999993896484376" minHeight="4.000020599365236" prefHeight="57.6" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="68.00001068115235" minHeight="0.0" prefHeight="56.8" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="79.20001220703125" minHeight="8.800004577636713" prefHeight="55.199989318847656" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="124.80001220703124" minHeight="42.399987792968744" prefHeight="79.99998779296874" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="123.19998779296873" minHeight="32.00000610351563" prefHeight="72.79998779296875" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="188.0" minHeight="31.999975585937506" prefHeight="80.79998779296875" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="145.5999694824219" minHeight="28.799951171875023" prefHeight="58.39996337890625" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="135.99995117187495" minHeight="0.0" prefHeight="73.59994506835949" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="63.99998779296874" minHeight="0.0" prefHeight="38.4000244140625" vgrow="ALWAYS" />
                      </rowConstraints>
                      <children>
                         <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                         <TextField fx:id="usernameTextField" prefWidth="200.0" promptText="user1234" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                        <Label text="Date/Time:" GridPane.rowIndex="2" />
-                        <Label text="Comment:" GridPane.rowIndex="3" />
-                        <TextField fx:id="commentTextField" prefWidth="200" promptText="no comments" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Difficulty:" GridPane.rowIndex="4" />
-                        <Label text="Total distance (in m):" GridPane.rowIndex="5" />
-                        <Label text="Total time (in min):" GridPane.rowIndex="6" />
-                        <Label text="Rating:" GridPane.rowIndex="7" />
-                        <Slider fx:id="difficultySlider" blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Spinner fx:id="totalDistanceSpinner" editable="true" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Spinner fx:id="totalTimeSpinner" editable="true" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Slider fx:id="ratingSlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Button maxWidth="Infinity" onAction="#onCreateBtnClick" prefHeight="25.0" prefWidth="141.0" styleClass="button_create" text="Create" GridPane.rowIndex="9" />
-                        <Button maxWidth="Infinity" onAction="#onSaveBtnClick" prefHeight="25.0" prefWidth="91.0" styleClass="button_save_edit" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Button maxWidth="Infinity" onAction="#onDeleteBtnClick" prefHeight="26.0" prefWidth="185.0" styleClass="button_danger" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                        <Label text="Date/Time:" GridPane.rowIndex="1" />
+                        <Label text="Comment:" GridPane.rowIndex="2" />
+                        <TextField fx:id="commentTextField" prefWidth="200" promptText="no comments" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Difficulty:" GridPane.rowIndex="3" />
+                        <Label text="Total distance (in m):" GridPane.rowIndex="4" />
+                        <Label text="Total time (in min):" GridPane.rowIndex="5" />
+                        <Label text="Rating:" GridPane.rowIndex="6" />
+                        <Slider fx:id="difficultySlider" blockIncrement="1.0" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Spinner fx:id="totalDistanceSpinner" editable="true" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <Spinner fx:id="totalTimeSpinner" editable="true" prefHeight="26.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Slider fx:id="ratingSlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Button maxWidth="Infinity" onAction="#onCreateBtnClick" prefHeight="25.0" prefWidth="141.0" styleClass="button_create" text="Create" GridPane.rowIndex="8" />
+                        <Button maxWidth="Infinity" onAction="#onSaveBtnClick" prefHeight="26.0" prefWidth="288.0" styleClass="button_save_edit" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Button maxWidth="Infinity" onAction="#onDeleteBtnClick" prefHeight="26.0" prefWidth="185.0" styleClass="button_danger" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="8">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Label fx:id="errorLabel" styleClass="label-error" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                        <TextField fx:id="dateTextField" prefWidth="200.0" promptText="2024-02-12" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="errorLabel" styleClass="label-error" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                        <TextField fx:id="dateTextField" prefWidth="200.0" promptText="2024-02-12" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

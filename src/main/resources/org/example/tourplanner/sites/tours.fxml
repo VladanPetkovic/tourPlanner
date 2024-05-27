@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="920.0" styleClass="contentOfPage" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="contentOfPage" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.ToursController">
    <children>
        <!-- INCLUDE NAVIGATION BAR -->
       <fx:include source="components/navigation.fxml" />
-      <HBox prefHeight="629.0" prefWidth="920.0">
+      <HBox prefHeight="729.0" prefWidth="1000.0">
          <children>
             <VBox prefHeight="663.0" prefWidth="298.0" styleClass="contentOfPage">
                <children>
@@ -50,33 +50,35 @@
                      </padding>
                   </GridPane>
                   <Label prefHeight="46.0" prefWidth="298.0" styleClass="label-white" text="Tour-List:" />
-                  <ListView fx:id="tourListView" prefHeight="371.0" prefWidth="298.0" />
+                  <ListView fx:id="tourListView" prefHeight="473.0" prefWidth="298.0" />
                </children>
             </VBox>
-            <VBox prefHeight="623.0" prefWidth="622.0">
+            <VBox prefHeight="713.0" prefWidth="702.0">
                <children>
-                  <Pane prefHeight="390.0" prefWidth="622.0">
+                  <Pane prefHeight="442.0" prefWidth="702.0">
                      <children>
-                        <ImageView fitHeight="614.0" fitWidth="614.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="691.0" fitWidth="724.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/card.png" />
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <GridPane prefHeight="249.0" prefWidth="622.0" styleClass="contentOfPage">
+                  <GridPane prefHeight="317.0" prefWidth="702.0" styleClass="contentOfPage">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.1999755859375" minWidth="10.0" prefWidth="140.0000244140625" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.599983215332" minWidth="10.0" prefWidth="437.5999755859375" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.1999755859375" minWidth="10.0" prefWidth="166.39998779296874" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.599983215332" minWidth="10.0" prefWidth="515.2000122070312" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="41.333343505859375" minHeight="10.0" prefHeight="36.66668701171875" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="31.666646321614586" minHeight="10.0" prefHeight="30.333333333333336" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="37.33331298828125" minHeight="10.0" prefHeight="24.33333333333333" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="36.333320617675795" minHeight="10.0" prefHeight="28.666687011718764" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="37.33331298828125" minHeight="10.0" prefHeight="25.799999999999997" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="36.333320617675795" minHeight="10.0" prefHeight="29.799999999999997" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="35.666687011718764" minHeight="10.0" prefHeight="28.33330535888672" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="26.999979654947907" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="34.33331298828125" minHeight="10.0" prefHeight="28.333292643229157" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="24.3333740234375" minHeight="10.0" prefHeight="23.66668701171875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.3333740234375" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="24.3333740234375" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label styleClass="label-white" text="Tour-Name:" GridPane.rowIndex="1" />
@@ -129,6 +131,10 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Label styleClass="label-white" text="Popularity:" GridPane.rowIndex="8" />
+                        <Label styleClass="label-white" text="Child-Friendliness:" GridPane.rowIndex="9" />
+                        <Label fx:id="popularityLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="childFriendLinessLabel" styleClass="label-white" text="..." GridPane.columnIndex="1" GridPane.rowIndex="9" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

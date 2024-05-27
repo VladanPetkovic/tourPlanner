@@ -19,7 +19,7 @@ public class Main extends Application
     {
         Main.stage = stage;
         Parent root = FXMLDependencyInjection.load("sites/tours.fxml");
-        Scene scene = new Scene(root, 920, 700);
+        Scene scene = new Scene(root, 1000, 800);
         stage.setScene(scene);
         stage.show();
     }
