@@ -25,6 +25,7 @@ module org.example.tourplanner {
     requires itextpdf;
     requires javafx.swing;
     requires org.apache.logging.log4j;
+    requires spring.data.commons;
 
     opens org.example.tourplanner to javafx.fxml;
     opens org.example.tourplanner.backend;

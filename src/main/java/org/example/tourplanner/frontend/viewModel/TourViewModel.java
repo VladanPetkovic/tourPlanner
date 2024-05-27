@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
+import org.example.tourplanner.frontend.model.TourAverage;
+import org.example.tourplanner.frontend.service.LogService;
 import org.example.tourplanner.frontend.service.TourService;
 
 import java.util.ArrayList;
@@ -30,11 +32,13 @@ public class TourViewModel {
     private Tour selectedTour;
     private boolean hasSelectedTour = false;
     private TourService tourService;
+    private LogService logService;
     private boolean reportType;     // false = tourReport; true = summarizeReport
 
     public TourViewModel() {
         // TODO: maybe change the response-handling to be better (what happens when server is inactive?)
         tourService = new TourService();
+        logService = new LogService();
         Tour[] receivedTours = tourService.getTours().block();
         if (receivedTours != null) {
             Collections.addAll(tourData, receivedTours);
@@ -43,6 +47,33 @@ public class TourViewModel {
 
     public void addListener(FocusChangedListener listener) {
         this.focusChangedListenerList.add(listener);
+    }
+
+    public String getPopularityString() {
+        Long countOfLogs = logService.countLogsByTourId(selectedTour.getTourid()).block();
+        selectedTour.setPopularity(countOfLogs);
+        return selectedTour.getPopularity().toString();
+    }
+
+    public String getChildFriendLinessString() {
+        TourAverage tourAverage = logService.getAverages(selectedTour.getTourid()).block();
+
+        if (tourAverage == null) {
+            return "No Data";
+        }
+
+        if (tourAverage.getAverageDifficulty() == null ||
+                tourAverage.getAverageTotalTime() == null ||
+                tourAverage.getAverageTotalDistance() == null) {
+            return "No Data";
+        }
+
+        selectedTour.setChildFriendliness(
+                tourAverage.getAverageDifficulty(),
+                tourAverage.getAverageTotalTime(),
+                tourAverage.getAverageTotalDistance());
+
+        return selectedTour.getChildFriendliness().toString();
     }
 
     public void saveDataToList() {

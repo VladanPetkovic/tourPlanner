@@ -3,6 +3,7 @@ package org.example.tourplanner.frontend.service;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.frontend.model.Log;
+import org.example.tourplanner.frontend.model.TourAverage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -77,5 +78,25 @@ public class LogService {
                 .bodyToMono(Void.class)
                 .doOnSuccess(aVoid -> logger.info("Log deleted successfully ID: {}", id))
                 .doOnError(error -> logger.error("Failed to delete log with ID: {}", id, error));
+    }
+
+    public Mono<TourAverage> getAverages(long tourId) {
+        logger.info("Fetching averages for tour ID: {}", tourId);
+        return webClient.get()
+                .uri("/averages?tourId=" + tourId)
+                .retrieve()
+                .bodyToMono(TourAverage.class)
+                .doOnSuccess(averages -> logger.info("Fetched averages for tour ID: {}", tourId))
+                .doOnError(error -> logger.error("Failed to fetch averages for tour ID: {}", tourId, error));
+    }
+
+    public Mono<Long> countLogsByTourId(long tourId) {
+        logger.info("Fetching log count for tour ID: {}", tourId);
+        return webClient.get()
+                .uri("/count?tourId=" + tourId)
+                .retrieve()
+                .bodyToMono(Long.class)
+                .doOnSuccess(count -> logger.info("Fetched log count for tour ID: {}", tourId))
+                .doOnError(error -> logger.error("Failed to fetch log count for tour ID: {}", tourId, error));
     }
 }

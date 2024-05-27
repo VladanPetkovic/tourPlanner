@@ -79,28 +79,28 @@ public class Tour {
     }
 
     // TODO: good for unit-tests
-    public void setPopularity(int numberOfLogs) {
-        switch (numberOfLogs) {
-            case 0:
-                this.popularity = Popularity.UNKNOWN; break;
-            case 1:
-            case 2:
-                this.popularity = Popularity.UNPOPULAR; break;
-            case 3:
-            case 4:
-                this.popularity = Popularity.AVERAGE; break;
-            case 5:
-            case 6:
-            case 7:
-                this.popularity = Popularity.POPULAR; break;
-            default:
-                this.popularity = Popularity.VERY_POPULAR;
+    public void setPopularity(Long numberOfLogs) {
+        if (numberOfLogs == 0) {
+            this.popularity = Popularity.UNKNOWN;
+        } else if (numberOfLogs == 1 || numberOfLogs == 2) {
+            this.popularity = Popularity.UNPOPULAR;
+        } else if (numberOfLogs == 3 || numberOfLogs == 4) {
+            this.popularity = Popularity.AVERAGE;
+        } else if (numberOfLogs == 5 || numberOfLogs == 6 || numberOfLogs == 7) {
+            this.popularity = Popularity.POPULAR;
+        } else {
+            this.popularity = Popularity.VERY_POPULAR;
         }
     }
 
     // TODO: good for unit-tests
     public void setChildFriendliness(double avgDifficulty, double avgTotalTime, double avgDistance) {
         double childFriendLiness = 2;
+
+        if (avgDifficulty == 0 && avgTotalTime == 0 && avgDistance == 0) {
+            setChildFriendliness(null);
+            return;
+        }
         
         // average difficulty
         if (avgDifficulty < 3) {

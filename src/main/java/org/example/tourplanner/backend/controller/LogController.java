@@ -3,6 +3,7 @@ package org.example.tourplanner.backend.controller;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.backend.model.Log;
+import org.example.tourplanner.backend.model.TourAverage;
 import org.example.tourplanner.backend.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -95,6 +96,65 @@ public class LogController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             logger.error("Failed to delete log with ID: {}", id, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /** NOT NEEDED EXPLICITLY, BUT STILL IMPLEMENTED **/
+    @GetMapping("/average-difficulty")
+    public ResponseEntity<Double> getAverageDifficulty(@RequestParam Long tourId) {
+        logger.info("Fetching average difficulty for tour ID: {}", tourId);
+        try {
+            Double averageDifficulty = logService.getAverageDifficulty(tourId);
+            return new ResponseEntity<>(averageDifficulty, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve average difficulty for tour ID: {}", tourId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/average-total-time")
+    public ResponseEntity<Double> getAverageTotalTime(@RequestParam Long tourId) {
+        logger.info("Fetching average total time for tour ID: {}", tourId);
+        try {
+            Double averageDifficulty = logService.getAverageTotalTime(tourId);
+            return new ResponseEntity<>(averageDifficulty, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve average total time for tour ID: {}", tourId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/average-total-distance")
+    public ResponseEntity<Double> getAverageTotalDistance(@RequestParam Long tourId) {
+        logger.info("Fetching average total distance for tour ID: {}", tourId);
+        try {
+            Double averageDifficulty = logService.getAverageTotalDistance(tourId);
+            return new ResponseEntity<>(averageDifficulty, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve average total distance for tour ID: {}", tourId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/averages")
+    public ResponseEntity<TourAverage> getAverages(@RequestParam Long tourId) {
+        logger.info("Fetching averages for tour ID: {}", tourId);
+        try {
+            TourAverage averages = logService.getAverages(tourId);
+            return new ResponseEntity<>(averages, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve averages for tour ID: {}", tourId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countLogsByTourId(@RequestParam Long tourId) {
+        logger.info("Fetching log count for tour ID: {}", tourId);
+        try {
+            Long count = logService.countLogsByTourId(tourId);
+            return new ResponseEntity<>(count, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve log count for tour ID: {}", tourId, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.backend.model.Log;
 import org.example.tourplanner.backend.model.Tour;
+import org.example.tourplanner.backend.model.TourAverage;
 import org.example.tourplanner.backend.repository.LogRepository;
 import org.example.tourplanner.backend.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,23 @@ public class LogService {
             logger.error("Failed to delete log ID: {}", id, e);
             throw e;
         }
+    }
+
+    public Double getAverageDifficulty(Long tourId) {
+        return logRepository.findAverageDifficultyByTourId(tourId);
+    }
+    public Double getAverageTotalTime(Long tourId) {
+        return logRepository.findAverageTotalTimeByTourId(tourId);
+    }
+    public Double getAverageTotalDistance(Long tourId) {
+        return logRepository.findAverageDistanceByTourId(tourId);
+    }
+
+    public TourAverage getAverages(Long tourId) {
+        return logRepository.findAveragesByTourId(tourId);
+    }
+
+    public Long countLogsByTourId(Long tourId) {
+        return logRepository.countLogsByTourId(tourId);
     }
 }

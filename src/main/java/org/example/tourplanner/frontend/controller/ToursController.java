@@ -77,6 +77,8 @@ public class ToursController implements Initializable {
                 transportTypeLabel.setText(newValue.getTransportType().name());
                 tourDistanceLabel.setText(String.valueOf(newValue.getDistance()));
                 estimatedTimeLabel.setText(String.valueOf(newValue.getEstimated_time()));
+                popularityLabel.setText(viewModel.getPopularityString());
+                childFriendLinessLabel.setText(viewModel.getChildFriendLinessString());
             } else {
                 tourNameLabel.setText("...");
                 descriptionLabel.setText("...");
@@ -85,6 +87,8 @@ public class ToursController implements Initializable {
                 transportTypeLabel.setText("...");
                 tourDistanceLabel.setText("...");
                 estimatedTimeLabel.setText("...");
+                popularityLabel.setText("...");
+                childFriendLinessLabel.setText("...");
             }
         });
     }
