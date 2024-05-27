@@ -14,7 +14,7 @@ import static org.example.tourplanner.frontend.controller.SwitchScene.switchScen
 
 public class ToursEditCreateController implements Initializable {
     private final TourViewModel viewModel;
-    private final String[] transportTypeItems = {"Bike", "Hike", "Running", "Vacation"};
+    private final String[] transportTypeItems = {"BIKE", "HIKE", "RUNNING", "VACATION"};
     public TextField nameTextField;
     public TextField fromTextField;
     public TextField toTextField;

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="920.0" styleClass="navigation" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.NavigationController">
+<GridPane maxHeight="70.0" maxWidth="1.7976931348623157E308" minHeight="70.0" prefHeight="70.0" prefWidth="920.0" styleClass="navigation" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.frontend.controller.NavigationController">
    <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="423.33335367838544" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="453.3334045410156" minWidth="30.0" prefWidth="69.33335367838538" />

@@ -50,7 +50,7 @@ public class TourViewModel {
                 this.currentTourDescription.get(),
                 this.currentFrom.get(),
                 this.currentTo.get(),
-                this.currentTransportType.get(),
+                Tour.getTransportTypeInteger(this.currentTransportType.get()),
                 this.currentTourDistance.get(),
                 this.currentEstimatedTime.get(),
                 this.currentRouteInformation.get());
@@ -68,7 +68,7 @@ public class TourViewModel {
         selectedTour.setDescription(this.currentTourDescription.get());
         selectedTour.setFromPlace(this.currentFrom.get());
         selectedTour.setToPlace(this.currentTo.get());
-        selectedTour.initTransportType(this.currentTransportType.get());
+        selectedTour.setTransport_type(Tour.getTransportTypeInteger(this.currentTransportType.get()));
         selectedTour.setDistance(this.currentTourDistance.get());
         selectedTour.setEstimated_time(this.currentEstimatedTime.get());
         selectedTour.setRoute_information(this.currentRouteInformation.get());

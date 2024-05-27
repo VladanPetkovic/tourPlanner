@@ -17,18 +17,18 @@ public class Export {
     public boolean export(List<Tour> tours) {
         try (FileWriter writer = new FileWriter(this.directoryPath + "\\" + createFileName())) {
             // Write CSV header
-            writer.append("name,description,fromPlace,toPlace,transport_type,distance,estimated_time,route_information\n");
+            writer.append("name;description;fromPlace;toPlace;transport_type;distance;estimated_time;route_information\n");
 
             // Write tour data
             for (Tour tour : tours) {
-                writer.append(tour.getName()).append(",");
-                writer.append(tour.getDescription()).append(",");
-                writer.append(tour.getFromPlace()).append(",");
-                writer.append(tour.getToPlace()).append(",");
-                writer.append(String.valueOf(tour.getTransport_type())).append(",");
-                writer.append(tour.getDistance().toString()).append(",");
-                writer.append(tour.getEstimated_time().toString()).append(",");
-                writer.append(tour.getRoute_information()).append("\n");
+                writer.append("\"").append(tour.getName()).append("\"").append(";");
+                writer.append("\"").append(tour.getDescription()).append("\"").append(";");
+                writer.append("\"").append(tour.getFromPlace()).append("\"").append(";");
+                writer.append("\"").append(tour.getToPlace()).append("\"").append(";");
+                writer.append("\"").append(tour.getTransportType().toString()).append("\"").append(";");
+                writer.append(tour.getDistance().toString()).append(";");
+                writer.append(tour.getEstimated_time().toString()).append(";");
+                writer.append("\"").append(tour.getRoute_information()).append("\"").append("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -20,7 +20,7 @@ public class Import {
      public List<Tour> importToursFromCSV() {
         List<Tour> tours = new ArrayList<>();
         String line;
-        String csvSplitBy = ",";
+        String csvSplitBy = ";";
 
         try (BufferedReader br = new BufferedReader(new FileReader(this.filePath))) {
             // skipping header
@@ -40,13 +40,20 @@ public class Import {
 
     private Tour getTourFromLine(String line, String csvSplitBy) {
         String[] tourData = line.split(csvSplitBy);
+        int[] indicesToClean = {0, 1, 2, 3, 4, 7};
+
+        for (int index : indicesToClean) {
+            if (tourData[index].startsWith("\"") && tourData[index].endsWith("\"")) {
+                tourData[index] = tourData[index].substring(1, tourData[index].length() - 1);
+            }
+        }
 
         return new Tour(
                 tourData[0],
                 tourData[1],
                 tourData[2],
                 tourData[3],
-                getTransportType(Integer.parseInt(tourData[4])).toString(),
+                Tour.getTransportTypeInteger(tourData[4]),
                 Double.parseDouble(tourData[5]),
                 Integer.parseInt(tourData[6]),
                 tourData[7]

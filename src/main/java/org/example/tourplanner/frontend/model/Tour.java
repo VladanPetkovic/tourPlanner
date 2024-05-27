@@ -23,7 +23,7 @@ public class Tour {
             String description,
             String fromPlace,
             String toPlace,
-            String transport_type,
+            Integer transport_type,
             Double distance,
             Integer estimated_time,
             String route_information) {
@@ -35,7 +35,7 @@ public class Tour {
         setDescription(description);
         setFromPlace(fromPlace);
         setToPlace(toPlace);
-        initTransportType(transport_type);
+        setTransport_type(transport_type);
         setDistance(distance);
         setEstimated_time(estimated_time);
         setRoute_information(route_information);
@@ -54,16 +54,13 @@ public class Tour {
         this.route_information = other.route_information;
     }
 
-    public void initTransportType(String transportTypeValue) {
-        switch (transportTypeValue) {
-            case "Bike": setTransport_type(TransportType.BIKE.ordinal());
-                break;
-            case "Hike": setTransport_type(TransportType.HIKE.ordinal());
-                break;
-            case "Running": setTransport_type(TransportType.RUNNING.ordinal());
-                break;
-            default: setTransport_type(TransportType.VACATION.ordinal());
-        }
+    public static int getTransportTypeInteger(String transportTypeValue) {
+        return switch (transportTypeValue) {
+            case "BIKE" -> TransportType.BIKE.ordinal();
+            case "HIKE" -> TransportType.HIKE.ordinal();
+            case "RUNNING" -> TransportType.RUNNING.ordinal();
+            default -> TransportType.VACATION.ordinal();
+        };
     }
 
     public TransportType getTransportType() {
@@ -76,6 +73,15 @@ public class Tour {
             case 1 -> TransportType.HIKE;
             case 2 -> TransportType.RUNNING;
             default -> TransportType.VACATION;
+        };
+    }
+
+    public static int getTransportTypeInteger(int transport_type) {
+        return switch (transport_type) {
+            case 0 -> TransportType.BIKE.ordinal();
+            case 1 -> TransportType.HIKE.ordinal();
+            case 2 -> TransportType.RUNNING.ordinal();
+            default -> TransportType.VACATION.ordinal();
         };
     }
 
