@@ -23,6 +23,17 @@ public class TourController {
         this.tourService = tourService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<Tour>> getAllTours(@RequestParam(required = false) String search) {
+        List<Tour> tours;
+        if (search != null && !search.isEmpty()) {
+            tours = tourService.findByNameContaining(search);
+        } else {
+            tours = tourService.findTop100ByOrderByIdDesc();
+        }
+        return new ResponseEntity<>(tours, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Tour> saveTour(@RequestBody Tour tour) {
         logger.info("Attempting to create a new tour: {}", tour.getName());

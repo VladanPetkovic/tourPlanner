@@ -20,6 +20,16 @@ public class TourService {
         this.tourRepository = tourRepository;
     }
 
+    public List<Tour> findByNameContaining(String name) {
+        logger.info("Searching for tours containing: {}", name);
+        return tourRepository.findByNameContaining(name);
+    }
+
+    public List<Tour> findTop100ByOrderByIdDesc() {
+        logger.info("Fetching the top 100 latest tours");
+        return tourRepository.findTop100ByOrderByIdDesc();
+    }
+
     /**
      * Save a tour.
      * @param tour the tour to save

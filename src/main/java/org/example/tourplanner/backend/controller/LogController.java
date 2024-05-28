@@ -24,6 +24,12 @@ public class LogController {
         this.logService = logService;
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Log>> searchLogsByComment(@RequestParam String comment) {
+        List<Log> logs = logService.findByCommentContaining(comment);
+        return new ResponseEntity<>(logs, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Log> saveLog(@RequestParam Long tourId, @RequestBody Log log) {
         logger.info("Attempting to save a new log for tour ID: {}", tourId);
