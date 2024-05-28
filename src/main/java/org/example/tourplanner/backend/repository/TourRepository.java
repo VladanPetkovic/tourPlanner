@@ -11,5 +11,5 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
     @Query("SELECT t FROM Tour t WHERE lower(t.name) LIKE lower(concat('%', :name, '%'))")
     List<Tour> findByNameContaining(@Param("name") String name);
 
-    List<Tour> findTop100ByOrderByIdDesc();
+    List<Tour> findTop100ByOrderByTouridDesc();
 }

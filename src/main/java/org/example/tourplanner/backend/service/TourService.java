@@ -27,7 +27,7 @@ public class TourService {
 
     public List<Tour> findTop100ByOrderByIdDesc() {
         logger.info("Fetching the top 100 latest tours");
-        return tourRepository.findTop100ByOrderByIdDesc();
+        return tourRepository.findTop100ByOrderByTouridDesc();
     }
 
     /**

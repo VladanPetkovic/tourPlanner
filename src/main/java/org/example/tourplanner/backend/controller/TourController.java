@@ -23,8 +23,8 @@ public class TourController {
         this.tourService = tourService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Tour>> getAllTours(@RequestParam(required = false) String search) {
+    @GetMapping("/search")
+    public ResponseEntity<List<Tour>> searchTourByString(@RequestParam(required = false) String search) {
         List<Tour> tours;
         if (search != null && !search.isEmpty()) {
             tours = tourService.findByNameContaining(search);
