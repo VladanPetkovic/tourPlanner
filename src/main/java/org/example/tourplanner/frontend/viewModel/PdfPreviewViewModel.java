@@ -7,6 +7,8 @@ import org.example.tourplanner.frontend.app.Report;
 import org.example.tourplanner.frontend.app.SummarizeReport;
 import org.example.tourplanner.frontend.app.TourReport;
 import org.example.tourplanner.frontend.model.Tour;
+import org.example.tourplanner.frontend.model.TourAverage;
+import org.example.tourplanner.frontend.service.LogService;
 import org.example.tourplanner.frontend.service.TourService;
 
 import java.util.ArrayList;
@@ -16,20 +18,26 @@ import java.util.List;
 @Setter
 public class PdfPreviewViewModel {
     private TourService tourService;
+    private LogService logService;
     private Report report;
-    private List<Tour> tours = new ArrayList<>();
+    private boolean reportType;
+    private List<Tour> tours = new ArrayList<>();           // used in TourReport
+    private List<TourAverage> tourAverages = new ArrayList<>();    // used in SummarizeReport
 
     public PdfPreviewViewModel() {
         tourService = new TourService();
+        logService = new LogService();
     }
 
     public void initializeReport(boolean reportType, Tour selectedTour) {
+        setReportType(reportType);
         tours = new ArrayList<>();
+
         if (reportType) {
             report = new SummarizeReport();
-            Tour[] receivedTours = tourService.getTours().block();
-            if (receivedTours != null) {
-                tours = List.of(receivedTours);
+            TourAverage[] receivedAverages = logService.getAverages().block();
+            if (receivedAverages != null) {
+                tourAverages = List.of(receivedAverages);
             }
         } else {
             report = new TourReport();
@@ -45,6 +53,10 @@ public class PdfPreviewViewModel {
 
     public void exportReport(String directory) {
         report.setOptions(directory);
-        report.export(tours);
+        if (reportType) {
+            report.export(tourAverages);
+        } else {
+            report.export(tours);
+        }
     }
 }

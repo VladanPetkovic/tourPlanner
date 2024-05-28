@@ -1,17 +1,18 @@
 package org.example.tourplanner.frontend.app;
 
 import com.itextpdf.layout.Document;
-import org.example.tourplanner.frontend.model.Tour;
+import org.example.tourplanner.frontend.model.TourAverage;
+
 import java.io.IOException;
 import java.util.List;
 
-public class SummarizeReport extends Report {
+public class SummarizeReport extends Report<List<TourAverage>> {
     public SummarizeReport() {
         super();
     }
 
     @Override
-    protected Document buildDocument(List<Tour> tours) {
+    protected Document buildDocument(List<TourAverage> tours) {
         try {
             // create the document
             Document newDocument = new Document(pdfDocument);
@@ -27,7 +28,7 @@ public class SummarizeReport extends Report {
     }
 
     @Override
-    protected void setContent(Document document, List<Tour> tours) throws IOException {
+    protected void setContent(Document document, List<TourAverage> tours) throws IOException {
         setTitle(document, "Summarize-Report");
 
         if (tours == null) {

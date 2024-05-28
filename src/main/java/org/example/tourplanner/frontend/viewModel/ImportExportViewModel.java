@@ -2,8 +2,6 @@ package org.example.tourplanner.frontend.viewModel;
 
 import org.example.tourplanner.frontend.app.Export;
 import org.example.tourplanner.frontend.app.Import;
-import org.example.tourplanner.frontend.app.SummarizeReport;
-import org.example.tourplanner.frontend.app.TourReport;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.service.TourService;
 

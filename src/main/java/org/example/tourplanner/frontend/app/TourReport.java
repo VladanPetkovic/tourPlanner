@@ -5,7 +5,7 @@ import org.example.tourplanner.frontend.model.Tour;
 import java.io.IOException;
 import java.util.List;
 
-public class TourReport extends Report {
+public class TourReport extends Report<List<Tour>> {
     public TourReport() {
         super();
     }

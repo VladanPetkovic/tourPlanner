@@ -10,7 +10,6 @@ import javafx.embed.swing.SwingFXUtils;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
-import org.example.tourplanner.frontend.model.Tour;
 import com.itextpdf.layout.Document;
 import javafx.scene.image.Image;
 
@@ -21,19 +20,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
-public abstract class Report {
+public abstract class Report<T> {
     protected final float MARGIN = 50;
     protected String destinationFolder = "";
     protected String fileName = "";
     protected PdfDocument pdfDocument;
 
-    protected abstract Document buildDocument(List<Tour> tours);
-    protected abstract void setContent(Document document, List<Tour> tours) throws IOException;
+    protected abstract Document buildDocument(T t);
+    protected abstract void setContent(Document document, T t) throws IOException;
 
-    public ArrayList<Image> getPreviewImages(List<Tour> tours) {
+    public ArrayList<Image> getPreviewImages(T t) {
         ArrayList<Image> images = new ArrayList<>();
 
         createBinDirectory();
@@ -46,7 +43,7 @@ public abstract class Report {
         }
 
         pdfDocument = new PdfDocument(writer);
-        Document document = buildDocument(tours);
+        Document document = buildDocument(t);
         // Close the PDF document
         document.close();
         pdfDocument.close();
@@ -71,7 +68,7 @@ public abstract class Report {
 
         return images;
     }
-    public void export(List<Tour> tours) {
+    public void export(T t) {
         // Create a new PDF document
         File file = new File(this.destinationFolder + "\\" + this.fileName);
         FileOutputStream fos = null;
@@ -83,7 +80,7 @@ public abstract class Report {
 
         PdfWriter writer = new PdfWriter(fos);
         pdfDocument = new PdfDocument(writer);
-        Document document = buildDocument(tours);
+        Document document = buildDocument(t);
 
         if (document == null) {
             return;

@@ -3,6 +3,7 @@ package org.example.tourplanner.backend.controller;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.backend.model.Log;
+import org.example.tourplanner.backend.model.Tour;
 import org.example.tourplanner.backend.model.TourAverage;
 import org.example.tourplanner.backend.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +150,18 @@ public class LogController {
             return new ResponseEntity<>(averages, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Failed to retrieve averages for tour ID: {}", tourId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/averagesAll")
+    public ResponseEntity<List<TourAverage>> getAverages() {
+        logger.info("Fetching averages for all tours.");
+        try {
+            List<TourAverage> averages = logService.getAverages();
+            return new ResponseEntity<>(averages, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve averages for all tours.", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

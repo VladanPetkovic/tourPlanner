@@ -90,6 +90,16 @@ public class LogService {
                 .doOnError(error -> logger.error("Failed to fetch averages for tour ID: {}", tourId, error));
     }
 
+    public Mono<TourAverage[]> getAverages() {
+        logger.info("Fetching averages for all tours.");
+        return webClient.get()
+                .uri("/averagesAll")
+                .retrieve()
+                .bodyToMono(TourAverage[].class)
+                .doOnSuccess(averages -> logger.info("Fetched averages for all tours."))
+                .doOnError(error -> logger.error("Failed to fetch averages for all tours.", error));
+    }
+
     public Mono<Long> countLogsByTourId(long tourId) {
         logger.info("Fetching log count for tour ID: {}", tourId);
         return webClient.get()

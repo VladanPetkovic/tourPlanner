@@ -113,6 +113,10 @@ public class LogService {
         return logRepository.findAveragesByTourId(tourId);
     }
 
+    public List<TourAverage> getAverages() {
+        return logRepository.findAveragesForAllTours();
+    }
+
     public Long countLogsByTourId(Long tourId) {
         return logRepository.countLogsByTourId(tourId);
     }

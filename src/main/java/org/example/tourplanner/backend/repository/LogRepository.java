@@ -23,9 +23,32 @@ public interface LogRepository extends JpaRepository<Log, Long> {
     @Query("SELECT AVG(l.totalDistance) FROM Log l WHERE l.tour.tourid = :tourId")
     Double findAverageDistanceByTourId(@Param("tourId") Long tourId);
 
-    @Query("SELECT new org.example.tourplanner.backend.model.TourAverage(AVG(l.difficulty), AVG(l.totalTime), AVG(l.totalDistance)) " +
-            "FROM Log l WHERE l.tour.tourid = :tourId")
+    @Query("SELECT new org.example.tourplanner.backend.model.TourAverage(" +
+            "l.tour.tourid, " +
+            "l.tour.name, " +
+            "l.tour.fromPlace, " +
+            "l.tour.toPlace, " +
+            "AVG(l.difficulty), " +
+            "AVG(l.totalTime), " +
+            "AVG(l.totalDistance), " +
+            "AVG(l.rating)) " +
+            "FROM Log l " +
+            "GROUP BY l.tour.tourid, l.tour.name, l.tour.fromPlace, l.tour.toPlace " +
+            "HAVING l.tour.tourid = :tourId")
     TourAverage findAveragesByTourId(@Param("tourId") Long tourId);
+
+    @Query("SELECT new org.example.tourplanner.backend.model.TourAverage(" +
+            "l.tour.tourid, " +
+            "l.tour.name, " +
+            "l.tour.fromPlace, " +
+            "l.tour.toPlace, " +
+            "AVG(l.difficulty), " +
+            "AVG(l.totalTime), " +
+            "AVG(l.totalDistance), " +
+            "AVG(l.rating)) " +
+            "FROM Log l " +
+            "GROUP BY l.tour.tourid, l.tour.name, l.tour.fromPlace, l.tour.toPlace")
+    List<TourAverage> findAveragesForAllTours();
 
     @Query("SELECT COUNT(l) FROM Log l WHERE l.tour.tourid = :tourId")
     Long countLogsByTourId(@Param("tourId") Long tourId);
