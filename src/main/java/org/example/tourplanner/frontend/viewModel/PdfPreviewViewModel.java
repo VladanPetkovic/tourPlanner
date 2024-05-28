@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.example.tourplanner.frontend.app.Report;
 import org.example.tourplanner.frontend.app.SummarizeReport;
 import org.example.tourplanner.frontend.app.TourReport;
+import org.example.tourplanner.frontend.model.Log;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.model.TourAverage;
 import org.example.tourplanner.frontend.service.LogService;
@@ -21,8 +22,8 @@ public class PdfPreviewViewModel {
     private LogService logService;
     private Report report;
     private boolean reportType;
-    private List<Tour> tours = new ArrayList<>();           // used in TourReport
-    private List<TourAverage> tourAverages = new ArrayList<>();    // used in SummarizeReport
+    private Tour tour = null;                                       // used in TourReport
+    private List<TourAverage> tourAverages = new ArrayList<>();     // used in SummarizeReport
 
     public PdfPreviewViewModel() {
         tourService = new TourService();
@@ -31,9 +32,8 @@ public class PdfPreviewViewModel {
 
     public void initializeReport(boolean reportType, Tour selectedTour) {
         setReportType(reportType);
-        tours = new ArrayList<>();
 
-        if (reportType) {
+        if (isReportType()) {
             report = new SummarizeReport();
             TourAverage[] receivedAverages = logService.getAverages().block();
             if (receivedAverages != null) {
@@ -42,21 +42,29 @@ public class PdfPreviewViewModel {
         } else {
             report = new TourReport();
             if (selectedTour != null) {
-                tours.add(selectedTour);
+                Log[] receivedLogs = logService.getLogsByTourId(selectedTour.getTourid()).block();
+                tour = selectedTour;
+                if (receivedLogs != null) {
+                    tour.setLogs(List.of(receivedLogs));
+                }
             }
         }
     }
 
     public ArrayList<Image> getPreviewImages() {
-        return report.getPreviewImages(tours);
+        if (isReportType()) {
+            return report.getPreviewImages(tourAverages);
+        } else {
+            return report.getPreviewImages(tour);
+        }
     }
 
     public void exportReport(String directory) {
         report.setOptions(directory);
-        if (reportType) {
+        if (isReportType()) {
             report.export(tourAverages);
         } else {
-            report.export(tours);
+            report.export(tour);
         }
     }
 }

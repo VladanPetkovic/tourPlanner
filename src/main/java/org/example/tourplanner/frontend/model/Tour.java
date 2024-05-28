@@ -3,6 +3,7 @@ package org.example.tourplanner.frontend.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -19,6 +20,7 @@ public class Tour {
     private String route_information;
     private Popularity popularity;
     private ChildFriendliness childFriendliness;
+    private List<Log> logs;
 
     public Tour(
             String name,
