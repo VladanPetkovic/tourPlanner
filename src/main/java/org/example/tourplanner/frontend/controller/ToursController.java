@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.viewModel.TourViewModel;
@@ -27,6 +28,7 @@ public class ToursController implements Initializable {
     public Label estimatedTimeLabel;
     public Label popularityLabel;
     public Label childFriendLinessLabel;
+    public TextField tourSearchTextField;
 
     public ToursController(TourViewModel tourViewModel) {
         this.viewModel = tourViewModel;
@@ -126,6 +128,6 @@ public class ToursController implements Initializable {
     }
 
     public void onSearchBtnClick(ActionEvent actionEvent) {
-        // some bridge to search logic
+        this.viewModel.getTours(tourSearchTextField.getText());
     }
 }

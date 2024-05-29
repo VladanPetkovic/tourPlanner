@@ -11,7 +11,7 @@ public class TourTests {
             "A beautiful city tour",
             "Stephansplatz",
             "Reumannplatz",
-            "Hike",
+1,
             10.0, // Distance in km
             7200, // Estimated time in seconds
             "Explore the city with a walk through the city"

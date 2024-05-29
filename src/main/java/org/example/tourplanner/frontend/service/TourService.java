@@ -50,6 +50,16 @@ public class TourService {
                 .doOnError(error -> logger.error("Failed to fetch tours", error));
     }
 
+    public Mono<Tour[]> getTours(String searchString) {
+        logger.info("Fetching all tours");
+        return webClient.get()
+                .uri("/search?search=" + searchString)
+                .retrieve()
+                .bodyToMono(Tour[].class)
+                .doOnSuccess(tours -> logger.info("Searching for tours, count: {}", tours.length))
+                .doOnError(error -> logger.error("Failed to search for tours", error));
+    }
+
     public Mono<Tour> getTour(long id) {
         logger.info("Fetching tour by ID: {}", id);
         return webClient.get()

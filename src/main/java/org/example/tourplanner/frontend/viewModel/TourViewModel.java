@@ -36,11 +36,14 @@ public class TourViewModel {
     private boolean reportType;     // false = tourReport; true = summarizeReport
 
     public TourViewModel() {
-        // TODO: maybe change the response-handling to be better (what happens when server is inactive?)
         tourService = new TourService();
         logService = new LogService();
-        Tour[] receivedTours = tourService.getTours().block();
+    }
+
+    public void getTours(String searchString) {
+        Tour[] receivedTours = tourService.getTours(searchString).block();
         if (receivedTours != null) {
+            tourData.clear();
             Collections.addAll(tourData, receivedTours);
         }
     }

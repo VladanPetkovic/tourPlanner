@@ -34,7 +34,7 @@
                     </rowConstraints>
                      <children>
                         <Label prefHeight="29.0" prefWidth="282.0" styleClass="label-dark" text="Search for Tour:" GridPane.rowIndex="1" />
-                        <TextField alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="230.0" promptText="Type Tour-Name" GridPane.rowIndex="2" />
+                        <TextField fx:id="tourSearchTextField" alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="230.0" promptText="Type Tour-Name" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" onAction="#onSearchBtnClick" prefHeight="27.0" prefWidth="425.0" styleClass="button_search" text="Search" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets />
