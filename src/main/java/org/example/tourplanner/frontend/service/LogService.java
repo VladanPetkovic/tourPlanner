@@ -1,5 +1,6 @@
 package org.example.tourplanner.frontend.service;
 
+import lombok.Getter;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.frontend.model.Log;
@@ -8,10 +9,15 @@ import org.example.tourplanner.frontend.model.TourPopularity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.Sinks;
+
+import java.time.Duration;
 
 @Service
 public class LogService {
     private static final Logger logger = LogManager.getLogger(LogService.class);
+    @Getter
+    private final Sinks.Many<Boolean> loadingSink = Sinks.many().replay().latest();
     private static final String BASE_URL = "http://localhost:8080/logs";
 
     private final WebClient webClient;
@@ -46,8 +52,15 @@ public class LogService {
                 .uri("/search?comment=" + searchString + "&tour_id=" + tourId)
                 .retrieve()
                 .bodyToMono(Log[].class)
-                .doOnSuccess(logs -> logger.info("Fetched {} logs", logs.length))
-                .doOnError(error -> logger.error("Failed to fetch logs", error));
+                .flatMap(logs -> simulateLatency().then(Mono.just(logs)))
+                .doOnSuccess(logs -> {
+                    loadingSink.tryEmitNext(false);
+                    logger.info("Fetched {} logs", logs.length);
+                })
+                .doOnError(error -> {
+                    loadingSink.tryEmitNext(false);
+                    logger.error("Failed to fetch logs", error);
+                });
     }
 
     public Mono<Log[]> getLogsByTourId(Long tourId) {
@@ -140,4 +153,12 @@ public class LogService {
                 .doOnSuccess(count -> logger.info("Fetched log count for tour ID: {}", tourId))
                 .doOnError(error -> logger.error("Failed to fetch log count for tour ID: {}", tourId, error));
     }
+
+    private Mono<Void> simulateLatency() {
+        return Mono.delay(Duration.ofSeconds(0))
+                .then()
+                .doOnSubscribe(subscription -> logger.info("Simulating latency..."))
+                .doOnTerminate(() -> logger.info("Latency simulation completed"));
+    }
+
 }

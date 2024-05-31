@@ -1,11 +1,15 @@
 package org.example.tourplanner.frontend.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.viewModel.TourViewModel;
@@ -29,6 +33,8 @@ public class ToursController implements Initializable {
     public Label popularityLabel;
     public Label childFriendLinessLabel;
     public TextField tourSearchTextField;
+    public ImageView loadingImageView;
+    private Timeline timeline;
 
     public ToursController(TourViewModel tourViewModel) {
         this.viewModel = tourViewModel;
@@ -43,11 +49,41 @@ public class ToursController implements Initializable {
             }
         });
 
+        initLoadingAnimation();
+
         tourListView.setItems(viewModel.getTourData());
         displayTourNames();
         displayTourInformation();
     }
 
+    private void initLoadingAnimation() {
+        viewModel.getLoading().addListener((obs, wasLoading, isNowLoading) -> {
+            if (isNowLoading) {
+                loadingImageView.setVisible(true);
+                startRotationAnimation();
+            } else {
+                stopRotationAnimation();
+            }
+            loadingImageView.setVisible(isNowLoading);
+        });
+    }
+
+    private void startRotationAnimation() {
+        if (timeline == null) {
+            timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(0.04), event -> loadingImageView.setRotate(loadingImageView.getRotate() - 12))
+            );
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            timeline.play();
+        }
+    }
+
+    private void stopRotationAnimation() {
+        if (timeline != null) {
+            timeline.stop();
+            timeline = null;
+        }
+    }
     /**
      * This function displays only the tour-name in the listView.
      */

@@ -41,6 +41,11 @@
                            </GridPane.margin>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#onCreateNewTourBtnClick" prefHeight="26.0" prefWidth="458.0" styleClass="button_create" text="Create new Tour" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                        <ImageView fx:id="loadingImageView" fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../icons/loading.png" />
+                           </image>
+                        </ImageView>
                      </children>
                      <VBox.margin>
                         <Insets />

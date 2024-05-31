@@ -26,6 +26,7 @@ module org.example.tourplanner {
     requires javafx.swing;
     requires org.apache.logging.log4j;
     requires spring.data.commons;
+    requires org.reactivestreams;
 
     opens org.example.tourplanner to javafx.fxml;
     opens org.example.tourplanner.backend;

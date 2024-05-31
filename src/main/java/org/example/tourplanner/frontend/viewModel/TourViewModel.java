@@ -1,5 +1,6 @@
 package org.example.tourplanner.frontend.viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import org.example.tourplanner.frontend.model.TourAverage;
 import org.example.tourplanner.frontend.model.TourPopularity;
 import org.example.tourplanner.frontend.service.LogService;
 import org.example.tourplanner.frontend.service.TourService;
+import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +32,7 @@ public class TourViewModel {
     private final IntegerProperty currentEstimatedTime = new SimpleIntegerProperty(); // in seconds
     private final StringProperty currentRouteInformation = new SimpleStringProperty("");
     private final ObservableList<Tour> tourData = FXCollections.observableArrayList();
+    private final BooleanProperty loading = new SimpleBooleanProperty();
     private Tour selectedTour;
     private boolean hasSelectedTour = false;
     private TourService tourService;
@@ -39,14 +42,25 @@ public class TourViewModel {
     public TourViewModel() {
         tourService = new TourService();
         logService = new LogService();
+        // observe the loading state
+        Flux<Boolean> loadingFlux = tourService.getLoadingSink().asFlux();
+        loadingFlux.subscribe(isLoading -> Platform.runLater(() -> loading.set(isLoading)));
     }
 
     public void getTours(String searchString) {
-        Tour[] receivedTours = tourService.getTours(searchString).block();
-        if (receivedTours != null) {
-            tourData.clear();
-            Collections.addAll(tourData, receivedTours);
-        }
+        tourService.getTours(searchString)
+                .doOnSubscribe(subscription -> Platform.runLater(() -> loading.set(true)))
+                .doOnTerminate(() -> Platform.runLater(() -> loading.set(false)))
+                .subscribe(receivedTours -> {
+                    if (receivedTours != null) {
+                        Platform.runLater(() -> {
+                            tourData.clear();
+                            Collections.addAll(tourData, receivedTours);
+                        });
+                    }
+                }, error -> {
+                    Platform.runLater(() -> loading.set(false)); // Ensure loading is set to false on error
+                });
     }
 
     public void addListener(FocusChangedListener listener) {

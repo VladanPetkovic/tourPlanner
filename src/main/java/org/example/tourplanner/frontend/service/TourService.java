@@ -1,17 +1,22 @@
 package org.example.tourplanner.frontend.service;
 
+import lombok.Getter;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.frontend.model.Tour;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.Sinks;
 
+import java.time.Duration;
 import java.util.List;
 
 @Service
 public class TourService {
     private static final Logger logger = LogManager.getLogger(TourService.class);
+    @Getter
+    private final Sinks.Many<Boolean> loadingSink = Sinks.many().replay().latest();
     private static final String BASE_URL = "http://localhost:8080/tours";
 
     private final WebClient webClient;
@@ -56,8 +61,15 @@ public class TourService {
                 .uri("/search?search=" + searchString)
                 .retrieve()
                 .bodyToMono(Tour[].class)
-                .doOnSuccess(tours -> logger.info("Searching for tours, count: {}", tours.length))
-                .doOnError(error -> logger.error("Failed to search for tours", error));
+                .flatMap(tours -> simulateLatency().then(Mono.just(tours)))
+                .doOnSuccess(tours -> {
+                    loadingSink.tryEmitNext(false);
+                    logger.info("Searching for tours, count: {}", tours.length);
+                })
+                .doOnError(error -> {
+                    loadingSink.tryEmitNext(false);
+                    logger.error("Failed to search for tours", error);
+                });
     }
 
     public Mono<Tour> getTour(long id) {
@@ -89,5 +101,12 @@ public class TourService {
                 .bodyToMono(Void.class)
                 .doOnSuccess(aVoid -> logger.info("Tour deleted successfully ID: {}", id))
                 .doOnError(error -> logger.error("Failed to delete tour with ID: {}", id, error));
+    }
+
+    private Mono<Void> simulateLatency() {
+        return Mono.delay(Duration.ofSeconds(2))
+                .then()
+                .doOnSubscribe(subscription -> logger.info("Simulating latency..."))
+                .doOnTerminate(() -> logger.info("Latency simulation completed"));
     }
 }

@@ -1,5 +1,6 @@
 package org.example.tourplanner.frontend.viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Log;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.service.LogService;
+import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,11 +31,15 @@ public class LogViewModel {
     private final IntegerProperty currentTotalTime = new SimpleIntegerProperty();
     private final IntegerProperty currentRating = new SimpleIntegerProperty();
     private final ObservableList<Log> logData = FXCollections.observableArrayList();
+    private final BooleanProperty loading = new SimpleBooleanProperty();
     private Log selectedLog;
     private LogService logService;
 
     public LogViewModel() {
         logService = new LogService();
+        // observe the loading state
+        Flux<Boolean> loadingFlux = logService.getLoadingSink().asFlux();
+        loadingFlux.subscribe(isLoading -> Platform.runLater(() -> loading.set(isLoading)));
     }
 
     public void initializeData(Tour selectedTour) {
@@ -50,11 +56,19 @@ public class LogViewModel {
     }
 
     public void getLogs(String text, Long tour_id) {
-        Log[] receivedLogs = logService.getLogs(text, tour_id).block();
-        if (receivedLogs != null) {
-            logData.clear();
-            Collections.addAll(logData, receivedLogs);
-        }
+        logService.getLogs(text, tour_id)
+                .doOnSubscribe(subscription -> Platform.runLater(() -> loading.set(true)))
+                .doOnTerminate(() -> Platform.runLater(() -> loading.set(false)))
+                .subscribe(logs -> {
+                    if (logs != null) {
+                        Platform.runLater(() -> {
+                            logData.clear();
+                            Collections.addAll(logData, logs);
+                        });
+                    }
+                }, error -> {
+                    Platform.runLater(() -> loading.set(false)); // Ensure loading is set to false on error
+                });
     }
 
 
