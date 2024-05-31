@@ -24,6 +24,7 @@ public class ImportExportController {
 
     public void onImportBtnClick(ActionEvent actionEvent) {
         if (!checkInput(selectedFileLabel, fileNotSelectedLabel)) {
+            fileNotSelectedLabel.setText("File not selected!");
             successImportLabel.setVisible(false);
             return;
         }
@@ -32,11 +33,15 @@ public class ImportExportController {
         if (hasImported) {
             successImportLabel.setVisible(true);
             selectedFileLabel.setText("\"\"");
+        } else {
+            fileNotSelectedLabel.setText("An error has occurred!");
+            fileNotSelectedLabel.setVisible(true);
         }
     }
 
     public void onExportBtnClick(ActionEvent actionEvent) {
         if (!checkInput(selectedFolderLabel, folderNotSelectedLabel)) {
+            folderNotSelectedLabel.setText("Folder not selected!");
             successExportLabel.setVisible(false);
             return;
         }
@@ -45,6 +50,9 @@ public class ImportExportController {
         if (hasExported) {
             successExportLabel.setVisible(true);
             selectedFolderLabel.setText("\"\"");
+        } else {
+            folderNotSelectedLabel.setText("An error has occurred!");
+            folderNotSelectedLabel.setVisible(true);
         }
     }
 

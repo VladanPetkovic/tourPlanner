@@ -10,19 +10,9 @@ public class LogTests {
         System.out.println("Starting with Log-tests");
     }
 
-    @BeforeEach
-    void beforeEach() {
-        System.out.println("----------------------------------------------------------------------------");
-    }
-
-    @AfterEach
-    void afterEach() {
-        System.out.println("----------------------------------------------------------------------------");
-    }
-
     @AfterAll
     static void afterAll() {
-        System.out.println("Tour-tests finished");
+        System.out.println("Log-tests finished");
     }
 
     @Test

@@ -31,6 +31,11 @@ public class ImportExportViewModel {
         Import importTours = new Import(filePath);
         List<Tour> toursToImport = importTours.importToursFromCSV();
 
+        // an error has occurred
+        if (toursToImport == null) {
+            return false;
+        }
+
         Tour[] receivedTours = tourService.createTours(toursToImport).block();
         if (receivedTours != null) {
             return receivedTours.length > 0;

@@ -63,7 +63,8 @@ public class Tour {
             case "BIKE" -> TransportType.BIKE.ordinal();
             case "HIKE" -> TransportType.HIKE.ordinal();
             case "RUNNING" -> TransportType.RUNNING.ordinal();
-            default -> TransportType.VACATION.ordinal();
+            case "VACATION" -> TransportType.VACATION.ordinal();
+            default -> throw new IllegalStateException("Unexpected value: " + transportTypeValue);
         };
     }
 
@@ -76,26 +77,44 @@ public class Tour {
             case 0 -> TransportType.BIKE;
             case 1 -> TransportType.HIKE;
             case 2 -> TransportType.RUNNING;
-            default -> TransportType.VACATION;
+            case 3 -> TransportType.VACATION;
+            default -> throw new IllegalStateException("Unexpected value: " + transport_type);
         };
     }
 
-    // TODO: good for unit-tests
-    public void setPopularity(Long numberOfLogs) {
-        if (numberOfLogs == 0) {
+    public void setPopularity(TourPopularity tourPopularity) {
+        if (tourPopularity == null) {
             this.popularity = Popularity.UNKNOWN;
-        } else if (numberOfLogs == 1 || numberOfLogs == 2) {
-            this.popularity = Popularity.UNPOPULAR;
-        } else if (numberOfLogs == 3 || numberOfLogs == 4) {
-            this.popularity = Popularity.AVERAGE;
-        } else if (numberOfLogs == 5 || numberOfLogs == 6 || numberOfLogs == 7) {
-            this.popularity = Popularity.POPULAR;
-        } else {
-            this.popularity = Popularity.VERY_POPULAR;
+            return;
         }
+
+        int tempPopularity = 0;
+        Long maxLogCount = tourPopularity.getMaximumCountOfLogs();
+        Long logCountOfTour = tourPopularity.getCountOfLogsForTourId();
+        double relativeLogCount = (double) (logCountOfTour/maxLogCount);
+        Double averageRating = tourPopularity.getAverageRating();
+
+        // calculate by number of logs
+        if (relativeLogCount <= 0.25) {
+            tempPopularity = 1;
+        } else if (relativeLogCount <= 0.5) {
+            tempPopularity = 2;
+        } else if (relativeLogCount <= 0.75) {
+            tempPopularity = 3;
+        } else if (relativeLogCount <= 1) {
+            tempPopularity = 4;
+        }
+
+        // consider the average rating
+        if (averageRating < 2) {
+            tempPopularity = tempPopularity <= 2 ? Popularity.UNPOPULAR.ordinal() : tempPopularity - 2;
+        } else if (averageRating > 4) {
+            tempPopularity += 2;
+        }
+
+        this.popularity = Popularity.fromInteger(tempPopularity);
     }
 
-    // TODO: good for unit-tests
     public void setChildFriendliness(double avgDifficulty, double avgTotalTime, double avgDistance) {
         double childFriendLiness = 2;
 
@@ -103,14 +122,14 @@ public class Tour {
             setChildFriendliness(null);
             return;
         }
-        
+
         // average difficulty
         if (avgDifficulty < 3) {
             childFriendLiness++;
         } else if (avgDifficulty > 7) {
             childFriendLiness--;
         }
-        
+
         // avgTotalTime
         if (avgTotalTime < this.estimated_time * 0.9) {
             childFriendLiness++;

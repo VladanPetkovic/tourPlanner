@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.model.TourAverage;
+import org.example.tourplanner.frontend.model.TourPopularity;
 import org.example.tourplanner.frontend.service.LogService;
 import org.example.tourplanner.frontend.service.TourService;
 
@@ -53,8 +54,8 @@ public class TourViewModel {
     }
 
     public String getPopularityString() {
-        Long countOfLogs = logService.countLogsByTourId(selectedTour.getTourid()).block();
-        selectedTour.setPopularity(countOfLogs);
+        TourPopularity popularity = logService.getTourPopularity(selectedTour.getTourid()).block();
+        selectedTour.setPopularity(popularity);
         return selectedTour.getPopularity().toString();
     }
 

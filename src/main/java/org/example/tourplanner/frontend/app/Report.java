@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public abstract class Report<T> {
-    protected final float MARGIN = 50;
     protected String destinationFolder = "";
     protected String fileName = "";
     protected PdfDocument pdfDocument;

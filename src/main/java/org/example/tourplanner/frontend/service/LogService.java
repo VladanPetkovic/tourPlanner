@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.frontend.model.Log;
 import org.example.tourplanner.frontend.model.TourAverage;
+import org.example.tourplanner.frontend.model.TourPopularity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -98,6 +99,26 @@ public class LogService {
                 .bodyToMono(TourAverage[].class)
                 .doOnSuccess(averages -> logger.info("Fetched averages for all tours."))
                 .doOnError(error -> logger.error("Failed to fetch averages for all tours.", error));
+    }
+
+    public Mono<Double> getAverageRating(long tourId) {
+        logger.info("Fetching average rating for tour ID: {}", tourId);
+        return webClient.get()
+                .uri("/average-total-rating?tourId=" + tourId)
+                .retrieve()
+                .bodyToMono(Double.class)
+                .doOnSuccess(count -> logger.info("Fetched average rating for tour ID: {}", tourId))
+                .doOnError(error -> logger.error("Failed to fetch average rating for tour ID: {}", tourId, error));
+    }
+
+    public Mono<TourPopularity> getTourPopularity(long tourId) {
+        logger.info("Fetching popularity for tour ID: {}", tourId);
+        return webClient.get()
+                .uri("/popularity?tourId=" + tourId)
+                .retrieve()
+                .bodyToMono(TourPopularity.class)
+                .doOnSuccess(count -> logger.info("Fetched popularity for tour ID: {}", tourId))
+                .doOnError(error -> logger.error("Failed to fetch popularity for tour ID: {}", tourId, error));
     }
 
     public Mono<Long> countLogsByTourId(long tourId) {

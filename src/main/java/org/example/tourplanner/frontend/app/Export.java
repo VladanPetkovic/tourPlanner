@@ -15,6 +15,10 @@ public class Export {
     }
 
     public boolean export(List<Tour> tours) {
+        if (tours.isEmpty()) {
+            return false;
+        }
+
         try (FileWriter writer = new FileWriter(this.directoryPath + "\\" + createFileName())) {
             // Write CSV header
             writer.append("name;description;fromPlace;toPlace;transport_type;distance;estimated_time;route_information\n");

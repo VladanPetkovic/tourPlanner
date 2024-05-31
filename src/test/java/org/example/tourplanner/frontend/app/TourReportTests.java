@@ -2,8 +2,6 @@ package org.example.tourplanner.frontend.app;
 
 import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -13,15 +11,6 @@ public class TourReportTests {
     @BeforeAll
     void beforeAll() {
         System.out.println("Starting with TourReport-tests");
-    }
-    @BeforeEach
-    void beforeEach() {
-        System.out.println("----------------------------------------------------------------------------");
-    }
-
-    @AfterEach
-    void afterEach() {
-        System.out.println("----------------------------------------------------------------------------");
     }
 
     @AfterAll

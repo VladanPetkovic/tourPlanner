@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.backend.model.Log;
 import org.example.tourplanner.backend.model.Tour;
 import org.example.tourplanner.backend.model.TourAverage;
+import org.example.tourplanner.backend.model.TourPopularity;
 import org.example.tourplanner.backend.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -141,6 +142,17 @@ public class LogController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/average-total-rating")
+    public ResponseEntity<Double> getAverageTotalRating(@RequestParam Long tourId) {
+        logger.info("Fetching average rating for tour ID: {}", tourId);
+        try {
+            Double averageRating = logService.getAverageRating(tourId);
+            return new ResponseEntity<>(averageRating, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve average rating for tour ID: {}", tourId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/averages")
     public ResponseEntity<TourAverage> getAverages(@RequestParam Long tourId) {
@@ -162,6 +174,18 @@ public class LogController {
             return new ResponseEntity<>(averages, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Failed to retrieve averages for all tours.", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/popularity")
+    public ResponseEntity<TourPopularity> getTourPopularity(@RequestParam Long tourId) {
+        logger.info("Fetching popularity for tour ID: {}", tourId);
+        try {
+            TourPopularity popularity = logService.getTourPopularity(tourId);
+            return new ResponseEntity<>(popularity, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve popularity for tour ID: {}", tourId, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

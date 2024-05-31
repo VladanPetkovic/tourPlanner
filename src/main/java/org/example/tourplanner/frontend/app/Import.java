@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.tourplanner.frontend.model.Tour.getTransportType;
-
 public class Import {
     private String filePath;
 
@@ -23,8 +21,10 @@ public class Import {
         String csvSplitBy = ";";
 
         try (BufferedReader br = new BufferedReader(new FileReader(this.filePath))) {
-            // skipping header
-            br.readLine();
+            // skipping header and checking, if the file is empty
+            if (br.readLine() == null) {
+                return null;
+            }
 
             while ((line = br.readLine()) != null) {
                 Tour tour = getTourFromLine(line, csvSplitBy);

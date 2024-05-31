@@ -12,7 +12,6 @@ import com.itextpdf.layout.properties.VerticalAlignment;
 import org.example.tourplanner.frontend.model.Log;
 import org.example.tourplanner.frontend.model.Tour;
 import java.io.IOException;
-import java.util.List;
 
 public class TourReport extends Report<Tour> {
     public TourReport() {

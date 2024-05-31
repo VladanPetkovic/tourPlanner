@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.example.tourplanner.backend.model.Log;
 import org.example.tourplanner.backend.model.Tour;
 import org.example.tourplanner.backend.model.TourAverage;
+import org.example.tourplanner.backend.model.TourPopularity;
 import org.example.tourplanner.backend.repository.LogRepository;
 import org.example.tourplanner.backend.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +109,9 @@ public class LogService {
     public Double getAverageTotalDistance(Long tourId) {
         return logRepository.findAverageDistanceByTourId(tourId);
     }
+    public Double getAverageRating(Long tourId) {
+        return logRepository.findAverageRatingByTourId(tourId);
+    }
 
     public TourAverage getAverages(Long tourId) {
         return logRepository.findAveragesByTourId(tourId);
@@ -119,5 +123,9 @@ public class LogService {
 
     public Long countLogsByTourId(Long tourId) {
         return logRepository.countLogsByTourId(tourId);
+    }
+
+    public TourPopularity getTourPopularity(Long tourId) {
+        return logRepository.findTourPopularity(tourId);
     }
 }
