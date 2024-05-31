@@ -36,6 +36,7 @@ public class ImportExportController {
         } else {
             fileNotSelectedLabel.setText("An error has occurred!");
             fileNotSelectedLabel.setVisible(true);
+            successImportLabel.setVisible(false);
         }
     }
 
@@ -53,6 +54,7 @@ public class ImportExportController {
         } else {
             folderNotSelectedLabel.setText("An error has occurred!");
             folderNotSelectedLabel.setVisible(true);
+            successExportLabel.setVisible(false);
         }
     }
 

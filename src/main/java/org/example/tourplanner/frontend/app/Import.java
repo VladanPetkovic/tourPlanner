@@ -29,6 +29,10 @@ public class Import {
             while ((line = br.readLine()) != null) {
                 Tour tour = getTourFromLine(line, csvSplitBy);
 
+                // return, if import-data invalid
+                if (tour == null) {
+                    return null;
+                }
                 tours.add(tour);
             }
         } catch (IOException e) {
@@ -40,12 +44,33 @@ public class Import {
 
     private Tour getTourFromLine(String line, String csvSplitBy) {
         String[] tourData = line.split(csvSplitBy);
-        int[] indicesToClean = {0, 1, 2, 3, 4, 7};
+        double distance = 0;
+        int estimated_time = 0;
 
-        for (int index : indicesToClean) {
+        // check count of columns
+        if (tourData.length != 8) {
+            return null;
+        }
+        int[] stringColumnIndices = {0, 1, 2, 3, 4, 7};     // string-columns
+
+        for (int index : stringColumnIndices) {
             if (tourData[index].startsWith("\"") && tourData[index].endsWith("\"")) {
                 tourData[index] = tourData[index].substring(1, tourData[index].length() - 1);
+            } else {
+                return null;
             }
+        }
+
+        try {
+            distance = Double.parseDouble(tourData[5]);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+
+        try {
+            estimated_time = Integer.parseInt(tourData[6]);
+        } catch (NumberFormatException e) {
+            return null;
         }
 
         return new Tour(
@@ -54,8 +79,8 @@ public class Import {
                 tourData[2],
                 tourData[3],
                 Tour.getTransportTypeInteger(tourData[4]),
-                Double.parseDouble(tourData[5]),
-                Integer.parseInt(tourData[6]),
+                distance,
+                estimated_time,
                 tourData[7]
         );
     }
