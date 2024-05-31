@@ -12,8 +12,8 @@ import java.util.List;
 public interface LogRepository extends JpaRepository<Log, Long> {
     List<Log> findByTour_Tourid(Long id);
 
-    @Query("SELECT l FROM Log l WHERE lower(l.comment) LIKE lower(concat('%', :comment, '%'))")
-    List<Log> findByCommentContaining(@Param("comment") String comment);
+    @Query("SELECT l FROM Log l WHERE lower(l.comment) LIKE lower(concat('%', :comment, '%')) AND l.tour.tourid = :tourId")
+    List<Log> findByCommentContaining(@Param("comment") String comment, @Param("tourId") Long tourId);
 
     @Query("SELECT AVG(l.difficulty) FROM Log l WHERE l.tour.tourid = :tourId")
     Double findAverageDifficultyByTourId(@Param("tourId") Long tourId);

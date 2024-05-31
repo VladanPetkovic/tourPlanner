@@ -40,6 +40,16 @@ public class LogService {
                 .doOnError(error -> logger.error("Failed to fetch logs", error));
     }
 
+    public Mono<Log[]> getLogs(String searchString, Long tourId) {
+        logger.info("Searching for logs with string: {}", searchString);
+        return webClient.get()
+                .uri("/search?comment=" + searchString + "&tour_id=" + tourId)
+                .retrieve()
+                .bodyToMono(Log[].class)
+                .doOnSuccess(logs -> logger.info("Fetched {} logs", logs.length))
+                .doOnError(error -> logger.error("Failed to fetch logs", error));
+    }
+
     public Mono<Log[]> getLogsByTourId(Long tourId) {
         logger.info("Fetching logs for tour ID: {}", tourId);
         return webClient.get()

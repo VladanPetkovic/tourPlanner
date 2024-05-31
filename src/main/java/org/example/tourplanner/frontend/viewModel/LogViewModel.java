@@ -49,6 +49,14 @@ public class LogViewModel {
         }
     }
 
+    public void getLogs(String text, Long tour_id) {
+        Log[] receivedLogs = logService.getLogs(text, tour_id).block();
+        if (receivedLogs != null) {
+            logData.clear();
+            Collections.addAll(logData, receivedLogs);
+        }
+    }
+
 
     public void addListener(FocusChangedListener listener) {
         this.focusChangedListenerList.add(listener);

@@ -40,8 +40,8 @@
                      </rowConstraints>
                      <children>
                         <Label prefHeight="30.0" prefWidth="342.0" styleClass="label-dark-bold" text="Search for a Log:" />
-                        <TextField alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="230.0" promptText="Search by Comment..." GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="425.0" styleClass="button_search" text="Search" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <TextField fx:id="searchTextField" alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="230.0" promptText="Search by Comment..." GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#onSearchBtnClick" prefHeight="27.0" prefWidth="425.0" styleClass="button_search" text="Search" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>

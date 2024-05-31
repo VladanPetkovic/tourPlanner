@@ -29,6 +29,7 @@ public class LogsController implements Initializable {
     private final LogViewModel viewModel;
     private final TourViewModel tourViewModel;
     public Label selectedTourLabel;
+    public TextField searchTextField;
 
     public LogsController(LogViewModel logViewModel, TourViewModel tourViewModel) {
         this.viewModel = logViewModel;
@@ -169,5 +170,9 @@ public class LogsController implements Initializable {
     public void onDeleteBtnClick(ActionEvent actionEvent) {
         errorLabel.setText("");
         viewModel.deleteLog();
+    }
+
+    public void onSearchBtnClick(ActionEvent actionEvent) {
+        this.viewModel.getLogs(searchTextField.getText(), tourViewModel.getSelectedTour().getTourid());
     }
 }

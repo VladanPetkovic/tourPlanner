@@ -26,9 +26,9 @@ public class LogService {
         this.tourRepository = tourRepository;
     }
 
-    public List<Log> findByCommentContaining(String comment) {
+    public List<Log> findByCommentContaining(String comment, Long tour_id) {
         logger.info("Searching for logs with comments containing: {}", comment);
-        return logRepository.findByCommentContaining(comment);
+        return logRepository.findByCommentContaining(comment, tour_id);
     }
 
     public Log saveLog(Long tourId, Log log) {

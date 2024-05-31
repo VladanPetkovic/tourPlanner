@@ -27,9 +27,16 @@ public class LogController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Log>> searchLogsByComment(@RequestParam String comment) {
-        List<Log> logs = logService.findByCommentContaining(comment);
-        return new ResponseEntity<>(logs, HttpStatus.OK);
+    public ResponseEntity<List<Log>> searchLogsByComment(@RequestParam String comment, @RequestParam Long tour_id) {
+        logger.info("Attempting to search for logs with comment: {} and tour_id: {}", comment, tour_id);
+        try {
+            List<Log> logs = logService.findByCommentContaining(comment, tour_id);
+            logger.info("Successfully searched by comment for log with tour_id: {}", tour_id);
+            return new ResponseEntity<>(logs, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to retrieve all logs", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping
