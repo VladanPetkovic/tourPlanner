@@ -2,7 +2,7 @@
 
 Author: Vladan Petkovic & Luca Carpentieri & Magnus Goeppel
 
-Sommer semester 2024
+Summer semester 2024
 
 Submit-date: 02.06.2024
 
@@ -15,11 +15,20 @@ Submit-date: 02.06.2024
 University of Applied Sciences Technikum Wien
 
 ---
+### UML diagrams
+
+[<kbd>**View the sequence diagram for the full-text search** &rarr;</kbd>](docs/full_text_search.puml)
+
+[<kbd>**View the class diagram** &rarr;</kbd>](docs/project.puml)
+
+[<kbd>**View the use cases of our application** &rarr;</kbd>](docs/useCase.puml)
+
+---
 ### Project access
 
 
 Visit:
-https://github.com/VladanPetkovic/tourPlanner to check our project on github.
+https://github.com/VladanPetkovic/tourPlanner to check our project on GitHub.
 
 Visit:
 https://git.technikum-wien.at/sam/osm-tile-calculator to check out the tile-calculator we are using in this project.

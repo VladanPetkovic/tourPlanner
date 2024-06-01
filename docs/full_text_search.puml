@@ -1,0 +1,40 @@
+@startuml
+
+actor User
+participant UserInterface as UI
+participant ToursController as TC
+participant TourViewModel as TVM
+participant TourService as TS
+participant Backend as BE
+participant TourController as TBC
+participant TourServiceBackend as TSB
+participant TourRepository as TR
+
+User -> UI: Click Search Button
+
+UI -> TC: onSearchBtnClick()
+TC -> TVM: getTours(searchString)
+TVM -> TS: getTours(searchString)
+TS -> BE: HTTP GET /search?search={searchString};
+note right of TS: loading.set(true);
+BE -> TBC: searchTourByString(search)
+TBC -> TSB: findByNameContaining(search)
+alt searchString is not empty
+    TSB -> TR: findByNameContaining(search)
+else searchString is empty
+    TSB -> TR: findTop100ByOrderByIdDesc()
+end
+TSB -> TBC: tours
+TBC -> BE: ResponseEntity<List<Tour>>(tours, HttpStatus.OK)
+BE -> TS: Response with Tour[]
+note right of TS: simulates additional latency (2 sec)
+
+TS -> TVM: tours
+TVM -> TVM: Platform.runLater(() -> loading.set(false))
+alt receivedTours is not null
+    TVM -> TVM: tourData.clear(); tourData = receivedTours;
+else error
+    TVM -> TVM: loading.set(false);
+end
+
+@enduml
