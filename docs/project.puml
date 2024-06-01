@@ -2,60 +2,102 @@
 'https://plantuml.com/class-diagram
 
 class Tour {
+    -Long tourid;
     -String name;
-    -String tourDescription;
-    -String from;
-    -String to;
-    -TransportType transportType;
-    -double tourDistance;
-    -int estimatedTime;
-    -String routeInformation;
+    -String description;
+    -String fromPlace;
+    -String toPlace;
+    -int transport_type;
+    -Double distance;
+    -Integer estimated_time;
+    -String route_information;
+    -Popularity popularity;
+    -ChildFriendliness cf;
+    -List<Log> logs;
+    +Getter();
+    +Setter();
+    +setPopularity(TourPopularity tourPop);
+    +setChildFriendliness(avgDiff, avgTime, avgDist);
+    +setCombinedTourName(from, to);
+}
+
+class TourAverage {
+    -Long tourid;
+    -String name;
+    -String fromPlace;
+    -String toPlace;
+    -Double averageDifficulty;
+    -Double averageTotalTime;
+    -Double averageTotalDistance;
+    -Double averageRating;
     +Getter();
     +Setter();
 }
 
-class Logs {
-    -String dateTime;
+class TourPopularity {
+    Long tourid;
+    Long countOfLogsForTourId;
+    Long maximumCountOfLogs;
+    Double averageRating;
+    +Getter();
+    +Setter();
+}
+
+class Log {
+    -Long log_id;
+    -String username;
+    -LocalDate dateTime;
     -String comment;
-    -int difficulty;
-    -double totalDistance;
-    -double totalTime;
-    -int rating;
+    -Integer difficulty;
+    -Double totalDistance;
+    -Double totalTime;
+    -Integer rating;
+    -Tour tour;
     +Getter();
     +Setter();
-}
-
-class Import {
-    +importFromCSVFile();
+    +checkDate(dateString);
 }
 
 class Export {
-    +createCSVFile();
-    +exportToCSV();
+    -String directoryPath;
+    +boolean export(List<Tour> tours);
+    +String createFileName();
 }
 
-class User {
-    -String username;
-    int userid;
+class Import {
+    -String filePath;
+    +List<Tour> importToursFromCSV();
+    -Tour getTourFromLine(String line, String csvSplitBy);
 }
 
 abstract class Report {
-
+    #String destinationFolder;
+    #String fileName;
+    #PdfDocument pdfDocument;
+    #abstract Document buildDocument(T);
+    #abstract void setContent(Document, T);
+    +ArrayList<Image> getPreviewImages(T);
+    +void export(T);
+    +void setOptions(destinationFolder);
+    #String createFileName();
+    #void setTitle(Document, String);
+    #void createBinDirectory();
 }
 
 class TourReport {
-    -Tour tour;
-    -String tourLog;
-    +Getter();
-    +Setter();
+    #Document buildDocument(Tour);
+    #void setContent(Document, Tour);
+    -void setTable(Document, Tour);
+    -void addRow(Table, String attribute, String value);
+    -void addRow(Table, String... value);
+    -void addTableHeader(Table, String);
 }
 
 class SummarizeReport {
-
-}
-
-class Statistics {
-    +calculateAnalysis();
+    #Document buildDocument(List<TourAverage> tours);
+    #void setContent(Document, List<TourAverage>);
+    -void setTable(Document, List<TourAverage>);
+    -void addTableHeader(Table, String);
 }
 
 enum TransportType {
@@ -65,7 +107,34 @@ enum TransportType {
     VACATION
 }
 
-Report --|> SummarizeReport
-Report --|> TourReport
+enum ChildFriendliness {
+    VERY_UNFRIENDLY
+    UNFRIENDLY
+    NEUTRAL
+    FRIENDLY
+    VERY_FRIENDLY
+    +fromDouble(value);
+}
+
+enum Popularity {
+    UNKNOWN
+    UNPOPULAR
+    AVERAGE
+    POPULAR
+    VERY_POPULAR
+    +fromInteger(value);
+}
+
+Report -up-|> SummarizeReport
+Report -up-|> TourReport
+TransportType "1" o-- "1..*" Tour : "has"
+ChildFriendliness "1" o-- "1..*" Tour : "has"
+Popularity "1" o-- "1..*" Tour : "has"
+Tour "1..*" *-- "1" Import : "created by"
+Tour "1..*" *-- "1" Export : "exported by"
+Tour "1..*" *-right- "1" Report : "creates"
+Tour "1" *-- "1" TourPopularity : "calculates Popularity"
+Tour "1" *-- "1" TourAverage : "calculates ChildFriendliness"
+Tour "1" *-left- "0..*" Log : "has"
 
 @enduml

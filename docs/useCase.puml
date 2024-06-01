@@ -1,0 +1,32 @@
+@startuml
+
+left to right direction
+
+actor User as U
+
+
+package "Tour-Planner" {
+  usecase "CRUD Tours" as UC4
+  usecase "CRUD Logs" as UC8
+  usecase "Full-Text Search Tours" as UC9
+  usecase "Full-Text Search Tour Logs" as UC10
+  usecase "Generate Tour Report" as UC11
+  usecase "Generate Summary Report" as UC12
+  usecase "Import Tour Data" as UC13
+  usecase "Export Tour Data" as UC14
+  usecase "Preview PDF Report" as UC15
+
+  U --> UC4
+  U --> UC8
+  U --> UC9
+  U --> UC10
+  U --> UC11
+  U --> UC12
+  U --> UC13
+  U --> UC14
+
+  UC11 .down.> UC15 : <<extends>>
+  UC12 .down.> UC15 : <<extends>>
+}
+
+@enduml
