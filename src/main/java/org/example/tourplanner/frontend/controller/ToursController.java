@@ -8,12 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import org.example.tourplanner.frontend.FocusChangedListener;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.viewModel.TourViewModel;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,6 +36,7 @@ public class ToursController implements Initializable {
     public Label childFriendLinessLabel;
     public TextField tourSearchTextField;
     public ImageView loadingImageView;
+    public ImageView tourImageView;
     private Timeline timeline;
 
     public ToursController(TourViewModel tourViewModel) {
@@ -62,9 +65,9 @@ public class ToursController implements Initializable {
                 loadingImageView.setVisible(true);
                 startRotationAnimation();
             } else {
+                loadingImageView.setVisible(false);
                 stopRotationAnimation();
             }
-            loadingImageView.setVisible(isNowLoading);
         });
     }
 
@@ -115,6 +118,7 @@ public class ToursController implements Initializable {
                 transportTypeLabel.setText(newValue.getTransportType().name());
                 tourDistanceLabel.setText(String.valueOf(newValue.getDistance()));
                 estimatedTimeLabel.setText(String.valueOf(newValue.getEstimated_time()));
+                tourImageView.setImage(viewModel.retrieveTourImage());
                 popularityLabel.setText(viewModel.getPopularityString());
                 childFriendLinessLabel.setText(viewModel.getChildFriendLinessString());
             } else {
@@ -125,6 +129,9 @@ public class ToursController implements Initializable {
                 transportTypeLabel.setText("...");
                 tourDistanceLabel.setText("...");
                 estimatedTimeLabel.setText("...");
+                File file = new File("src/main/resources/org/example/tourplanner/icons/card.png");
+                Image defaultImage = new Image(file.toURI().toString());
+                tourImageView.setImage(defaultImage);
                 popularityLabel.setText("...");
                 childFriendLinessLabel.setText("...");
             }

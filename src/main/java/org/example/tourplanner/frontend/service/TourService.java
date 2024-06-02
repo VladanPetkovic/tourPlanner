@@ -15,8 +15,6 @@ import java.util.List;
 @Service
 public class TourService {
     private static final Logger logger = LogManager.getLogger(TourService.class);
-    @Getter
-    private final Sinks.Many<Boolean> loadingSink = Sinks.many().replay().latest();
     private static final String BASE_URL = "http://localhost:8080/tours";
 
     private final WebClient webClient;
@@ -63,11 +61,9 @@ public class TourService {
                 .bodyToMono(Tour[].class)
                 .flatMap(tours -> simulateLatency().then(Mono.just(tours)))
                 .doOnSuccess(tours -> {
-                    loadingSink.tryEmitNext(false);
                     logger.info("Searching for tours, count: {}", tours.length);
                 })
                 .doOnError(error -> {
-                    loadingSink.tryEmitNext(false);
                     logger.error("Failed to search for tours", error);
                 });
     }
@@ -104,7 +100,7 @@ public class TourService {
     }
 
     private Mono<Void> simulateLatency() {
-        return Mono.delay(Duration.ofSeconds(2))
+        return Mono.delay(Duration.ofSeconds(0))
                 .then()
                 .doOnSubscribe(subscription -> logger.info("Simulating latency..."))
                 .doOnTerminate(() -> logger.info("Latency simulation completed"));

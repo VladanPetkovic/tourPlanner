@@ -4,9 +4,11 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
+import org.example.tourplanner.frontend.app.OpenStreetMap;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.model.TourAverage;
 import org.example.tourplanner.frontend.model.TourPopularity;
@@ -14,10 +16,12 @@ import org.example.tourplanner.frontend.service.LogService;
 import org.example.tourplanner.frontend.service.TourService;
 import reactor.core.publisher.Flux;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 @Getter
 @Setter
@@ -42,9 +46,6 @@ public class TourViewModel {
     public TourViewModel() {
         tourService = new TourService();
         logService = new LogService();
-        // observe the loading state
-        Flux<Boolean> loadingFlux = tourService.getLoadingSink().asFlux();
-        loadingFlux.subscribe(isLoading -> Platform.runLater(() -> loading.set(isLoading)));
     }
 
     public void getTours(String searchString) {
@@ -65,6 +66,42 @@ public class TourViewModel {
 
     public void addListener(FocusChangedListener listener) {
         this.focusChangedListenerList.add(listener);
+    }
+
+    public Image retrieveTourImage() {
+        loading.set(true);
+        File existingImage = getTourImageFromFolder();
+        // open image, if already exists
+        if (existingImage.exists()) {
+            loading.set(false);
+            return new Image(existingImage.toURI().toString());
+        }
+
+        // create otherwise and try to open again
+        CompletableFuture<Void> imageCreationFuture = CompletableFuture.runAsync(() -> {
+            OpenStreetMap openStreetMap = new OpenStreetMap();
+            openStreetMap.createImage(selectedTour);
+        });
+
+        // wait for image creation to complete and then check if image exists
+        imageCreationFuture.join();
+        File newImage = getTourImageFromFolder();
+        if (newImage.exists()) {
+            loading.set(false);
+            return new Image(newImage.toURI().toString());
+        }
+        loading.set(false);
+
+        // default: return vienna-image
+        File defaultImage = new File("src/main/resources/org/example/tourplanner/icons/card.png");
+        return new Image(defaultImage.toURI().toString());
+    }
+
+    private File getTourImageFromFolder() {
+        String imageName = "tour_id_" + selectedTour.getTourid() + ".png";
+        String imagePath = "src/main/java/org/example/tourplanner/frontend/pictures/" + imageName;
+
+        return new File(imagePath);
     }
 
     public String getPopularityString() {
