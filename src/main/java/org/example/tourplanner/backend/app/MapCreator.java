@@ -2,6 +2,10 @@ package org.example.tourplanner.backend.app;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.flogger.Flogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.example.tourplanner.backend.service.TourService;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,6 +25,7 @@ import java.util.List;
 public class MapCreator {
 
     public record GeoCoordinate(double lon, double lat) {}
+    private static final Logger logger = LogManager.getLogger(MapCreator.class);
 
     public enum Marker {
         PIN_RED_16px("pin-red_16px"),
@@ -73,6 +78,7 @@ public class MapCreator {
 
         // Create a new image to hold all the tiles
         if (tilesX < 0 || tilesX > 100 || tilesY < 0 || tilesY > 100) {
+            logger.warn("Tiles of image too large or negative. TilesX: {}, TilesY: {}", tilesX, tilesY);
             return;
         }
 

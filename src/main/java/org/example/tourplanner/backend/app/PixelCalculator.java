@@ -14,22 +14,4 @@ public class PixelCalculator {
 
         return new Point(x_pixel, y_pixel);
     }
-
-//    public static void main(String[] args) {
-//        if (args.length<5) {
-//            System.out.println("Syntax: PixelCalculator tileX tileY lat lon zoom");
-//            System.out.println("Sample: PixelCalculator 71498 45431 16.377229 48.239676 17");
-//            System.exit(1);
-//        }
-//        int tileX = Integer.parseInt(args[0]);
-//        int tileY = Integer.parseInt(args[1]);
-//        double lon = Double.parseDouble(args[2]);
-//        double lat = Double.parseDouble(args[3]);
-//        int zoom = Integer.parseInt(args[4]);
-//
-//        Point globalPos = latLonToPixel(lat, lon, zoom);
-//        Point tileOriginPos = new Point( tileX * 256, tileY * 256 );
-//        Point relativePos = new Point(globalPos.x - tileOriginPos.x, globalPos.y - tileOriginPos.y );
-//        System.out.println("Pixel coordinate within tile: " + relativePos);
-//    }
 }
