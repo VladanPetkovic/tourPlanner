@@ -1,4 +1,4 @@
-package org.example.tourplanner.frontend.service;
+package org.example.tourplanner.backend.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,4 +1,4 @@
-package org.example.tourplanner.frontend.app;
+package org.example.tourplanner.backend.app;
 
 import lombok.Getter;
 import lombok.Setter;

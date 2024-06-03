@@ -8,13 +8,12 @@ import javafx.scene.image.Image;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.tourplanner.frontend.FocusChangedListener;
-import org.example.tourplanner.frontend.app.OpenStreetMap;
+import org.example.tourplanner.backend.app.OpenStreetMap;
 import org.example.tourplanner.frontend.model.Tour;
 import org.example.tourplanner.frontend.model.TourAverage;
 import org.example.tourplanner.frontend.model.TourPopularity;
 import org.example.tourplanner.frontend.service.LogService;
 import org.example.tourplanner.frontend.service.TourService;
-import reactor.core.publisher.Flux;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -78,19 +77,22 @@ public class TourViewModel {
         }
 
         // create otherwise and try to open again
-        CompletableFuture<Void> imageCreationFuture = CompletableFuture.runAsync(() -> {
-            OpenStreetMap openStreetMap = new OpenStreetMap();
-            openStreetMap.createImage(selectedTour);
-        });
+        tourService.createTourImage(selectedTour)
+                .doOnSubscribe(subscription -> Platform.runLater(() -> loading.set(true)))
+                .doOnTerminate(() -> Platform.runLater(() -> loading.set(false)))
+                .subscribe(
+                        aVoid -> {
+                            Platform.runLater(() -> loading.set(false));
+                        },
+                        error -> {
+                            Platform.runLater(() -> loading.set(false));
+                        });
 
         // wait for image creation to complete and then check if image exists
-        imageCreationFuture.join();
         File newImage = getTourImageFromFolder();
         if (newImage.exists()) {
-            loading.set(false);
             return new Image(newImage.toURI().toString());
         }
-        loading.set(false);
 
         // default: return vienna-image
         File defaultImage = new File("src/main/resources/org/example/tourplanner/icons/card.png");

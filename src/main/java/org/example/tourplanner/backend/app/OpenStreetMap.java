@@ -1,8 +1,8 @@
-package org.example.tourplanner.frontend.app;
+package org.example.tourplanner.backend.app;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.example.tourplanner.frontend.model.Tour;
-import org.example.tourplanner.frontend.service.OpenRouteService;
+import org.example.tourplanner.backend.model.Tour;
+import org.example.tourplanner.backend.service.OpenRouteService;
 
 import java.io.IOException;
 import java.util.ArrayList;

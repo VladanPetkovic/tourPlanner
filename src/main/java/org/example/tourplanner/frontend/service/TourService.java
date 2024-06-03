@@ -44,6 +44,17 @@ public class TourService {
                 .doOnError(error -> logger.error("Failed to create batch of tours", error));
     }
 
+    public Mono<Void> createTourImage(Tour tour) {
+        logger.info("Fetching tour-image with ID: {}", tour.getTourid());
+        return webClient.post()
+                .uri("/images")
+                .bodyValue(tour)
+                .retrieve()
+                .bodyToMono(Void.class)
+                .doOnSuccess(aVoid -> logger.info("Tour-image fetched successfully ID: {}", tour.getTourid()))
+                .doOnError(error -> logger.error("Failed to fetch tour-image with ID: {}", tour.getTourid(), error));
+    }
+
     public Mono<Tour[]> getTours() {
         logger.info("Fetching all tours");
         return webClient.get()

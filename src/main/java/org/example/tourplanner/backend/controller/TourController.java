@@ -47,6 +47,19 @@ public class TourController {
         }
     }
 
+    @PostMapping("/images")
+    public ResponseEntity<Tour> createImage(@RequestBody Tour tour) {
+        logger.info("Attempting to create a new tour-image: {}", tour.getName());
+        try {
+            tourService.createImage(tour);
+            logger.info("Tour-image created successfully.");
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            logger.error("Failed to create tour-image: {}", tour.getName(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/batch")
     public ResponseEntity<List<Tour>> createTours(@RequestBody List<Tour> tours) {
         logger.info("Attempting to create a batch of tours");

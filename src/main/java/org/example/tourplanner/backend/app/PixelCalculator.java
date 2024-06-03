@@ -1,4 +1,4 @@
-package org.example.tourplanner.frontend.app;
+package org.example.tourplanner.backend.app;
 
 /** used from:
  * <a href="https://git.technikum-wien.at/sam/osm-tile-calculator">osm-tile-calculator</a>

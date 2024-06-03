@@ -2,6 +2,7 @@ package org.example.tourplanner.backend.service;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.example.tourplanner.backend.app.OpenStreetMap;
 import org.example.tourplanner.backend.model.Tour;
 import org.example.tourplanner.backend.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class TourService {
         Tour savedTour = tourRepository.save(tour);
         logger.info("Tour saved successfully with ID: {}", savedTour.getTourid());
         return savedTour;
+    }
+
+    public void createImage(Tour tour) {
+        OpenStreetMap openStreetMap = new OpenStreetMap();
+        openStreetMap.createImage(tour);
     }
 
     public List<Tour> saveTours(List<Tour> tours) {
